@@ -1,0 +1,10 @@
+/* 强制代码块文字变为浅色，避免黑底黑字 */
+pre, code, .highlight {
+    color: #e0e0e0 !important;
+}
+
+/* 如果你还需要行内代码也清晰可见 */
+code {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+}
