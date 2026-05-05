@@ -1,12 +1,18 @@
 baseURL = 'https://acm-Lycoris.github.io/'
-languageCode = 'zh-cn'
-title = '我的技术博客'
-theme = 'PaperMod'
+locale = 'zh-cn'
+title = "ACM-Lycoris's Blog"
+theme = 'hugo-theme-reimu'
 
 [params]
+  mainSections = ["posts"]
+  author = "ACM-Lycoris"
+  description = "振桴彼岸，绽蕊忘川"
+  avatar = "avatar.jpg"
   ShowReadingTime = true
   ShowShareButtons = true
   ShowPostNavLinks = true
+  mouseeffect = false
+  highlightjslib = "highlight.js"
 
 [[menu.main]]
   name = '归档'
@@ -17,3 +23,8 @@ theme = 'PaperMod'
   name = '标签'
   url = '/tags/'
   weight = 20
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    noClasses = false

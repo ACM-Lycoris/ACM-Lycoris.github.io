@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: ACM-Lycoris/ACM-Lycoris.github.io
+  branch: main
+  # 不需要 base_url 了，直接用 Token 登录
+
+media_folder: "static/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "博客文章"
+    folder: "content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "发布日期", name: "date", widget: "datetime"}
+      - {label: "标签", name: "tags", widget: "list", default: ["技术"]}
+      - {label: "草稿", name: "draft", widget: "boolean", default: true}
+      - {label: "正文", name: "body", widget: "markdown"}
