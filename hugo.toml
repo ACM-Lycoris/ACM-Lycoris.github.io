@@ -1,4 +1,4 @@
-baseURL = 'https://ACM-Lycoris.github.io/'
+baseURL = 'https://acm-Lycoris.github.io/'
 languageCode = 'zh-cn'
 title = '我的技术博客'
 theme = 'PaperMod'
