@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // 检查当前 URL 路径是否以 /admin 开头
+    if (window.location.pathname.startsWith('/admin')) {
+      // 如果是，将其重定向到 /admin/index.html
+      sessionStorage.redirect = window.location.href;
+      window.location.replace('/admin/index.html');
+    }
+  </script>
+</head>
+<body>
+  <h1>Page not found</h1>
+  <p>If you are not redirected, <a href="/admin/">click here</a>.</p>
+</body>
+</html>
