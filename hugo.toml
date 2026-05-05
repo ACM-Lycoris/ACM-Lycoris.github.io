@@ -1,0 +1,19 @@
+baseURL = 'https://ACM-Lycoris.github.io/'
+languageCode = 'zh-cn'
+title = '我的技术博客'
+theme = 'PaperMod'
+
+[params]
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+
+[[menu.main]]
+  name = '归档'
+  url = '/archives/'
+  weight = 10
+
+[[menu.main]]
+  name = '标签'
+  url = '/tags/'
+  weight = 20
