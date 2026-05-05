@@ -1,0 +1,934 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  图论Hopcroft-Karp算法与2026天梯赛L3-2 | ACM-Lycoris
+</title>
+<meta name="description" content="振桴彼岸，绽蕊忘川"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_ex15nbittbh\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_ex15nbittbh.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" /><meta property="og:type" content="website" />
+  <meta property="og:title" content="图论Hopcroft-Karp算法与2026天梯赛L3-2 | ACM-Lycoris" />
+  <meta
+    property="og:description"
+    content="振桴彼岸，绽蕊忘川"
+  />
+  <meta property="og:url" content="http://localhost:1313/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/" />
+  <meta
+    property="og:site_name"
+    content="ACM-Lycoris&#39;s Blog"
+  />
+  <meta property="og:image" content="http://localhost:1313/images/banner.webp" />
+  <meta property="article:author" content="ACM-Lycoris" />
+  <meta property="article:published_time" content="2026-04-25T22:14:41&#43;08:00" />
+  <meta property="article:modified_time" content="2026-04-25T22:14:41&#43;08:00" /><meta property="article:tag" content="算法, 图论, 二分图, Hopcroft-Karp, 天梯赛" /><meta name="twitter:card" content="summary" /><meta name="twitter:image" content="http://localhost:1313/images/banner.webp" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
+  /><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"></nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="图论Hopcroft-Karp算法与2026天梯赛L3-2"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">图论Hopcroft-Karp算法与2026天梯赛L3-2</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          
+          class="sidebar-right"  ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#一什么是二分图">一、什么是二分图</a></li>
+    <li><a href="#二什么是匹配与最大匹配">二、什么是匹配与最大匹配</a></li>
+    <li><a href="#三增广路匹配增长的唯一通道">三、增广路：匹配增长的唯一通道</a></li>
+    <li><a href="#四从匈牙利到-hopcroft-karp">四、从匈牙利到 Hopcroft-Karp</a></li>
+    <li><a href="#五hopcroft-karp-核心机制">五、Hopcroft-Karp 核心机制</a>
+      <ul>
+        <li><a href="#51-bfs-分层找最短增广路长度">5.1 BFS 分层（找最短增广路长度）</a></li>
+        <li><a href="#52-dfs-批量增广只走合法层次">5.2 DFS 批量增广（只走合法层次）</a></li>
+        <li><a href="#53-一轮流程">5.3 一轮流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#六复杂度对比">六、复杂度对比</a></li>
+    <li><a href="#七c-函数模板可直接套">七、C++ 函数模板（可直接套）</a>
+      <ul>
+        <li><a href="#使用方式">使用方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#八天梯赛-2026-l3-2建模要点">八、天梯赛 2026 L3-2：建模要点</a>
+      <ul>
+        <li><a href="#81-图怎么建">8.1 图怎么建</a></li>
+        <li><a href="#82-为什么会出现最大匹配">8.2 为什么会出现最大匹配</a></li>
+        <li><a href="#83-结论按题解模型">8.3 结论（按题解模型）</a></li>
+      </ul>
+    </li>
+    <li><a href="#九容易写错的-6-个点">九、容易写错的 6 个点</a></li>
+    <li><a href="#十总结">十、总结</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="ACM-Lycoris"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">ACM-Lycoris</div>
+  <div class="sidebar-description">振桴彼岸，绽蕊忘川</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">2</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">6</div>
+  </a>
+</div>
+<div class="sidebar-social" ></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">友链</div>
+    </div></div></div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2026-04-25 22:14:41 &#43;0800 CST" itemprop="datePublished"
+      >2026-04-25</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2026-04-25</time
+    >
+  </span></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>从零入门二分图最大匹配，附天梯赛 2026 L3-2 的建模思路。</p>
+</blockquote>
+<hr>
+<h2 id="背景">
+<a class="header-anchor" href="#%e8%83%8c%e6%99%af"></a>
+背景
+</h2><p>这篇文章面向两类读者：</p>
+<ol>
+<li>学过 BFS/DFS，但对“增广路”理解不牢。</li>
+<li>做题时知道要用二分图匹配，但写不出稳定的 Hopcroft-Karp。</li>
+</ol>
+<p>如果你是第一次接触图论，也可以看，但建议先补一下 BFS、DFS 和图的基本表示
+什么 你说你不会BFS和DFS?</p>
+<hr>
+<h2 id="一什么是二分图">
+<a class="header-anchor" href="#%e4%b8%80%e4%bb%80%e4%b9%88%e6%98%af%e4%ba%8c%e5%88%86%e5%9b%be"></a>
+一、什么是二分图
+</h2><p>二分图是把点分成两组 $L$ 和 $R$，并且所有边都只在两组之间连接，不会出现组内连边。</p>
+<p>一个直观场景：左边是学生，右边是公司，边表示“可以投递”。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">LEFT SET (L)                      RIGHT SET (R)
+</span></span><span class="line"><span class="cl">  ┌───┐                           ┌───┐
+</span></span><span class="line"><span class="cl">  │小明│────────────────────────→│字节│
+</span></span><span class="line"><span class="cl">  └───┘                           └───┘
+</span></span><span class="line"><span class="cl">  ┌───┐                           ┌───┐
+</span></span><span class="line"><span class="cl">  │小红│────────────────────────→│腾讯│
+</span></span><span class="line"><span class="cl">  └───┘                           └───┘
+</span></span><span class="line"><span class="cl">  ┌───┐                           ┌───┐
+</span></span><span class="line"><span class="cl">  │小刚│────────────────────────→│美团│
+</span></span><span class="line"><span class="cl">  └───┘                           └───┘
+</span></span></code></pre></div><hr>
+<h2 id="二什么是匹配与最大匹配">
+<a class="header-anchor" href="#%e4%ba%8c%e4%bb%80%e4%b9%88%e6%98%af%e5%8c%b9%e9%85%8d%e4%b8%8e%e6%9c%80%e5%a4%a7%e5%8c%b9%e9%85%8d"></a>
+二、什么是匹配与最大匹配
+</h2><p>匹配是一组边，要求任意两条匹配边不能共享端点。</p>
+<p>在“学生-公司”语义下就是：</p>
+<ol>
+<li>一个学生最多匹配一个公司。</li>
+<li>一个公司最多匹配一个学生。</li>
+</ol>
+<p>匹配边数尽可能大，就是最大匹配。</p>
+<hr>
+<h2 id="三增广路匹配增长的唯一通道">
+<a class="header-anchor" href="#%e4%b8%89%e5%a2%9e%e5%b9%bf%e8%b7%af%e5%8c%b9%e9%85%8d%e5%a2%9e%e9%95%bf%e7%9a%84%e5%94%af%e4%b8%80%e9%80%9a%e9%81%93"></a>
+三、增广路：匹配增长的唯一通道
+</h2><p>从一个未匹配左点出发，沿着“未匹配边、匹配边、未匹配边、匹配边……”交替前进，最终到达一个未匹配右点，这条路就是增广路。</p>
+<p>找到增广路后，把路径上的边状态全部翻转（匹配变未匹配，未匹配变匹配），匹配数会恰好加 1。</p>
+<blockquote>
+<p>定理：当且仅当不存在增广路时，当前匹配是最大匹配。</p>
+</blockquote>
+<p>这句话几乎是所有二分图匹配算法的出发点。</p>
+<hr>
+<h2 id="四从匈牙利到-hopcroft-karp">
+<a class="header-anchor" href="#%e5%9b%9b%e4%bb%8e%e5%8c%88%e7%89%99%e5%88%a9%e5%88%b0-hopcroft-karp"></a>
+四、从匈牙利到 Hopcroft-Karp
+</h2><p>匈牙利算法（这里指 DFS 版二分图增广）是“每次找一条增广路”。</p>
+<p>它的瓶颈在于串行：</p>
+<ol>
+<li>找到一条。</li>
+<li>翻转。</li>
+<li>再从头找下一条。</li>
+</ol>
+<p>Hopcroft-Karp 的关键升级是：</p>
+<ol>
+<li>先 BFS 分层，定位“最短增广路长度”。</li>
+<li>再 DFS 只在分层图上找路。</li>
+<li>一轮内增广一批“点互不相交”的最短增广路。</li>
+</ol>
+<p>这就是它能从 O(E·V) 提升到 O(E·根号下V) 的核心原因。</p>
+<hr>
+<h2 id="五hopcroft-karp-核心机制">
+<a class="header-anchor" href="#%e4%ba%94hopcroft-karp-%e6%a0%b8%e5%bf%83%e6%9c%ba%e5%88%b6"></a>
+五、Hopcroft-Karp 核心机制
+</h2><h3 id="51-bfs-分层找最短增广路长度">
+<a class="header-anchor" href="#51-bfs-%e5%88%86%e5%b1%82%e6%89%be%e6%9c%80%e7%9f%ad%e5%a2%9e%e5%b9%bf%e8%b7%af%e9%95%bf%e5%ba%a6"></a>
+5.1 BFS 分层（找最短增广路长度）
+</h3><p>从所有未匹配左点同时出发：</p>
+<ol>
+<li>左点沿未匹配边走到右点。</li>
+<li>右点若已匹配，再沿匹配边回到左点。</li>
+</ol>
+<p>最终得到层次数组 dist，并确定本轮最短增广路长度。</p>
+<h3 id="52-dfs-批量增广只走合法层次">
+<a class="header-anchor" href="#52-dfs-%e6%89%b9%e9%87%8f%e5%a2%9e%e5%b9%bf%e5%8f%aa%e8%b5%b0%e5%90%88%e6%b3%95%e5%b1%82%e6%ac%a1"></a>
+5.2 DFS 批量增广（只走合法层次）
+</h3><p>DFS 只允许从深度 $d$ 走到 $d+1$，所以只会探索“本轮最短路”。</p>
+<p>注意一个常见误区：</p>
+<blockquote>
+<p>同一轮可同时增广的多条路径，必须是点互不相交（至少左侧和右侧匹配点不能冲突）。</p>
+</blockquote>
+<p>如果两条路径共享顶点，它们不能在同一轮同时翻转。</p>
+<h3 id="53-一轮流程">
+<a class="header-anchor" href="#53-%e4%b8%80%e8%bd%ae%e6%b5%81%e7%a8%8b"></a>
+5.3 一轮流程
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">初始化空匹配
+</span></span><span class="line"><span class="cl">  -&gt; BFS 分层（若不存在增广路则结束）
+</span></span><span class="line"><span class="cl">  -&gt; 多次 DFS 寻找并翻转最短增广路
+</span></span><span class="line"><span class="cl">  -&gt; 进入下一轮
+</span></span></code></pre></div><hr>
+<h2 id="六复杂度对比">
+<a class="header-anchor" href="#%e5%85%ad%e5%a4%8d%e6%9d%82%e5%ba%a6%e5%af%b9%e6%af%94"></a>
+六、复杂度对比
+</h2><table>
+  <thead>
+      <tr>
+          <th>算法</th>
+          <th>核心策略</th>
+          <th>复杂度</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>匈牙利（DFS 增广版）</td>
+          <td>一次找一条增广路</td>
+          <td>$O(VE)$</td>
+      </tr>
+      <tr>
+          <td>Hopcroft-Karp</td>
+          <td>一轮找多条最短增广路</td>
+          <td>$O(E\sqrt V)$</td>
+      </tr>
+  </tbody>
+</table>
+<p>在大图上，Hopcroft-Karp 通常有明显优势。</p>
+<hr>
+<h2 id="七c-函数模板可直接套">
+<a class="header-anchor" href="#%e4%b8%83c-%e5%87%bd%e6%95%b0%e6%a8%a1%e6%9d%bf%e5%8f%af%e7%9b%b4%e6%8e%a5%e5%a5%97"></a>
+七、C++ 函数模板（可直接套）
+</h2><p>下面给出常用、稳健的 HK 写法（函数式，不封装类）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mf">1e9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 左侧点编号: 1..nL
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 右侧点编号: 1..nR
+</span></span></span><span class="line"><span class="cl"><span class="c1">// adj[u] 存储 u 能连到的所有右点 v
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">adj</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pairU</span><span class="p">,</span> <span class="n">pairV</span><span class="p">,</span> <span class="n">dist</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">nL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;=</span> <span class="n">nL</span><span class="p">;</span> <span class="o">++</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span> <span class="c1">// NIL 节点，表示“到未匹配右点的出口”
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="n">INF</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dist</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">nxt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">u</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">dfs</span><span class="p">(</span><span class="n">nxt</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span> <span class="c1">// 剪枝：本轮从 u 出发已无可行最短路
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">hopcroftKarp</span><span class="p">(</span><span class="kt">int</span> <span class="n">nL</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nR</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pairU</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">nL</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pairV</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">nR</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">nL</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">INF</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">matching</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">bfs</span><span class="p">(</span><span class="n">nL</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;=</span> <span class="n">nL</span><span class="p">;</span> <span class="o">++</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">dfs</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">++</span><span class="n">matching</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">matching</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="使用方式">
+<a class="header-anchor" href="#%e4%bd%bf%e7%94%a8%e6%96%b9%e5%bc%8f"></a>
+使用方式
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">nL</span><span class="p">,</span> <span class="n">nR</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">nL</span> <span class="o">&gt;&gt;</span> <span class="n">nR</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">adj</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">nL</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">u</span> <span class="o">&gt;&gt;</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">hopcroftKarp</span><span class="p">(</span><span class="n">nL</span><span class="p">,</span> <span class="n">nR</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><hr>
+<h2 id="八天梯赛-2026-l3-2建模要点">
+<a class="header-anchor" href="#%e5%85%ab%e5%a4%a9%e6%a2%af%e8%b5%9b-2026-l3-2%e5%bb%ba%e6%a8%a1%e8%a6%81%e7%82%b9"></a>
+八、天梯赛 2026 L3-2：建模要点
+</h2><h3 id="81-图怎么建">
+<a class="header-anchor" href="#81-%e5%9b%be%e6%80%8e%e4%b9%88%e5%bb%ba"></a>
+8.1 图怎么建
+</h3><p>把红色花纹作为左点、蓝色花纹作为右点。</p>
+<p>每块工厂板块 $(r_i, b_i)$ 对应一条边 $r_i \to b_i$。</p>
+<h3 id="82-为什么会出现最大匹配">
+<a class="header-anchor" href="#82-%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e5%87%ba%e7%8e%b0%e6%9c%80%e5%a4%a7%e5%8c%b9%e9%85%8d"></a>
+8.2 为什么会出现最大匹配
+</h3><p>这题的最优策略本质上是在做“尽量多的有效配对”，而“配对互不冲突”正是匹配定义。</p>
+<p>所以核心变成：</p>
+<ol>
+<li>先把题目操作抽象成二分图。</li>
+<li>再求这张图上的最大匹配数 $M$。</li>
+</ol>
+<h3 id="83-结论按题解模型">
+<a class="header-anchor" href="#83-%e7%bb%93%e8%ae%ba%e6%8c%89%e9%a2%98%e8%a7%a3%e6%a8%a1%e5%9e%8b"></a>
+8.3 结论（按题解模型）
+</h3><p>在该题标准建模下，最终答案可写为：</p>
+<p>ans= n + M;</p>
+<p>其中 n 是板块数，M 是最大匹配数。</p>
+<p>实现时通常就是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="n">hopcroftKarp</span><span class="p">(</span><span class="n">nL</span><span class="p">,</span> <span class="n">nR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="n">M</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>于是，经过我们一顿操作,就有这样的AC代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include&lt;bits/stdc++.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">ll</span>  <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">ull</span> <span class="o">=</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">N</span><span class="o">=</span> <span class="mi">114514</span><span class="p">;</span><span class="c1">//最大顶点数，板块数量上限
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">adj</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//adj[红色花纹]={蓝色花纹1，蓝色花纹2....}
+</span></span></span><span class="line"><span class="cl"><span class="c1">//每个工厂板块对应一对红r-&gt;蓝b
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">pairU</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="c1">// pairU[红色花纹] = 当前匹配的蓝色花纹 (0 表示未匹配)
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">pairV</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>   <span class="c1">// pairV[蓝色花纹] = 当前匹配的红色花纹 (0 表示未匹配)
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">dist</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>    <span class="c1">// dist[红色花纹]  = BFS 时该红色节点所在的层次（距离）
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">BFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span><span class="c1">//从节点n开始广搜构建带层次的一个图，并判断能不能继续往下匹配
+</span></span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span><span class="c1">//存红色节点
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">u</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">u</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">u</span><span class="p">);</span><span class="c1">//如果一个节点没有匹配，就从这个节点开始匹配
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">INT_MAX</span><span class="p">;</span><span class="c1">//已匹配的红色初始一定不可达
+</span></span></span><span class="line"><span class="cl">            <span class="c1">//后面如果能到达了再更新
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">INT_MAX</span><span class="p">;</span><span class="c1">//dist[0]表示当前已知的最短的增广路长度+1
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//初始未找到，若dist[u]&gt;=dist[0]说明再往后找不到最短的增广路
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">u</span><span class="o">=</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">v</span><span class="p">:</span><span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//遍历u链接的所有蓝色v
+</span></span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">//表示找到一条增广路终点的时候
+</span></span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">INT_MAX</span><span class="p">){</span><span class="c1">//还没有其他增广路
+</span></span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">u2</span><span class="o">=</span><span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">];</span><span class="c1">//蓝色v已经匹配过红色了
+</span></span></span><span class="line"><span class="cl">                    <span class="c1">//
+</span></span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u2</span><span class="p">]</span><span class="o">==</span><span class="n">INT_MAX</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">dist</span><span class="p">[</span><span class="n">u2</span><span class="p">]</span><span class="o">=</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="c1">//u-v存在，v到u2存在，u2就可以抵达
+</span></span></span><span class="line"><span class="cl">                        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">u2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">){</span><span class="c1">//DFS成功表示u出发，成功找到一条增广路
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">u</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="c1">//到达虚拟节点，表示找到增广路
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">v</span><span class="p">:</span><span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">DFS</span><span class="p">(</span><span class="mi">0</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//v没有匹配，且到v的距离正好是最短增广路
+</span></span></span><span class="line"><span class="cl">            <span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">=</span><span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">dist</span><span class="p">[</span><span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span><span class="o">==</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">DFS</span><span class="p">(</span><span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//如果v已经匹配了一个红色且u到这个红色的层次正好差1且DFS成了
+</span></span></span><span class="line"><span class="cl">            <span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pairV</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">=</span><span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">INT_MAX</span><span class="p">;</span><span class="c1">//没匹配上
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">Hop</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="n">pairU</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">pairU</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="n">pairV</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">pairV</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">matching</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// 当前匹配数
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 反复进行 BFS + DFS，直到找不到增广路
+</span></span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">BFS</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 对每一个未匹配的红色节点，尝试 DFS 找增广路
+</span></span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">u</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">pairU</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">DFS</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">++</span><span class="n">matching</span><span class="p">;</span>   <span class="c1">// 每找到一条增广路，匹配数 +1
+</span></span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">matching</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">adj</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">adj</span><span class="p">[</span><span class="n">r</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">maxMatch</span><span class="o">=</span><span class="n">Hop</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="o">+</span><span class="n">maxMatch</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="九容易写错的-6-个点">
+<a class="header-anchor" href="#%e4%b9%9d%e5%ae%b9%e6%98%93%e5%86%99%e9%94%99%e7%9a%84-6-%e4%b8%aa%e7%82%b9"></a>
+九、容易写错的 6 个点
+</h2><ol>
+<li>把“同轮可增广路径”误写成可以共享点。</li>
+<li>BFS 不用所有未匹配左点同时入队。</li>
+<li>DFS 没有限制层次，导致退化或错配。</li>
+<li>忘了对失败点做剪枝（<code>dist[u] = INF</code>）。</li>
+<li>左右点编号范围没处理好（越界/混用）。</li>
+<li>把匈牙利复杂度写成 HK 复杂度。</li>
+</ol>
+<hr>
+<h2 id="十总结">
+<a class="header-anchor" href="#%e5%8d%81%e6%80%bb%e7%bb%93"></a>
+十、总结
+</h2><p>Hopcroft-Karp 可以浓缩成三句话：</p>
+<ol>
+<li>用 BFS 找“最短增广路层次”。</li>
+<li>用 DFS 在层次图中“批量增广”。</li>
+<li>重复直到没有增广路。</li>
+</ol>
+<p>掌握这三步，再复杂的二分图匹配题基本都能落地（加油！）</p>
+<hr>
+<blockquote>
+<p>关键词：二分图、增广路、最大匹配、Hopcroft-Karp、天梯赛</p>
+</blockquote>
+</div>
+    <footer class="article-footer"><ul class="article-category-list"><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/%e5%9b%be%e8%ae%ba"
+      data-aos="zoom-in"
+      >图论</a
+    >
+    </li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e7%ae%97%e6%b3%95"
+        rel="tag"
+        >算法</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e5%9b%be%e8%ae%ba"
+        rel="tag"
+        >图论</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e4%ba%8c%e5%88%86%e5%9b%be"
+        rel="tag"
+        >二分图</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/hopcroft-karp"
+        rel="tag"
+        >Hopcroft-Karp</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e5%a4%a9%e6%a2%af%e8%b5%9b"
+        rel="tag"
+        >天梯赛</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://d-sketon.top/img/_backwebp/bg1.webp"
+              data-sizes="auto"
+              alt="GPLT团体程序设计天梯赛2026题解"
+              class="lazyload"
+            /><a
+          href="/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/"
+          aria-label="前一篇:GPLT团体程序设计天梯赛2026题解"
+          title="前一篇:GPLT团体程序设计天梯赛2026题解"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">GPLT团体程序设计天梯赛2026题解</h3>
+      </div></nav></article></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2020-2026<span class="footer-info-sep rotate"></span>ACM-Lycoris
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp;Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;2.9k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;00:15</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#一什么是二分图">一、什么是二分图</a></li>
+    <li><a href="#二什么是匹配与最大匹配">二、什么是匹配与最大匹配</a></li>
+    <li><a href="#三增广路匹配增长的唯一通道">三、增广路：匹配增长的唯一通道</a></li>
+    <li><a href="#四从匈牙利到-hopcroft-karp">四、从匈牙利到 Hopcroft-Karp</a></li>
+    <li><a href="#五hopcroft-karp-核心机制">五、Hopcroft-Karp 核心机制</a>
+      <ul>
+        <li><a href="#51-bfs-分层找最短增广路长度">5.1 BFS 分层（找最短增广路长度）</a></li>
+        <li><a href="#52-dfs-批量增广只走合法层次">5.2 DFS 批量增广（只走合法层次）</a></li>
+        <li><a href="#53-一轮流程">5.3 一轮流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#六复杂度对比">六、复杂度对比</a></li>
+    <li><a href="#七c-函数模板可直接套">七、C++ 函数模板（可直接套）</a>
+      <ul>
+        <li><a href="#使用方式">使用方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#八天梯赛-2026-l3-2建模要点">八、天梯赛 2026 L3-2：建模要点</a>
+      <ul>
+        <li><a href="#81-图怎么建">8.1 图怎么建</a></li>
+        <li><a href="#82-为什么会出现最大匹配">8.2 为什么会出现最大匹配</a></li>
+        <li><a href="#83-结论按题解模型">8.3 结论（按题解模型）</a></li>
+      </ul>
+    </li>
+    <li><a href="#九容易写错的-6-个点">九、容易写错的 6 个点</a></li>
+    <li><a href="#十总结">十、总结</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="ACM-Lycoris"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">ACM-Lycoris</div>
+  <div class="sidebar-description">振桴彼岸，绽蕊忘川</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">2</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">6</div>
+  </a>
+</div>
+<div class="sidebar-social" ></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">友链</div>
+    </div></div></div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js"  ></script><script src="/js/aos.js"  ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax ></script><script>
+  var setupFirework = () => {
+    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+      if (window.firework) {
+        const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+        options.excludeElements = options.excludeelements;
+        delete options.excludeelements;
+        window.firework(options);
+      }
+    }
+  }
+</script><script
+    src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js"
+    defer
+    
+    
+    onload="setupFirework()"
+    integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8&#43;pUoWX8n1rgq282T" crossorigin="anonymous"></script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "ACM-Lycoris",
+          title: "图论Hopcroft-Karp算法与2026天梯赛L3-2",
+          url: "http:\/\/localhost:1313\/posts\/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2\/",
+          description: " 从零入门二分图最大匹配，附天梯赛 2026 L3-2 的建模思路。\n背景\r这篇文章面向两类读者：\n学过 BFS\/DFS，但对“增广路”理解不牢。 做题时知道要用二分图匹配，但写不出稳定的 Hopcroft-Karp。 如果你是第一次接触图论，也可以看，但建议先补一下 BFS、DFS 和图的基本表示 什么 你说你不会BFS和DFS?\n一、什么是二分图\r二分图是把点分成两组 $L$ 和 $R$，并且所有边都只在两组之间连接，不会出现组内连边。\n一个直观场景：左边是学生，右边是公司，边表示“可以投递”。\nLEFT SET (L) RIGHT SET (R) ┌───┐ ┌───┐ │小明 …",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax ></script><script src="/js/tabs.js" data-pjax defer></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+        }
+        pswp()
+      </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

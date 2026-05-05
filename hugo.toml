@@ -1,4 +1,4 @@
-baseURL = 'https://acm-Lycoris.github.io/'
+baseURL = 'https://acm-lycoris.cn/'
 locale = 'zh-cn'
 title = "ACM-Lycoris's Blog"
 theme = 'hugo-theme-reimu'

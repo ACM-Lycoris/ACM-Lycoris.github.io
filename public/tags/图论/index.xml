@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on ACM-Lycoris&#39;s Blog</title>
-    <link>http://localhost:1313/posts/</link>
+    <title>图论 on ACM-Lycoris&#39;s Blog</title>
+    <link>http://localhost:1313/tags/%E5%9B%BE%E8%AE%BA/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
@@ -15,7 +15,7 @@
     <lastBuildDate>Sat, 25 Apr 2026 22:14:41 +0800</lastBuildDate>
     
     
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="http://localhost:1313/tags/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
@@ -91,57 +91,6 @@
       </description>
       
         <category>图论</category>
-      
-    </item>
-    
-    
-
-    <item>
-      <title>GPLT团体程序设计天梯赛2026题解</title>
-      <link>http://localhost:1313/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</link>
-      <pubDate>Wed, 22 Apr 2026 20:38:10 &#43;0800</pubDate>
-      <author>xxx@example.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</guid>
-      <description>
-        <![CDATA[<h1>GPLT团体程序设计天梯赛2026题解</h1><p>作者：ACM-Lycoris（xxx@example.com）</p>
-        
-          <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="-比赛简介">
-<a class="header-anchor" href="#-%e6%af%94%e8%b5%9b%e7%ae%80%e4%bb%8b"></a>
-📝 比赛简介
-</h2><h2 id="gplt-团体程序设计天梯赛-2026-全国总决赛">
-<a class="header-anchor" href="#gplt-%e5%9b%a2%e4%bd%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1%e5%a4%a9%e6%a2%af%e8%b5%9b-2026-%e5%85%a8%e5%9b%bd%e6%80%bb%e5%86%b3%e8%b5%9b"></a>
-GPLT 团体程序设计天梯赛 2026 全国总决赛
-</h2><p>来自2026.4.18日天梯赛2026总决赛，往年真题链接 <a href="https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7">https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7</a>  比赛补题链接 <a href="https://pintia.cn/problem-sets/2045817898201726976/exam/overview">https://pintia.cn/problem-sets/2045817898201726976/exam/overview</a> （补题链接于2026.4.30关闭）</p>
-<p>每道题的讲解结构：<strong>题目 → 思路 → 代码</strong>。</p>
-<!-- raw HTML omitted -->
-<ul>
-<li><a href="#l1-1">L1-1 一行代码</a></li>
-<li><a href="#l1-2">L1-2 要刷多少题</a></li>
-<li><a href="#l1-3">L1-3 就挺突然的</a></li>
-<li><a href="#l1-4">L1-4 普及赛排名</a></li>
-<li><a href="#l1-5">L1-5 做什么都被骂怎么办</a></li>
-<li><a href="#l1-6">L1-6 钓鱼佬专用挪车电话</a></li>
-<li><a href="#l1-7">L1-7 网络流量监测</a></li>
-<li><a href="#l1-8">L1-8 智慧文本编辑器</a></li>
-<li><a href="#l2-1">L2-1 姥姥改作业</a></li>
-<li><a href="#l2-2">L2-2 超参数搜索</a></li>
-<li><a href="#l2-3">L2-3 森林藏宝图</a></li>
-<li><a href="#l2-4">L2-4 大语言模型的推理</a></li>
-<li><a href="#l3-1">L3-1 门诊预约排队系统</a></li>
-</ul>
-<!-- raw HTML omitted -->
-<hr>
-<h2 id="l1-1-一行代码">
-<a class="header-anchor" href="#l1-1-%e4%b8%80%e8%a1%8c%e4%bb%a3%e7%a0%81"></a>
-<!-- raw HTML omitted --><!-- raw HTML omitted -->L1-1 一行代码
-</h2><p><strong>分数</strong>：5</p>
-        
-        <hr><p>本文2026-04-22首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-22</p>]]>
-      </description>
-      
-        <category>GPLT天梯赛</category><category>2026</category>
       
     </item>
     

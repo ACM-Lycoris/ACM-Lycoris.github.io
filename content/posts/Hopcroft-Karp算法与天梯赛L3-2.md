@@ -17,7 +17,8 @@ tags: ["算法", "图论", "二分图", "Hopcroft-Karp", "天梯赛"]
 1. 学过 BFS/DFS，但对“增广路”理解不牢。
 2. 做题时知道要用二分图匹配，但写不出稳定的 Hopcroft-Karp。
 
-如果你是第一次接触图论，也可以看，但建议先补一下 BFS、DFS 和图的基本表示。
+如果你是第一次接触图论，也可以看，但建议先补一下 BFS、DFS 和图的基本表示
+什么 你说你不会BFS和DFS?
 
 ---
 
@@ -83,7 +84,7 @@ Hopcroft-Karp 的关键升级是：
 2. 再 DFS 只在分层图上找路。
 3. 一轮内增广一批“点互不相交”的最短增广路。
 
-这就是它能从 $O(VE)$ 提升到 $O(E\sqrt V)$ 的核心原因。
+这就是它能从 O(E·V) 提升到 O(E·根号下V) 的核心原因。
 
 ---
 
@@ -250,17 +251,145 @@ cout << hopcroftKarp(nL, nR) << '\n';
 
 在该题标准建模下，最终答案可写为：
 
-$$
-\text{ans} = n + M
-$$
+ans= n + M;
 
-其中 $n$ 是板块数，$M$ 是最大匹配数。
+其中 n 是板块数，M 是最大匹配数。
 
 实现时通常就是：
 
 ```cpp
 int M = hopcroftKarp(nL, nR);
 cout << n + M << '\n';
+```
+
+于是，经过我们一顿操作,就有这样的AC代码
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using ll  = long long;
+using ull = unsigned long long;
+
+const int N= 114514;//最大顶点数，板块数量上限
+
+vector<int> adj[N];
+//adj[红色花纹]={蓝色花纹1，蓝色花纹2....}
+//每个工厂板块对应一对红r->蓝b
+
+int pairU[N];   // pairU[红色花纹] = 当前匹配的蓝色花纹 (0 表示未匹配)
+int pairV[N];   // pairV[蓝色花纹] = 当前匹配的红色花纹 (0 表示未匹配)
+int dist[N];    // dist[红色花纹]  = BFS 时该红色节点所在的层次（距离）
+
+bool BFS(int n){//从节点n开始广搜构建带层次的一个图，并判断能不能继续往下匹配
+    queue<int> q;//存红色节点
+
+    for(int u=1;u<=n;u++){
+        if(pairU[u]==0){
+            dist[u]=0;
+            q.push(u);//如果一个节点没有匹配，就从这个节点开始匹配
+        }else{
+            dist[u]=INT_MAX;//已匹配的红色初始一定不可达
+            //后面如果能到达了再更新
+        }
+    }
+
+    dist[0]=INT_MAX;//dist[0]表示当前已知的最短的增广路长度+1
+    //初始未找到，若dist[u]>=dist[0]说明再往后找不到最短的增广路
+
+    while(!q.empty()){
+        int u=q.front();
+        q.pop();
+
+        if(dist[u]<dist[0]){
+            for(int v:adj[u]){
+                //遍历u链接的所有蓝色v
+                if(pairV[v]==0){
+                    //表示找到一条增广路终点的时候
+                    if(dist[0]==INT_MAX){//还没有其他增广路
+                        dist[0]=dist[u]+1;
+                    }
+                }else{
+                    int u2=pairV[v];//蓝色v已经匹配过红色了
+                    //
+                    if(dist[u2]==INT_MAX){
+                        dist[u2]=dist[u]+1;//u-v存在，v到u2存在，u2就可以抵达
+                        q.push(u2);
+                    }
+                }
+            }
+        }
+    }
+    return dist[0]!=INT_MAX;
+}
+
+bool DFS(int u){//DFS成功表示u出发，成功找到一条增广路
+    if(u==0){
+        return true;
+    }//到达虚拟节点，表示找到增广路
+
+    for(int v:adj[u]){
+        if(pairV[v]==0&&dist[0]==dist[u]+1&&DFS(0)){
+            //v没有匹配，且到v的距离正好是最短增广路
+            pairU[u]=v;
+            pairV[v]=u;
+            return true;
+        }
+        else if(pairV[v]!=0&&dist[pairV[v]]==dist[u]+1&&DFS(pairV[v])){
+            //如果v已经匹配了一个红色且u到这个红色的层次正好差1且DFS成了
+            pairU[u]=v;
+            pairV[v]=u;
+            return true;
+        }
+    }
+
+    dist[u]=INT_MAX;//没匹配上
+    return false;
+
+}
+
+int Hop(int n){
+    memset(pairU, 0, sizeof(pairU));
+    memset(pairV, 0, sizeof(pairV));
+
+    int matching = 0;   // 当前匹配数
+
+    // 反复进行 BFS + DFS，直到找不到增广路
+    while (BFS(n)) {
+        // 对每一个未匹配的红色节点，尝试 DFS 找增广路
+        for (int u = 1; u <= n; u++) {
+            if (pairU[u] == 0 && DFS(u)) {
+                ++matching;   // 每找到一条增广路，匹配数 +1
+            }
+        }
+    }
+    return matching;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin>>T;
+    while(T--){
+        int n;
+        cin>>n;
+        for(int i=1;i<=n;i++){
+            adj[i].clear();
+        }
+        for(int i=1;i<=n;i++){
+            int r,b;
+            cin>>r>>b;
+            adj[r].push_back(b);
+        }
+
+        int maxMatch=Hop(n);
+
+        cout<<n+maxMatch<<endl;
+    }
+
+    return 0;
+}
 ```
 
 ---
