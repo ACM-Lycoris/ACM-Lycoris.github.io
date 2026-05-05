@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ACM-Lycoris/ACM-Lycoris.github.io
   branch: main
-  base_url: https://sveltia-cms-auth.netlify.app
+  # 不需要 base_url 了，直接用 Token 登录
 
 media_folder: "static/images"
 public_folder: "/images"
