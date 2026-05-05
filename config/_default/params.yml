@@ -1,0 +1,28 @@
+# 站点信息
+author: ACM-Lycoris
+email: your@email.com
+description: "振桴彼岸，绽蕊忘川"
+
+# 主标题下方的副标题（打字机效果关闭时显示的文字）
+subtitle:
+  typing:
+    enable: false
+  text: "振桴彼岸，绽蕊忘川"
+
+# 加载动画文字（就是进入网站前那个“少女祈祷中...”）
+preloader:
+  enable: true
+  text:
+    zh-CN: "电波接受中..."
+    en: "Loading..."
+  rotate: true
+
+# 社交链接
+social:
+  github: https://github.com/ACM-Lycoris
+  bilibili: https://space.bilibili.com/3493117112093634
+
+# 看板娘
+live2d:
+  enable: true
+  position: left
