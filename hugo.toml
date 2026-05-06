@@ -1,10 +1,12 @@
 baseURL = 'https://acm-lycoris.cn/'
+timeZone = 'Asia/Shanghai'
 locale = 'zh-cn'
 title = "ACM-Lycoris's Blog"
 theme = 'hugo-theme-reimu'
 
 [params]
   uglyURLs = true
+  customCSS = ["css/custom.css"]
   mainSections = ["posts"]
   author = "ACM-Lycoris"
   description = "振桴彼岸，绽蕊忘川"

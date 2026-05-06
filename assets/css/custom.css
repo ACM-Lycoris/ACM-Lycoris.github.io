@@ -1,10 +1,73 @@
-/* 强制代码块文字变为浅色，避免黑底黑字 */
+/* ========== 代码块美化 ========== */
 pre, code, .highlight {
     color: #e0e0e0 !important;
 }
 
-/* 如果你还需要行内代码也清晰可见 */
 code {
     background-color: #2d2d2d;
     color: #f8f8f2;
+}
+
+/* ========== 归档页面美化 ========== */
+
+/* 归档容器 */
+.archive {
+  padding: 20px 0;
+}
+
+/* 年份标题 */
+.archive-year-header {
+  font-size: 1.8rem;
+  margin: 30px 0 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--color-red-2, #e74c3c);
+  display: inline-block;
+  color: var(--text-primary, #333);
+}
+
+/* 文章列表容器 */
+.archive-post-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* 每篇文章的卡片 */
+.archive-post-item {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+  padding: 12px 18px;
+  margin: 8px 0;
+  border-radius: 10px;
+  background: rgba(255, 240, 240, 0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+/* 鼠标悬停效果 */
+.archive-post-item:hover {
+  border-left-color: var(--color-red-3, #ff7675);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: translateX(4px);
+}
+
+/* 日期样式 */
+.archive-post-time {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #888);
+  min-width: 60px;
+  font-weight: 500;
+}
+
+/* 文章标题链接 */
+.archive-post-link {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary, #333);
+  text-decoration: none;
+}
+
+.archive-post-link:hover {
+  color: var(--color-red-3, #ff7675);
 }

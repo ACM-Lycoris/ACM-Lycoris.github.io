@@ -1,18 +1,22 @@
 {{ define "main" }}
 <div class="archive container">
-  <h1>{{ .Title }}</h1>
-  {{ range (where .Site.RegularPages "Section" "posts").GroupByDate "2006-01" }}
-    {{ $year := substr .Key 0 4 }}
-    {{ $month := substr .Key 5 2 }}
-    <h2>{{ $year }}年 {{ printf "%d" (int $month) }}月</h2>
-    <ul>
-      {{ range .Pages }}
-      <li>
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        <time>{{ .Date.Format "2006-01-02" }}</time>
-      </li>
-      {{ end }}
-    </ul>
+  <h1 class="archive-title">{{ .Title }}</h1>
+
+  {{ $posts := where .Site.RegularPages "Section" "in" .Site.Params.mainSections }}
+  {{ range $posts.GroupByDate "2006" }}
+    <section class="archive-year">
+      <h2 class="archive-year-header">{{ .Key }}</h2>
+      <div class="archive-post-list">
+        {{ range .Pages }}
+        <div class="archive-post-item">
+          <time class="archive-post-time" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "01-02" }}
+          </time>
+          <a class="archive-post-link" href="{{ .Permalink }}">{{ .Title }}</a>
+        </div>
+        {{ end }}
+      </div>
+    </section>
   {{ end }}
 </div>
 {{ end }}
