@@ -15,14 +15,29 @@ theme = 'hugo-theme-reimu'
   highlightjslib = "highlight.js"
 
 [[menu.main]]
+  name = '首页'
+  url = '/'
+  weight = 10
+
+[[menu.main]]
   name = '归档'
   url = '/archives/'
-  weight = 10
+  weight = 20
 
 [[menu.main]]
   name = '标签'
   url = '/tags/'
-  weight = 20
+  weight = 30
+
+[[menu.main]]
+  name = '友链'
+  url = '/friend/'
+  weight = 40
+
+[[menu.main]]
+  name = '关于'
+  url = '/about/'
+  weight = 50
 
 [markup]
   [markup.highlight]
