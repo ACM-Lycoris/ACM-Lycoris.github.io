@@ -343,6 +343,61 @@
     </div>
   </div></div></div></aside>
 <section id="main" aria-label="Main content">
+<style>
+ 
+.archive-year-header {
+  font-size: 1.8rem;
+  margin: 30px 0 15px;
+  padding-bottom: 5px;
+  border-bottom: 3px solid #ff7675;
+  display: inline-block;
+  color: #333;
+}
+
+.archive-post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.archive-post-item {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+  padding: 12px 18px;
+  margin: 10px 0;
+  border-radius: 12px;
+  background: rgba(255, 235, 235, 0.45);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border-left: 4px solid #ff7675;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.archive-post-item:hover {
+  transform: translateX(6px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  background: rgba(255, 220, 220, 0.6);
+}
+
+.archive-post-time {
+  font-size: 0.9rem;
+  color: #888;
+  min-width: 60px;
+  font-weight: 600;
+}
+
+.archive-post-link {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d3436;
+  text-decoration: none;
+}
+
+.archive-post-link:hover {
+  color: #d63031;
+}
+</style>
+
 <div class="archive container">
   <h1 class="archive-title">归档</h1>
 

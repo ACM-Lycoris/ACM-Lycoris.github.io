@@ -2,72 +2,69 @@
 pre, code, .highlight {
     color: #e0e0e0 !important;
 }
-
 code {
-    background-color: #2d2d2d;
-    color: #f8f8f2;
+    background-color: #2d2d2d !important;
+    color: #f8f8f2 !important;
 }
 
-/* ========== 归档页面美化 ========== */
+/* ========== 归档页面强制卡片化 (硬核覆盖版) ========== */
 
-/* 归档容器 */
+/* 整个归档容器留一点呼吸空间 */
 .archive {
-  padding: 20px 0;
+    padding: 20px 0 !important;
 }
 
-/* 年份标题 */
+/* 年份大标题 */
 .archive-year-header {
-  font-size: 1.8rem;
-  margin: 30px 0 15px;
-  padding-bottom: 5px;
-  border-bottom: 2px solid var(--color-red-2, #e74c3c);
-  display: inline-block;
-  color: var(--text-primary, #333);
+    font-size: 1.8rem !important;
+    margin: 30px 0 15px !important;
+    padding-bottom: 5px !important;
+    border-bottom: 2px solid var(--color-red-2) !important;
+    display: inline-block !important;
 }
 
-/* 文章列表容器 */
-.archive-post-list {
-  list-style: none;
-  padding: 0;
-}
-
-/* 每篇文章的卡片 */
+/* 每条文章卡片 */
 .archive-post-item {
-  display: flex;
-  align-items: baseline;
-  gap: 15px;
-  padding: 12px 18px;
-  margin: 8px 0;
-  border-radius: 10px;
-  background: rgba(255, 240, 240, 0.3);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 15px !important;
+    padding: 12px 18px !important;
+    margin: 10px 0 !important;
+    border-radius: 12px !important;
+    background: rgba(255, 235, 235, 0.45) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+    border-left: 4px solid var(--color-red-3) !important;
+    transition: all 0.2s ease !important;
+    backdrop-filter: blur(6px) !important;
 }
 
-/* 鼠标悬停效果 */
+/* 鼠标悬停：向右滑一下，阴影加深 */
 .archive-post-item:hover {
-  border-left-color: var(--color-red-3, #ff7675);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transform: translateX(4px);
+    transform: translateX(6px) !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18) !important;
+    background: rgba(255, 220, 220, 0.55) !important;
 }
 
-/* 日期样式 */
+/* 日期数字 */
 .archive-post-time {
-  font-size: 0.9rem;
-  color: var(--text-secondary, #888);
-  min-width: 60px;
-  font-weight: 500;
+    font-size: 0.9rem !important;
+    color: #888 !important;
+    min-width: 60px !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
 }
 
 /* 文章标题链接 */
 .archive-post-link {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary, #333);
-  text-decoration: none;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    background: none !important;
+    display: inline-block !important;
 }
 
 .archive-post-link:hover {
-  color: var(--color-red-3, #ff7675);
+    color: #d63031 !important;
 }
