@@ -13,7 +13,7 @@ subtitle:
 preloader:
   enable: true
   text:
-    zh-CN: "电波接受中..."
+    zh-CN: "少女祈祷中..."
     en: "Loading..."
   rotate: true
 

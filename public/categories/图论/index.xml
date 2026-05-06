@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>图论 on ACM-Lycoris&#39;s Blog</title>
-    <link>http://localhost:1313/categories/%E5%9B%BE%E8%AE%BA/</link>
+    <link>https://acm-lycoris.cn/categories/%E5%9B%BE%E8%AE%BA/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     
-    <managingEditor>xxx@example.com (ACM-Lycoris)</managingEditor>
-    <webMaster>xxx@example.com (ACM-Lycoris)</webMaster>
+    <managingEditor>your@email.com (ACM-Lycoris)</managingEditor>
+    <webMaster>your@email.com (ACM-Lycoris)</webMaster>
     
     <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
     
     <lastBuildDate>Sat, 25 Apr 2026 22:14:41 +0800</lastBuildDate>
     
     
-    <atom:link href="http://localhost:1313/categories/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="https://acm-lycoris.cn/categories/%E5%9B%BE%E8%AE%BA/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
@@ -23,12 +23,12 @@
 
     <item>
       <title>图论Hopcroft-Karp算法与2026天梯赛L3-2</title>
-      <link>http://localhost:1313/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</link>
+      <link>https://acm-lycoris.cn/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</link>
       <pubDate>Sat, 25 Apr 2026 22:14:41 &#43;0800</pubDate>
-      <author>xxx@example.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</guid>
+      <author>your@email.com (ACM-Lycoris)</author>
+      <guid>https://acm-lycoris.cn/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</guid>
       <description>
-        <![CDATA[<h1>图论Hopcroft-Karp算法与2026天梯赛L3-2</h1><p>作者：ACM-Lycoris（xxx@example.com）</p>
+        <![CDATA[<h1>图论Hopcroft-Karp算法与2026天梯赛L3-2</h1><p>作者：ACM-Lycoris（your@email.com）</p>
         
           <blockquote>
 <p>从零入门二分图最大匹配，附天梯赛 2026 L3-2 的建模思路。</p>
@@ -87,7 +87,7 @@
 四、从匈牙利到 Hopcroft-Karp
 </h2><p>匈牙利算法（这里指 DFS 版二分图增广）是“每次找一条增广路”。</p>
         
-        <hr><p>本文2026-04-25首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-25</p>]]>
+        <hr><p>本文2026-04-25首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-25</p>]]>
       </description>
       
         <category>图论</category>
