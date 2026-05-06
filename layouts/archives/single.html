@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="archive container">
+  <h1>{{ .Title }}</h1>
+  {{ range (where .Site.RegularPages "Section" "posts").GroupByDate "2006-01" }}
+    {{ $year := substr .Key 0 4 }}
+    {{ $month := substr .Key 5 2 }}
+    <h2>{{ $year }}年 {{ printf "%d" (int $month) }}月</h2>
+    <ul>
+      {{ range .Pages }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <time>{{ .Date.Format "2006-01-02" }}</time>
+      </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</div>
+{{ end }}

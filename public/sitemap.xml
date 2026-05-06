@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2026-04-25T22:14:41+08:00</lastmod>
+    <lastmod>2026-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/about/</loc>
+    <lastmod>2026-05-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/friend/</loc>
+    <lastmod>2026-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
     <lastmod>2026-04-25T22:14:41+08:00</lastmod>
@@ -46,5 +52,7 @@
   </url><url>
     <loc>http://localhost:1313/categories/gplt%E5%A4%A9%E6%A2%AF%E8%B5%9B/</loc>
     <lastmod>2026-04-22T20:38:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/archives/</loc>
   </url>
 </urlset>

@@ -4,6 +4,7 @@ title = "ACM-Lycoris's Blog"
 theme = 'hugo-theme-reimu'
 
 [params]
+  uglyURLs = true
   mainSections = ["posts"]
   author = "ACM-Lycoris"
   description = "振桴彼岸，绽蕊忘川"
