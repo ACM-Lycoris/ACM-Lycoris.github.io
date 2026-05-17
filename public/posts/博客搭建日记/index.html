@@ -1,0 +1,1159 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  博客搭建日记——Hugo &#43; GitHub Pages &#43; Cloudflare 全流程 | ACM-Lycoris
+</title>
+<meta name="description" content="从零开始搭建一个免费、高速、带后台管理的个人博客，最适合抄作业"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_ex15nbittbh\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_ex15nbittbh.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" /><meta property="og:type" content="website" />
+  <meta property="og:title" content="博客搭建日记——Hugo &#43; GitHub Pages &#43; Cloudflare 全流程 | ACM-Lycoris" />
+  <meta
+    property="og:description"
+    content="从零开始搭建一个免费、高速、带后台管理的个人博客，最适合抄作业"
+  />
+  <meta property="og:url" content="http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/" />
+  <meta
+    property="og:site_name"
+    content="ACM-Lycoris&#39;s Blog"
+  />
+  <meta property="og:image" content="http://localhost:1313/images/back.png" />
+  <meta property="article:author" content="ACM-Lycoris" />
+  <meta property="article:published_time" content="2026-05-17T12:00:00&#43;08:00" />
+  <meta property="article:modified_time" content="2026-05-17T12:00:00&#43;08:00" /><meta property="article:tag" content="Hugo, 教程, 建站" /><meta name="twitter:card" content="summary" /><meta name="twitter:image" content="http://localhost:1313/images/back.png" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
+  /><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"></nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/back.png" alt="博客搭建日记——Hugo &#43; GitHub Pages &#43; Cloudflare 全流程"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">博客搭建日记——Hugo &#43; GitHub Pages &#43; Cloudflare 全流程</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          
+          class="sidebar-right"  ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一这个博客用了什么">一、这个博客用了什么</a></li>
+    <li><a href="#二github-仓库创建">二、GitHub 仓库创建</a></li>
+    <li><a href="#三安装-hugo">三、安装 Hugo</a></li>
+    <li><a href="#四本地创建站点">四、本地创建站点</a></li>
+    <li><a href="#五安装主题">五、安装主题</a></li>
+    <li><a href="#六配置主题换头像改名字改描述">六、配置主题：换头像、改名字、改描述</a>
+      <ul>
+        <li><a href="#61-先看主题有哪些配置项">6.1 先看主题有哪些配置项</a></li>
+        <li><a href="#62-hugotoml-基本配置">6.2 hugo.toml 基本配置</a></li>
+        <li><a href="#63-覆盖主题默认的文字">6.3 覆盖主题默认的文字</a></li>
+        <li><a href="#64-开启-live2d-看板娘">6.4 开启 Live2D 看板娘</a></li>
+        <li><a href="#65-本地预览">6.5 本地预览</a></li>
+      </ul>
+    </li>
+    <li><a href="#七个性化定制">七、个性化定制</a>
+      <ul>
+        <li><a href="#71-自定义-css">7.1 自定义 CSS</a></li>
+        <li><a href="#72-自定义模板">7.2 自定义模板</a></li>
+        <li><a href="#73-菜单">7.3 菜单</a></li>
+      </ul>
+    </li>
+    <li><a href="#八github-actions-自动部署">八、GitHub Actions 自动部署</a>
+      <ul>
+        <li><a href="#81-创建工作流文件">8.1 创建工作流文件</a></li>
+        <li><a href="#82-开启-pages">8.2 开启 Pages</a></li>
+        <li><a href="#83-推送代码">8.3 推送代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#九为什么必须买域名--用-cloudflare-加速">九、为什么必须买域名 + 用 Cloudflare 加速</a>
+      <ul>
+        <li><a href="#91-腾讯云买域名">9.1 腾讯云买域名</a></li>
+        <li><a href="#92-把域名加到-cloudflare">9.2 把域名加到 Cloudflare</a></li>
+        <li><a href="#93-回腾讯云改-ns">9.3 回腾讯云改 NS</a></li>
+        <li><a href="#94-在-cloudflare-添加-dns-记录指向-github-pages">9.4 在 Cloudflare 添加 DNS 记录指向 GitHub Pages</a></li>
+        <li><a href="#95-ssltls-设置">9.5 SSL/TLS 设置</a></li>
+        <li><a href="#96-回-github-绑定自定义域名">9.6 回 GitHub 绑定自定义域名</a></li>
+        <li><a href="#97-更新-hugo-和-cms-配置">9.7 更新 Hugo 和 CMS 配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#十cloudflare-的其他免费福利">十、Cloudflare 的其他免费福利</a>
+      <ul>
+        <li><a href="#101-缓存规则">10.1 缓存规则</a></li>
+        <li><a href="#102-自动压缩">10.2 自动压缩</a></li>
+        <li><a href="#103-安全防护">10.3 安全防护</a></li>
+      </ul>
+    </li>
+    <li><a href="#十一写文章和发布">十一、写文章和发布</a>
+      <ul>
+        <li><a href="#111-命令行方式">11.1 命令行方式</a></li>
+        <li><a href="#112-用-cms-后台sveltia">11.2 用 CMS 后台（Sveltia）</a></li>
+        <li><a href="#113-用-cms-写了文章后同步到本地">11.3 用 CMS 写了文章后同步到本地</a></li>
+      </ul>
+    </li>
+    <li><a href="#十二日常操作总结">十二、日常操作总结</a></li>
+    <li><a href="#十三我踩过的坑你有缘看到就帮自己省时间了">十三、我踩过的坑（你有缘看到，就帮自己省时间了）</a></li>
+    <li><a href="#十四总结">十四、总结</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="ACM-Lycoris"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">ACM-Lycoris</div>
+  <div class="sidebar-description">振桴彼岸，绽蕊忘川</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">4</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      4
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">11</div>
+  </a>
+</div>
+<div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
+        <a
+          href="https://space.bilibili.com/3493117112093634"
+          itemprop="url"
+          target="_blank"
+          aria-label="bilibili"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div><div class="icon-github sidebar-social-icon">
+        <a
+          href="https://github.com/ACM-Lycoris"
+          itemprop="url"
+          target="_blank"
+          aria-label="github"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">友链</div>
+    </div></div></div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2026-05-17 12:00:00 &#43;0800 CST" itemprop="datePublished"
+      >2026-05-17</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2026-05-17</time
+    >
+  </span></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>总成本一年几十块，其他全部免费。这篇文章记录我从零搭建这个博客的完整过程，以及博主在搭建过程中踩过的坑</p>
+</blockquote>
+<hr>
+<h2 id="一这个博客用了什么">
+<a class="header-anchor" href="#%e4%b8%80%e8%bf%99%e4%b8%aa%e5%8d%9a%e5%ae%a2%e7%94%a8%e4%ba%86%e4%bb%80%e4%b9%88"></a>
+一、这个博客用了什么
+</h2><table>
+  <thead>
+      <tr>
+          <th>层级</th>
+          <th>技术</th>
+          <th>作用</th>
+          <th>花费</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>静态站点生成</td>
+          <td>Hugo</td>
+          <td>把 Markdown 编译成 HTML</td>
+          <td>免费</td>
+      </tr>
+      <tr>
+          <td>代码托管 + 自动部署</td>
+          <td>GitHub + GitHub Actions</td>
+          <td>推送代码自动构建发布</td>
+          <td>免费</td>
+      </tr>
+      <tr>
+          <td>主题</td>
+          <td>hugo-theme-reimu</td>
+          <td>二次元灵梦风格，暗黑模式</td>
+          <td>免费</td>
+      </tr>
+      <tr>
+          <td>后台管理</td>
+          <td>Sveltia CMS</td>
+          <td>浏览器里在线写文章</td>
+          <td>免费</td>
+      </tr>
+      <tr>
+          <td>CDN + DNS</td>
+          <td>Cloudflare</td>
+          <td>全球加速 + HTTPS</td>
+          <td>免费</td>
+      </tr>
+      <tr>
+          <td>域名</td>
+          <td>腾讯云 .cn</td>
+          <td>自己的域名，看着正经</td>
+          <td>首年 35 元</td>
+      </tr>
+  </tbody>
+</table>
+<p>全部加起来，一年只需要出个域名的钱。</p>
+<hr>
+<h2 id="二github-仓库创建">
+<a class="header-anchor" href="#%e4%ba%8cgithub-%e4%bb%93%e5%ba%93%e5%88%9b%e5%bb%ba"></a>
+二、GitHub 仓库创建
+</h2><p>第一步，注册 GitHub 账号。这个不教了，大家都应该有。
+别告诉我这你不会弄啊</p>
+<p>创建一个新仓库，<strong>仓库名必须叫 <code>用户名.github.io</code></strong>。比如我的 GitHub 用户名是 <code>ACM-Lycoris</code>，那仓库名就是 <code>ACM-Lycoris.github.io</code>。</p>
+<ul>
+<li>仓库类型选 <strong>Public</strong>（私有仓库不能开 Pages，除非你付费）。</li>
+<li>先不要勾选 Add README，我们后面本地初始化完再推上去。</li>
+</ul>
+<p>建好之后你会有一个空的远程仓库地址：<code>https://github.com/你的用户名/你的用户名.github.io.git</code>，记下来。</p>
+<hr>
+<h2 id="三安装-hugo">
+<a class="header-anchor" href="#%e4%b8%89%e5%ae%89%e8%a3%85-hugo"></a>
+三、安装 Hugo
+</h2><p>Hugo 是用 Go 写的，Windows 上下载一个 zip 解压就能用。</p>
+<ol>
+<li>去 <a href="https://github.com/gohugoio/hugo/releases">Hugo Releases</a> 下载最新的 <code>hugo_extended_xxx_windows-amd64.zip</code>（注意带 <code>extended</code>，否则后面处理 SCSS 会翻车）。</li>
+<li>解压到比如 <code>C:\hugo\</code>，里面只有一个 <code>hugo.exe</code>。</li>
+<li>把这个路径加到系统环境变量 Path 里。</li>
+<li>打开 Git Bash，验证：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo version
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出类似: hugo v0.145.0+extended windows/amd64 ...</span>
+</span></span></code></pre></div><p>看到 <code>extended</code> 字样就没问题。</p>
+<hr>
+<h2 id="四本地创建站点">
+<a class="header-anchor" href="#%e5%9b%9b%e6%9c%ac%e5%9c%b0%e5%88%9b%e5%bb%ba%e7%ab%99%e7%82%b9"></a>
+四、本地创建站点
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 找个目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /d/BlogNew
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建新站点骨架</span>
+</span></span><span class="line"><span class="cl">hugo new site myblog
+</span></span></code></pre></div><p><code>myblog</code> 文件夹里会生成这些：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">myblog/
+</span></span><span class="line"><span class="cl">  archetypes/   # 文章模板
+</span></span><span class="line"><span class="cl">  assets/       # 自定义 CSS/JS
+</span></span><span class="line"><span class="cl">  content/      # 放文章 (.md) 的地方
+</span></span><span class="line"><span class="cl">  data/         # 数据文件
+</span></span><span class="line"><span class="cl">  layouts/      # 自定义模板
+</span></span><span class="line"><span class="cl">  static/       # 图片等静态资源
+</span></span><span class="line"><span class="cl">  config/       # 配置文件（新版本 Hugo 用 _default/ 目录）
+</span></span><span class="line"><span class="cl">  hugo.toml     # 主配置文件
+</span></span></code></pre></div><p>进入项目，初始化 Git：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> myblog
+</span></span><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git branch -M main
+</span></span><span class="line"><span class="cl">git remote add origin https://github.com/你的用户名/你的用户名.github.io.git
+</span></span></code></pre></div><hr>
+<h2 id="五安装主题">
+<a class="header-anchor" href="#%e4%ba%94%e5%ae%89%e8%a3%85%e4%b8%bb%e9%a2%98"></a>
+五、安装主题
+</h2><p>我去 GitHub 的主题库里翻了一圈，锁定了 <a href="https://github.com/D-Sketon/hugo-theme-reimu">hugo-theme-reimu</a>——理由是好看，暗黑模式、打字机效果、鼠标特效、代码高亮全都有。最关键是纯 CSS 的鼠标轨迹特效和烟花特效不用任何配置就能用。</p>
+<p>然后，我其实不混二次元……个别人能不能别总盯着这个博丽灵梦然后说我。</p>
+<p>用 git submodule 安装，因为 Hugo 推荐这么搞，方便以后拉取主题更新：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add https://github.com/D-Sketon/hugo-theme-reimu.git themes/hugo-theme-reimu
+</span></span></code></pre></div><p>这会生成一个 <code>.gitmodules</code> 文件，记录子模块信息。以后换电脑 <code>git clone --recurse-submodules</code> 就能把主题一起拉下来。</p>
+<hr>
+<h2 id="六配置主题换头像改名字改描述">
+<a class="header-anchor" href="#%e5%85%ad%e9%85%8d%e7%bd%ae%e4%b8%bb%e9%a2%98%e6%8d%a2%e5%a4%b4%e5%83%8f%e6%94%b9%e5%90%8d%e5%ad%97%e6%94%b9%e6%8f%8f%e8%bf%b0"></a>
+六、配置主题：换头像、改名字、改描述
+</h2><p>主题装好只是第一步，你得让它变成&quot;你自己的博客&quot;而不是&quot;灵梦的默认样子&quot;。</p>
+<h3 id="61-先看主题有哪些配置项">
+<a class="header-anchor" href="#61-%e5%85%88%e7%9c%8b%e4%b8%bb%e9%a2%98%e6%9c%89%e5%93%aa%e4%ba%9b%e9%85%8d%e7%bd%ae%e9%a1%b9"></a>
+6.1 先看主题有哪些配置项
+</h3><p>去 <code>themes/hugo-theme-reimu/</code> 里面找 <code>theme.toml</code> 或者 <code>config/</code> 目录。有些主题还会提供示例站点 <code>_example/</code>，那里面有完整的配置参考。</p>
+<p>hugo-theme-reimu 的核心配置项都在它的 <code>config.toml</code> 里有写，另外它的 README 也是重要参考源。</p>
+<h3 id="62-hugotoml-基本配置">
+<a class="header-anchor" href="#62-hugotoml-%e5%9f%ba%e6%9c%ac%e9%85%8d%e7%bd%ae"></a>
+6.2 hugo.toml 基本配置
+</h3><p>新版 Hugo 用 <code>hugo.toml</code>（替代了旧版的 <code>config.toml</code>），在项目根目录创建/编辑它：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s1">&#39;https://你的域名/&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">timeZone</span> <span class="p">=</span> <span class="s1">&#39;Asia/Shanghai&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">locale</span> <span class="p">=</span> <span class="s1">&#39;zh-cn&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;你的博客名&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">theme</span> <span class="p">=</span> <span class="s1">&#39;hugo-theme-reimu&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">author</span> <span class="p">=</span> <span class="s2">&#34;你的昵称&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">description</span> <span class="p">=</span> <span class="s2">&#34;你的签名&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">avatar</span> <span class="p">=</span> <span class="s2">&#34;avatar.jpg&#34;</span>
+</span></span></code></pre></div><ul>
+<li><code>baseURL</code>：先写 <code>https://用户名.github.io</code>，等买了域名再改成域名。</li>
+<li><code>avatar</code>：把头像图放到 <code>static/</code> 下，名字对应就行。我放了张赛马娘的图叫 <code>avatar.jpg</code>，那你用任何 jpg/png 都行。</li>
+<li><code>description</code>：会显示在主页标题下方。</li>
+</ul>
+<h3 id="63-覆盖主题默认的文字">
+<a class="header-anchor" href="#63-%e8%a6%86%e7%9b%96%e4%b8%bb%e9%a2%98%e9%bb%98%e8%ae%a4%e7%9a%84%e6%96%87%e5%ad%97"></a>
+6.3 覆盖主题默认的文字
+</h3><p>主题有些默认文字你可能想改，比如加载动画那个&quot;少女祈祷中&quot;（虽然我还挺喜欢的）。不要直接在主题目录里改，下次更新子模块会覆盖掉。</p>
+<p>正确做法：在项目根目录新建 <code>config/_default/params.yml</code>，用 YAML 覆盖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 主标题下方的副标题（打字机效果）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">subtitle</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">typing</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;你自己的签名&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 加载动画文字</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">preloader</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">text</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">zh-CN</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;少女祈祷中...&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">en</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Loading...&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rotate</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 社交链接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">social</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">github</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/你的用户名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">bilibili</span><span class="p">:</span><span class="w"> </span><span class="l">https://space.bilibili.com/你的UID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 看板娘</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">live2d</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l">left</span><span class="w">
+</span></span></span></code></pre></div><p>这就是 <strong>Hugo 的配置合并机制</strong>：<code>config/_default/params.yml</code> 里的值会覆盖主题默认值，不会因为更新子模块而丢失。</p>
+<h3 id="64-开启-live2d-看板娘">
+<a class="header-anchor" href="#64-%e5%bc%80%e5%90%af-live2d-%e7%9c%8b%e6%9d%bf%e5%a8%98"></a>
+6.4 开启 Live2D 看板娘
+</h3><p>这个是重头戏——主题自带了 Live2D 看板娘功能，但是<strong>默认是关闭的</strong>（主题的 <code>enable: false</code>）。你在 <code>config/_default/params.yml</code> 里加上：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">live2d</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="l">left </span><span class="w"> </span><span class="c"># 看板娘站在左边还是右边</span><span class="w">
+</span></span></span></code></pre></div><p>保存后刷新页面，左下角或者右下角就会出现一个灵梦的 Live2D 模型。挺可爱的，第一次加载可能会慢一点，因为要下载模型文件。</p>
+<blockquote>
+<p>如果只想用简单的提示气泡而不是完整 Live2D 模型，主题还有个 <code>live2d_widgets</code> 选项，那个更轻量。两个只能开一个。</p>
+</blockquote>
+<h3 id="65-本地预览">
+<a class="header-anchor" href="#65-%e6%9c%ac%e5%9c%b0%e9%a2%84%e8%a7%88"></a>
+6.5 本地预览
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo server -D
+</span></span></code></pre></div><p>浏览器打开 <code>http://localhost:1313</code>，你就能看到博客的样子了。修改配置后会自动刷新，不用重启。</p>
+<hr>
+<h2 id="七个性化定制">
+<a class="header-anchor" href="#%e4%b8%83%e4%b8%aa%e6%80%a7%e5%8c%96%e5%ae%9a%e5%88%b6"></a>
+七、个性化定制
+</h2><h3 id="71-自定义-css">
+<a class="header-anchor" href="#71-%e8%87%aa%e5%ae%9a%e4%b9%89-css"></a>
+7.1 自定义 CSS
+</h3><p>主题的颜色和样式不一定完全符合你的口味。在 <code>assets/css/custom.css</code> 里写 CSS，用 <code>!important</code> 覆盖主题默认样式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/* 代码块美化 */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">pre</span><span class="o">,</span> <span class="nt">code</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#2d2d2d</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#f8f8f2</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">/* 归档页卡片化 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">archive-post-item</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-left</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>然后在 <code>hugo.toml</code> 里声明加载这个 CSS：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">customCSS</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;css/custom.css&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><h3 id="72-自定义模板">
+<a class="header-anchor" href="#72-%e8%87%aa%e5%ae%9a%e4%b9%89%e6%a8%a1%e6%9d%bf"></a>
+7.2 自定义模板
+</h3><p>如果你想改变某个页面的布局——比如归档页，主题默认可能是一行一行纯文字列表，你想改成卡片样式——那就去 <code>layouts/</code> 下创建一个跟主题同路径的文件。</p>
+<p>以归档页为例，主题的原始模板在 <code>themes/hugo-theme-reimu/layouts/archives/single.html</code>。复制一份到项目根目录的 <code>layouts/archives/single.html</code>，然后在上面改。Hugo 会优先使用项目根目录的版本。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p layouts/archives
+</span></span><span class="line"><span class="cl">cp themes/hugo-theme-reimu/layouts/archives/single.html layouts/archives/single.html
+</span></span><span class="line"><span class="cl"><span class="c1"># 然后编辑 layouts/archives/single.html</span>
+</span></span></code></pre></div><h3 id="73-菜单">
+<a class="header-anchor" href="#73-%e8%8f%9c%e5%8d%95"></a>
+7.3 菜单
+</h3><p>在 <code>hugo.toml</code> 里加：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s1">&#39;首页&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">url</span> <span class="p">=</span> <span class="s1">&#39;/&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">weight</span> <span class="p">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s1">&#39;归档&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">url</span> <span class="p">=</span> <span class="s1">&#39;/archives/&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">weight</span> <span class="p">=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s1">&#39;友链&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">url</span> <span class="p">=</span> <span class="s1">&#39;/friend/&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">weight</span> <span class="p">=</span> <span class="mi">40</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s1">&#39;关于&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">url</span> <span class="p">=</span> <span class="s1">&#39;/about/&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">weight</span> <span class="p">=</span> <span class="mi">50</span>
+</span></span></code></pre></div><p>然后在 <code>content/</code> 下创建对应的 <code>.md</code> 文件，比如 <code>content/about/index.md</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: 关于
+</span></span><span class="line"><span class="cl">date: 2026-05-17
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">这里是关于页面，随便写点自我介绍。
+</span></span></code></pre></div><hr>
+<h2 id="八github-actions-自动部署">
+<a class="header-anchor" href="#%e5%85%abgithub-actions-%e8%87%aa%e5%8a%a8%e9%83%a8%e7%bd%b2"></a>
+八、GitHub Actions 自动部署
+</h2><p>你要的是：写完文章，推送到 GitHub，网站自动更新。这靠 GitHub Actions 完成。</p>
+<h3 id="81-创建工作流文件">
+<a class="header-anchor" href="#81-%e5%88%9b%e5%bb%ba%e5%b7%a5%e4%bd%9c%e6%b5%81%e6%96%87%e4%bb%b6"></a>
+8.1 创建工作流文件
+</h3><p>在项目里创建 <code>.github/workflows/hugo.yml</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Hugo site to Pages</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;main&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">permissions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l">read</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pages</span><span class="p">:</span><span class="w"> </span><span class="l">write</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">id-token</span><span class="p">:</span><span class="w"> </span><span class="l">write</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;latest&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo --minify</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Upload artifact</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/upload-pages-artifact@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">github-pages</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">${{ steps.deployment.outputs.page_url }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to GitHub Pages</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/deploy-pages@v4</span><span class="w">
+</span></span></span></code></pre></div><p>这个文件的意思是：当 <code>main</code> 分支有推送时，自动用 Hugo 构建站点，然后把生成的 <code>public/</code> 部署到 GitHub Pages。</p>
+<h3 id="82-开启-pages">
+<a class="header-anchor" href="#82-%e5%bc%80%e5%90%af-pages"></a>
+8.2 开启 Pages
+</h3><p>去 GitHub 仓库 → Settings → Pages → Build and deployment → Source 选 <strong>GitHub Actions</strong>。不用管分支和文件夹，因为 Actions 文件已经定义了。</p>
+<h3 id="83-推送代码">
+<a class="header-anchor" href="#83-%e6%8e%a8%e9%80%81%e4%bb%a3%e7%a0%81"></a>
+8.3 推送代码
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add -A
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;初始化博客&#34;</span>
+</span></span><span class="line"><span class="cl">git push -u origin main
+</span></span></code></pre></div><p>推送后去仓库的 Actions 标签页，能看到工作流在跑。跑完后访问 <code>https://你的用户名.github.io</code>，博客就上线了。</p>
+<hr>
+<h2 id="九为什么必须买域名--用-cloudflare-加速">
+<a class="header-anchor" href="#%e4%b9%9d%e4%b8%ba%e4%bb%80%e4%b9%88%e5%bf%85%e9%a1%bb%e4%b9%b0%e5%9f%9f%e5%90%8d--%e7%94%a8-cloudflare-%e5%8a%a0%e9%80%9f"></a>
+九、为什么必须买域名 + 用 Cloudflare 加速
+</h2><p>到这里为止，你的博客已经可以通过 <code>https://用户名.github.io</code> 访问了。但是——<strong>在国内访问 GitHub Pages 经常慢得离谱，甚至直接打不开</strong>。</p>
+<p>有人会说那我开个 CDN 呗。问题是：<strong>Cloudflare 不能直接加速 <code>github.io</code> 这样的二级域名</strong>。因为 <code>github.io</code> 这个域名不属于你，你没法把它加到 Cloudflare 上改 DNS。Cloudflare 的 CDN 服务要求域名的 DNS 托管在它那里，而这只有你自己拥有的域名才能做到。</p>
+<p>所以路线很明确：<strong>买个自己的域名 → 把 DNS 交给 Cloudflare → Cloudflare 帮你全球加速</strong>。这就是为什么必须花这几十块钱。</p>
+<h3 id="91-腾讯云买域名">
+<a class="header-anchor" href="#91-%e8%85%be%e8%ae%af%e4%ba%91%e4%b9%b0%e5%9f%9f%e5%90%8d"></a>
+9.1 腾讯云买域名
+</h3><ol>
+<li>打开 <a href="https://dnspod.cloud.tencent.com/">腾讯云域名注册</a>，搜你喜欢的名字。</li>
+<li>.cn 首年大概 35 元，续费也差不多。</li>
+<li>付款，需要实名认证（上传身份证），几分钟就过。</li>
+</ol>
+<p>买完后<strong>不要</strong>在腾讯云里做任何 DNS 解析设置——全交给 Cloudflare。</p>
+<h3 id="92-把域名加到-cloudflare">
+<a class="header-anchor" href="#92-%e6%8a%8a%e5%9f%9f%e5%90%8d%e5%8a%a0%e5%88%b0-cloudflare"></a>
+9.2 把域名加到 Cloudflare
+</h3><ol>
+<li>注册 <a href="https://cloudflare.com">Cloudflare</a> 账号。</li>
+<li>登录后点 &ldquo;Add a site&rdquo;，输入你刚买的域名。</li>
+<li>选 <strong>Free</strong> 套餐，点继续。</li>
+<li>Cloudflare 会扫描你现有的 DNS 记录（此时应该没有或只有腾讯云默认的），全删掉，我们要手动建。</li>
+<li>Cloudflare 会给你分配两个 NS 地址，类似：
+<pre tabindex="0"><code>aragorn.ns.cloudflare.com
+maria.ns.cloudflare.com
+</code></pre></li>
+</ol>
+<h3 id="93-回腾讯云改-ns">
+<a class="header-anchor" href="#93-%e5%9b%9e%e8%85%be%e8%ae%af%e4%ba%91%e6%94%b9-ns"></a>
+9.3 回腾讯云改 NS
+</h3><p>回到腾讯云 → 域名管理 → 你的域名 → 更多 → DNS 服务器 → 修改 → 填入 Cloudflare 的两个 NS 地址。</p>
+<p><strong>这一步生效要等，短则几分钟，长则一两小时。</strong> 等 Cloudflare 显示 &ldquo;Active&rdquo; 就说明生效了。</p>
+<h3 id="94-在-cloudflare-添加-dns-记录指向-github-pages">
+<a class="header-anchor" href="#94-%e5%9c%a8-cloudflare-%e6%b7%bb%e5%8a%a0-dns-%e8%ae%b0%e5%bd%95%e6%8c%87%e5%90%91-github-pages"></a>
+9.4 在 Cloudflare 添加 DNS 记录指向 GitHub Pages
+</h3><p>在 Cloudflare 的 DNS 设置里添加一条 <strong>CNAME</strong> 记录：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>名称</th>
+          <th>目标</th>
+          <th>代理状态</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CNAME</td>
+          <td>@</td>
+          <td>你的用户名.github.io</td>
+          <td>已代理（橙色云朵）</td>
+      </tr>
+  </tbody>
+</table>
+<p>注意那个<strong>橙色云朵图标要亮着</strong>，表示流量经过 Cloudflare 的 CDN。灰色云朵等于直连，加速就白搞了。</p>
+<blockquote>
+<p>如果裸域 @ CNAME 不生效（某些 DNS 规范不推荐裸域 CNAME），就加 <code>www</code> 的 CNAME，然后在 Cloudflare 的 Rules → Redirect Rules 里设置裸域 301 跳转到 <code>www</code>。</p>
+</blockquote>
+<h3 id="95-ssltls-设置">
+<a class="header-anchor" href="#95-ssltls-%e8%ae%be%e7%bd%ae"></a>
+9.5 SSL/TLS 设置
+</h3><p>Cloudflare → SSL/TLS → Overview → 加密模式选 <strong>Full</strong> 或 <strong>Full (strict)</strong>。</p>
+<ul>
+<li><strong>Flexible</strong>（灵活）：用户到 Cloudflare 加密，但 Cloudflare 到 GitHub 是明文——不安全，别用。</li>
+<li><strong>Full</strong>：全程加密，但不验证 GitHub 那边的证书。</li>
+<li><strong>Full (strict)</strong>：全程加密且严格验证证书，最安全。推荐这个。</li>
+</ul>
+<h3 id="96-回-github-绑定自定义域名">
+<a class="header-anchor" href="#96-%e5%9b%9e-github-%e7%bb%91%e5%ae%9a%e8%87%aa%e5%ae%9a%e4%b9%89%e5%9f%9f%e5%90%8d"></a>
+9.6 回 GitHub 绑定自定义域名
+</h3><p>GitHub 仓库 → Settings → Pages → Custom domain → 填你的域名 → Save。</p>
+<p>勾选 <strong>Enforce HTTPS</strong>。GitHub 会自动签发 SSL 证书，这需要几分钟。如果报错说域名没验证通过，等 DNS 完全生效再试。</p>
+<h3 id="97-更新-hugo-和-cms-配置">
+<a class="header-anchor" href="#97-%e6%9b%b4%e6%96%b0-hugo-%e5%92%8c-cms-%e9%85%8d%e7%bd%ae"></a>
+9.7 更新 Hugo 和 CMS 配置
+</h3><p>把 <code>hugo.toml</code> 里的 <code>baseURL</code> 换掉：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s1">&#39;https://acm-lycoris.cn/&#39;</span>
+</span></span></code></pre></div><p>Sveltia CMS 的 <code>static/admin/config.yml</code> 里如果有旧域名也一并改。然后 <code>git push</code> 推上去。</p>
+<hr>
+<h2 id="十cloudflare-的其他免费福利">
+<a class="header-anchor" href="#%e5%8d%81cloudflare-%e7%9a%84%e5%85%b6%e4%bb%96%e5%85%8d%e8%b4%b9%e7%a6%8f%e5%88%a9"></a>
+十、Cloudflare 的其他免费福利
+</h2><p>既然都上了 Cloudflare，顺便把一些有用的免费功能开了：</p>
+<h3 id="101-缓存规则">
+<a class="header-anchor" href="#101-%e7%bc%93%e5%ad%98%e8%a7%84%e5%88%99"></a>
+10.1 缓存规则
+</h3><p>Cloudflare → Caching → Cache Rules → 创建规则：</p>
+<pre tabindex="0"><code>当 URI 路径包含 /images/ 时 → 缓存 30 天
+当 URI 路径包含 /css/ 或 /js/ 时 → 缓存 7 天
+</code></pre><p>这样图片和静态资源会被缓存在 Cloudflare 的边缘节点，二次访问秒开。</p>
+<h3 id="102-自动压缩">
+<a class="header-anchor" href="#102-%e8%87%aa%e5%8a%a8%e5%8e%8b%e7%bc%a9"></a>
+10.2 自动压缩
+</h3><p>Speed → Optimization → Content Optimization：</p>
+<ul>
+<li><strong>Auto Minify</strong>：勾选 JavaScript、CSS、HTML。</li>
+<li><strong>Brotli</strong>：开启。比 gzip 压缩率更高。</li>
+</ul>
+<h3 id="103-安全防护">
+<a class="header-anchor" href="#103-%e5%ae%89%e5%85%a8%e9%98%b2%e6%8a%a4"></a>
+10.3 安全防护
+</h3><p>Security → Settings：</p>
+<ul>
+<li><strong>Security Level</strong>：选 Medium。</li>
+<li><strong>Bot Fight Mode</strong>：开启。防止爬虫和恶意扫描。</li>
+</ul>
+<p>这些都是免费的，开了不亏。</p>
+<hr>
+<h2 id="十一写文章和发布">
+<a class="header-anchor" href="#%e5%8d%81%e4%b8%80%e5%86%99%e6%96%87%e7%ab%a0%e5%92%8c%e5%8f%91%e5%b8%83"></a>
+十一、写文章和发布
+</h2><h3 id="111-命令行方式">
+<a class="header-anchor" href="#111-%e5%91%bd%e4%bb%a4%e8%a1%8c%e6%96%b9%e5%bc%8f"></a>
+11.1 命令行方式
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 新建文章</span>
+</span></span><span class="line"><span class="cl">hugo new posts/2026-05-17-hello-world.md
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 编辑 content/posts/2026-05-17-hello-world.md</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 注意把 draft: true 改成 false，否则不会发布</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 本地预览</span>
+</span></span><span class="line"><span class="cl">hugo server -D
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 满意了就推送</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;发表新文章：hello world&#34;</span>
+</span></span><span class="line"><span class="cl">git push
+</span></span></code></pre></div><p>推送后 GitHub Actions 会自动构建部署，一两分钟网站就更新了。</p>
+<h3 id="112-用-cms-后台sveltia">
+<a class="header-anchor" href="#112-%e7%94%a8-cms-%e5%90%8e%e5%8f%b0sveltia"></a>
+11.2 用 CMS 后台（Sveltia）
+</h3><p>命令行写文章还是有点硬核，Sveltia CMS 提供一个类似 WordPress 的后台界面，可以在浏览器里直接写。</p>
+<ol>
+<li>注册一个 <a href="https://github.com/settings/developers">GitHub OAuth App</a>，获取 Client ID 和 Secret。Authorization callback URL 填 <code>https://你的域名/admin/index.html</code>。</li>
+<li>在 <code>static/admin/</code> 下放两个文件：</li>
+</ol>
+<p><strong><code>static/admin/index.html</code></strong>（加载 Sveltia 的 JS）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;zh-CN&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>博客管理后台<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/@sveltia/cms@latest/dist/sveltia-cms.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p><strong><code>static/admin/config.yml</code></strong>（告诉 CMS 你的仓库结构）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">github</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l">你的用户名/你的用户名.github.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">media_folder</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;static/images&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">public_folder</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/images&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">collections</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;posts&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;博客文章&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">folder</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;content/posts&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">create</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">slug</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{year}}-{{month}}-{{day}}-{{slug}}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fields</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- {<span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;标题&#34;</span><span class="nt">, name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;title&#34;</span><span class="nt">, widget</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;string&#34;</span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- {<span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;发布日期&#34;</span><span class="nt">, name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;date&#34;</span><span class="nt">, widget</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;datetime&#34;</span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- {<span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;标签&#34;</span><span class="nt">, name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;tags&#34;</span><span class="nt">, widget</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;list&#34;</span><span class="nt">, default</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;技术&#34;</span><span class="p">]</span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- {<span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;草稿&#34;</span><span class="nt">, name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;draft&#34;</span><span class="nt">, widget</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;boolean&#34;</span><span class="nt">, default</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- {<span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;正文&#34;</span><span class="nt">, name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;body&#34;</span><span class="nt">, widget</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;markdown&#34;</span>}<span class="w">
+</span></span></span></code></pre></div><ol start="3">
+<li>访问 <code>https://你的域名/admin/</code>，用 GitHub 账号登录后就能在线写文章了。CMS 背后实际是调用 GitHub API 提交 Markdown 文件到你的仓库，然后 Actions 自动构建部署。</li>
+</ol>
+<blockquote>
+<p>踩坑提醒：我一开始用了 Netlify 的公共 OAuth 代理，后来代理挂了导致 /admin/ 页面 404。最后干脆去掉了 base_url，直接生成 GitHub Personal Access Token 登录，稳得很。</p>
+</blockquote>
+<h3 id="113-用-cms-写了文章后同步到本地">
+<a class="header-anchor" href="#113-%e7%94%a8-cms-%e5%86%99%e4%ba%86%e6%96%87%e7%ab%a0%e5%90%8e%e5%90%8c%e6%ad%a5%e5%88%b0%e6%9c%ac%e5%9c%b0"></a>
+11.3 用 CMS 写了文章后同步到本地
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git pull
+</span></span></code></pre></div><p>这样本地代码就跟远程一致了。</p>
+<hr>
+<h2 id="十二日常操作总结">
+<a class="header-anchor" href="#%e5%8d%81%e4%ba%8c%e6%97%a5%e5%b8%b8%e6%93%8d%e4%bd%9c%e6%80%bb%e7%bb%93"></a>
+十二、日常操作总结
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">本地写文章流程:
+</span></span><span class="line"><span class="cl">  hugo new posts/xxx.md  →  编辑  →  hugo server -D 预览  →  git add . &amp;&amp; git commit -m &#34;xxx&#34; &amp;&amp; git push
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMS 后台写了文章后:
+</span></span><span class="line"><span class="cl">  git pull
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">改配置/改样式:
+</span></span><span class="line"><span class="cl">  编辑 hugo.toml / params.yml / custom.css  →  git add . &amp;&amp; git commit &amp;&amp; git push
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">主题更新:
+</span></span><span class="line"><span class="cl">  git submodule update --remote themes/hugo-theme-reimu
+</span></span></code></pre></div><hr>
+<h2 id="十三我踩过的坑你有缘看到就帮自己省时间了">
+<a class="header-anchor" href="#%e5%8d%81%e4%b8%89%e6%88%91%e8%b8%a9%e8%bf%87%e7%9a%84%e5%9d%91%e4%bd%a0%e6%9c%89%e7%bc%98%e7%9c%8b%e5%88%b0%e5%b0%b1%e5%b8%ae%e8%87%aa%e5%b7%b1%e7%9c%81%e6%97%b6%e9%97%b4%e4%ba%86"></a>
+十三、我踩过的坑（你有缘看到，就帮自己省时间了）
+</h2><ol>
+<li><strong><code>hugo server -D</code> 预览正常但部署后文章不显示</strong>：因为你文章里 <code>draft: true</code> 没改，<code>hugo --minify</code> 不会构建草稿文章。Hugo server 加 <code>-D</code> 才会显示草稿，线上构建不加。</li>
+<li><strong>访问域名显示 Netlify 404</strong>：本地 DNS 被代理软件劫持，域名解析到了错误的 IP。关掉代理，<code>ipconfig /flushdns</code>，再用 <code>nslookup 你的域名</code> 验证。</li>
+<li><strong>自定义 CSS 不生效</strong>：主题 CSS 优先级太高。加 <code>!important</code> 或者直接把样式内嵌到模板里。</li>
+<li><strong>Git 推送报权限错误</strong>：Personal Access Token 过期或者没勾选 <code>workflow</code> 权限。重新生成 Token，勾上 <code>repo</code> 和 <code>workflow</code>。</li>
+<li><strong>子模块被别人改了</strong>：<code>git status</code> 里显示 <code>themes/xxx modified</code>，不是你改的就用 <code>git submodule update --force themes/hugo-theme-reimu</code> 恢复。</li>
+<li><strong>hugo.toml 里的嵌套配置被覆盖</strong>：TOML 的 <code>[params]</code> 和单独的 <code>params.yml</code> 合并时可能有坑。复杂配置建议都放到 <code>config/_default/params.yml</code>。</li>
+</ol>
+<hr>
+<h2 id="十四总结">
+<a class="header-anchor" href="#%e5%8d%81%e5%9b%9b%e6%80%bb%e7%bb%93"></a>
+十四、总结
+</h2><p>这个博客的技术栈本质上就是：</p>
+<ol>
+<li><strong>Hugo</strong> 负责生成 → 2. <strong>GitHub</strong> 负责托管和自动部署 → 3. <strong>Cloudflare</strong> 负责加速 → 4. <strong>Sveltia CMS</strong> 提供写作后台</li>
+</ol>
+<p>全程只需要花域名的钱，其他全免。配置写在项目文件夹里，换电脑 <code>git clone</code> 就能继续维护。</p>
+<p>如果你也想搭一个，按这篇文章的顺序走一遍，快的话一个下午就能搞定。碰到问题就去搜 Hugo 的官方文档或者看主题的 README，大部分坑我这篇文章都已经帮你踩平了。</p>
+<blockquote>
+<p>关键词：Hugo、GitHub Pages、Cloudflare、Sveltia CMS、建站教程、博客搭建、DNS</p>
+</blockquote>
+</div>
+    <footer class="article-footer"><ul class="article-category-list"><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/%e5%bb%ba%e7%ab%99"
+      data-aos="zoom-in"
+      >建站</a
+    >
+    </li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/hugo"
+        rel="tag"
+        >Hugo</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e6%95%99%e7%a8%8b"
+        rel="tag"
+        >教程</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e5%bb%ba%e7%ab%99"
+        rel="tag"
+        >建站</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="/images/covers/OIP-C.jpg"
+              data-sizes="auto"
+              alt="图论Dijkstra算法——从入门到赛场上直接默写"
+              class="lazyload"
+            /><a
+          href="/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/"
+          aria-label="前一篇:图论Dijkstra算法——从入门到赛场上直接默写"
+          title="前一篇:图论Dijkstra算法——从入门到赛场上直接默写"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">图论Dijkstra算法——从入门到赛场上直接默写</h3>
+      </div></nav></article></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2020-2026<span class="footer-info-sep rotate"></span>ACM-Lycoris
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp;Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;4.8k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;00:24</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一这个博客用了什么">一、这个博客用了什么</a></li>
+    <li><a href="#二github-仓库创建">二、GitHub 仓库创建</a></li>
+    <li><a href="#三安装-hugo">三、安装 Hugo</a></li>
+    <li><a href="#四本地创建站点">四、本地创建站点</a></li>
+    <li><a href="#五安装主题">五、安装主题</a></li>
+    <li><a href="#六配置主题换头像改名字改描述">六、配置主题：换头像、改名字、改描述</a>
+      <ul>
+        <li><a href="#61-先看主题有哪些配置项">6.1 先看主题有哪些配置项</a></li>
+        <li><a href="#62-hugotoml-基本配置">6.2 hugo.toml 基本配置</a></li>
+        <li><a href="#63-覆盖主题默认的文字">6.3 覆盖主题默认的文字</a></li>
+        <li><a href="#64-开启-live2d-看板娘">6.4 开启 Live2D 看板娘</a></li>
+        <li><a href="#65-本地预览">6.5 本地预览</a></li>
+      </ul>
+    </li>
+    <li><a href="#七个性化定制">七、个性化定制</a>
+      <ul>
+        <li><a href="#71-自定义-css">7.1 自定义 CSS</a></li>
+        <li><a href="#72-自定义模板">7.2 自定义模板</a></li>
+        <li><a href="#73-菜单">7.3 菜单</a></li>
+      </ul>
+    </li>
+    <li><a href="#八github-actions-自动部署">八、GitHub Actions 自动部署</a>
+      <ul>
+        <li><a href="#81-创建工作流文件">8.1 创建工作流文件</a></li>
+        <li><a href="#82-开启-pages">8.2 开启 Pages</a></li>
+        <li><a href="#83-推送代码">8.3 推送代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#九为什么必须买域名--用-cloudflare-加速">九、为什么必须买域名 + 用 Cloudflare 加速</a>
+      <ul>
+        <li><a href="#91-腾讯云买域名">9.1 腾讯云买域名</a></li>
+        <li><a href="#92-把域名加到-cloudflare">9.2 把域名加到 Cloudflare</a></li>
+        <li><a href="#93-回腾讯云改-ns">9.3 回腾讯云改 NS</a></li>
+        <li><a href="#94-在-cloudflare-添加-dns-记录指向-github-pages">9.4 在 Cloudflare 添加 DNS 记录指向 GitHub Pages</a></li>
+        <li><a href="#95-ssltls-设置">9.5 SSL/TLS 设置</a></li>
+        <li><a href="#96-回-github-绑定自定义域名">9.6 回 GitHub 绑定自定义域名</a></li>
+        <li><a href="#97-更新-hugo-和-cms-配置">9.7 更新 Hugo 和 CMS 配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#十cloudflare-的其他免费福利">十、Cloudflare 的其他免费福利</a>
+      <ul>
+        <li><a href="#101-缓存规则">10.1 缓存规则</a></li>
+        <li><a href="#102-自动压缩">10.2 自动压缩</a></li>
+        <li><a href="#103-安全防护">10.3 安全防护</a></li>
+      </ul>
+    </li>
+    <li><a href="#十一写文章和发布">十一、写文章和发布</a>
+      <ul>
+        <li><a href="#111-命令行方式">11.1 命令行方式</a></li>
+        <li><a href="#112-用-cms-后台sveltia">11.2 用 CMS 后台（Sveltia）</a></li>
+        <li><a href="#113-用-cms-写了文章后同步到本地">11.3 用 CMS 写了文章后同步到本地</a></li>
+      </ul>
+    </li>
+    <li><a href="#十二日常操作总结">十二、日常操作总结</a></li>
+    <li><a href="#十三我踩过的坑你有缘看到就帮自己省时间了">十三、我踩过的坑（你有缘看到，就帮自己省时间了）</a></li>
+    <li><a href="#十四总结">十四、总结</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="ACM-Lycoris"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">ACM-Lycoris</div>
+  <div class="sidebar-description">振桴彼岸，绽蕊忘川</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">4</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      4
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">11</div>
+  </a>
+</div>
+<div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
+        <a
+          href="https://space.bilibili.com/3493117112093634"
+          itemprop="url"
+          target="_blank"
+          aria-label="bilibili"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div><div class="icon-github sidebar-social-icon">
+        <a
+          href="https://github.com/ACM-Lycoris"
+          itemprop="url"
+          target="_blank"
+          aria-label="github"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">友链</div>
+    </div></div></div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js"  ></script><script src="/js/aos.js"  ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax ></script><script>
+  var setupFirework = () => {
+    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+      if (window.firework) {
+        const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+        options.excludeElements = options.excludeelements;
+        delete options.excludeelements;
+        window.firework(options);
+      }
+    }
+  }
+</script><script
+    src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js"
+    defer
+    
+    
+    onload="setupFirework()"
+    integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8&#43;pUoWX8n1rgq282T" crossorigin="anonymous"></script><script>
+  var setupLive2d = () => {
+    live2d.init('https:\/\/fastly.jsdelivr.net\/gh\/D-Sketon\/plugin-live2d\/', {themeTipsPath: ""});
+  }
+</script><script
+    src="http://localhost:1313/"
+    
+    async
+    
+    onload="setupLive2d()"
+    ></script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "ACM-Lycoris",
+          title: "博客搭建日记——Hugo \u002b GitHub Pages \u002b Cloudflare 全流程",
+          url: "http:\/\/localhost:1313\/posts\/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0\/",
+          description: "从零开始搭建一个免费、高速、带后台管理的个人博客，最适合抄作业",
+          cover: "http:\/\/localhost:1313\/images\/back.png",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax ></script><script src="/js/tabs.js" data-pjax defer></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+        }
+        pswp()
+      </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

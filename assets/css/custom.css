@@ -1,3 +1,9 @@
+/* ========== Banner 图片位置微调 ========== */
+/* 精准命中 banner 图 */
+header img[src*="back.png"] {
+    object-position: center 0% !important;
+}
+
 /* ========== 代码块美化 ========== */
 pre, code, .highlight {
     color: #e0e0e0 !important;

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dijkstra on ACM-Lycoris&#39;s Blog</title>
+    <link>http://localhost:1313/tags/dijkstra/</link>
+    <description>Recent content from ACM-Lycoris&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>abcd1844314159@163.com (ACM-Lycoris)</managingEditor>
+    <webMaster>abcd1844314159@163.com (ACM-Lycoris)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Sat, 09 May 2026 12:17:06 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/tags/dijkstra/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>图论Dijkstra算法——从入门到赛场上直接默写</title>
+      <link>http://localhost:1313/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 09 May 2026 12:17:06 &#43;0800</pubDate>
+      <author>abcd1844314159@163.com (ACM-Lycoris)</author>
+      <guid>http://localhost:1313/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/</guid>
+      <description>
+        <![CDATA[<h1>图论Dijkstra算法——从入门到赛场上直接默写</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        
+          <blockquote>
+<p>最短路问题在ACM区域赛、天梯赛里几乎是必考题，Dijkstra是你必须能闭眼默写的板子之一。</p>
+</blockquote>
+<hr>
+<h2 id="背景">
+<a class="header-anchor" href="#%e8%83%8c%e6%99%af"></a>
+背景
+</h2><p>这篇文章写给我自己，也写给正在准备算法竞赛的同学。</p>
+<p>如果你已经学了 BFS 和 DFS，知道图怎么用邻接表存，但对 Dijkstra 的理解还停留在&quot;会用优先队列的那个最短路&quot;，看这篇就对了。</p>
+<p>什么，你说你还不会链式前向星？没事，这篇用 <code>vector</code> 存图，主打一个能跑就行。</p>
+<hr>
+<h2 id="一最短路问题是什么">
+<a class="header-anchor" href="#%e4%b8%80%e6%9c%80%e7%9f%ad%e8%b7%af%e9%97%ae%e9%a2%98%e6%98%af%e4%bb%80%e4%b9%88"></a>
+一、最短路问题是什么
+</h2><p>给你一张有向图（或无向图，无向边拆成两条有向边即可），每条边有一个非负权值。问：从起点 <code>s</code> 出发，到其他所有点的最短距离是多少？</p>
+<p>现实场景：导航从A到B的最短时间、网络路由选代价最小的路径。</p>
+<p>如果所有边权都是 1，BFS 就搞定了。但边权不一样的时候，BFS 的队列就不管用了——因为你先入队的路径不一定是最短的。</p>
+<p>这就是 Dijkstra 要解决的事。</p>
+<hr>
+<h2 id="二dijkstra-的核心思想">
+<a class="header-anchor" href="#%e4%ba%8cdijkstra-%e7%9a%84%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3"></a>
+二、Dijkstra 的核心思想
+</h2><p>一句话概括：<strong>每次从&quot;尚未确定最短距离&quot;的点中，取出当前距离最小的那个，这个点的距离就是最终答案，然后用它去更新它的邻居。</strong></p>
+<p>为什么这个贪心是对的？因为所有边权非负，你不可能通过别的路径绕一圈再回来，得到一个更小的距离。</p>
+<h3 id="21-图解一次-dijkstra">
+<a class="header-anchor" href="#21-%e5%9b%be%e8%a7%a3%e4%b8%80%e6%ac%a1-dijkstra"></a>
+2.1 图解一次 Dijkstra
+</h3><p>假设有这样一张图：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">起点 1:
+</span></span><span class="line"><span class="cl">  1 --(2)--&gt; 2
+</span></span><span class="line"><span class="cl">  1 --(5)--&gt; 3
+</span></span><span class="line"><span class="cl">  2 --(1)--&gt; 3
+</span></span><span class="line"><span class="cl">  2 --(4)--&gt; 4
+</span></span><span class="line"><span class="cl">  3 --(1)--&gt; 4
+</span></span></code></pre></div><p>初始：<code>dist[1]=0</code>，其余为 ∞。</p>
+<p><strong>第一轮</strong>：选 dist 最小的 1（dist=0），确定。用 1 更新邻居：</p>
+<ul>
+<li><code>dist[2] = min(∞, 0+2) = 2</code></li>
+<li><code>dist[3] = min(∞, 0+5) = 5</code></li>
+</ul>
+<p><strong>第二轮</strong>：未确定点中 dist 最小的是 2（dist=2），确定。用 2 更新：</p>
+        
+        <hr><p>本文2026-05-09首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-09</p>]]>
+      </description>
+      
+        <category>图论</category>
+      
+    </item>
+    
+  </channel>
+</rss>
