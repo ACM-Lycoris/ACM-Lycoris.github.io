@@ -46,3 +46,9 @@ theme = 'hugo-theme-reimu'
   [markup.highlight]
     style = "monokai"
     noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[minify]
+  disableHTML = true

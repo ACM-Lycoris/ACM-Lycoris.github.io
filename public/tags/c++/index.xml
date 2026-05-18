@@ -30,8 +30,25 @@
       <description>
         <![CDATA[<h1>GPLT团体程序设计天梯赛2026题解</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
-          <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+          <style>
+.gplt-desc {
+    margin: 0.8rem 0 1rem;
+    padding: 0.9rem 1rem;
+    border-left: 4px solid #6a3b9a;
+    background: linear-gradient(180deg, #faf7fc 0%, #f5eff9 100%);
+    border-radius: 8px;
+    line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+    .gplt-desc {
+        margin: 0.65rem 0 0.9rem;
+        padding: 0.75rem 0.8rem;
+        border-left-width: 3px;
+        line-height: 1.7;
+    }
+}
+</style>
 <h2 id="-比赛简介">
 <a class="header-anchor" href="#-%e6%af%94%e8%b5%9b%e7%ae%80%e4%bb%8b"></a>
 📝 比赛简介
@@ -48,56 +65,15 @@ L1-1 一行代码
 <h3 id="题目描述">
 <a class="header-anchor" href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0"></a>
 题目描述
-</h3><!-- raw HTML omitted -->
+</h3><div class="gplt-desc">
+每次一行代码，建起我们的未来 —— 本题非常简单，就请你直接在屏幕上输出这句话：
+<br>
+<strong>“Building the Future, One Line of Code at a Time.”</strong>
+</div>
 <h3 id="输入格式">
 <a class="header-anchor" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f"></a>
 输入格式
 </h3><p>本题没有输入。</p>
-<h3 id="输出格式">
-<a class="header-anchor" href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f"></a>
-输出格式
-</h3><p>在一行中输出 <code>Building the Future, One Line of Code at a Time.</code></p>
-<h3 id="输入样例">
-<a class="header-anchor" href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b"></a>
-输入样例
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">无
-</span></span></code></pre></div><h3 id="输出样例">
-<a class="header-anchor" href="#%e8%be%93%e5%87%ba%e6%a0%b7%e4%be%8b"></a>
-输出样例
-</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Building the Future, One Line of Code at a Time.
-</span></span></code></pre></div><h3 id="限制">
-<a class="header-anchor" href="#%e9%99%90%e5%88%b6"></a>
-限制
-</h3><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>限制</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>代码长度</td>
-          <td>16 KB</td>
-      </tr>
-      <tr>
-          <td>时间限制</td>
-          <td>400 ms</td>
-      </tr>
-      <tr>
-          <td>内存限制</td>
-          <td>64 MB</td>
-      </tr>
-      <tr>
-          <td>栈限制</td>
-          <td>8192 KB</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="思路">
-<a class="header-anchor" href="#%e6%80%9d%e8%b7%af"></a>
-思路
-</h3><p>本题没有任何难点，直接输出指定字符串即可。</p>
         
         <hr><p>本文2026-04-22首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-22</p>]]>
       </description>
