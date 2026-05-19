@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>单调队列 on ACM-Lycoris&#39;s Blog</title>
-    <link>http://localhost:1313/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</link>
+    <link>http://localhost:49677/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
@@ -15,7 +15,7 @@
     <lastBuildDate>Mon, 18 May 2026 15:30:00 +0800</lastBuildDate>
     
     
-    <atom:link href="http://localhost:1313/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="http://localhost:49677/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
@@ -23,10 +23,10 @@
 
     <item>
       <title>滑动窗口算法——从暴力到最优，一套模板通刷所有OJ</title>
-      <link>http://localhost:1313/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</link>
+      <link>http://localhost:49677/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</link>
       <pubDate>Mon, 18 May 2026 15:30:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</guid>
+      <guid>http://localhost:49677/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</guid>
       <description>
         <![CDATA[<h1>滑动窗口算法——从暴力到最优，一套模板通刷所有OJ</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
@@ -104,7 +104,7 @@
 </svg>
 <p>上图窗口 <code>[L, R)</code>（左闭右开）包含了 <code>[5, 3, 7]</code> 三个元素。接下来：</p>
         
-        <hr><p>本文2026-05-18首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-18</p>]]>
+        <hr><p>本文2026-05-18首发于<a href='http://localhost:49677/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-18</p>]]>
       </description>
       
         <category>算法</category>
