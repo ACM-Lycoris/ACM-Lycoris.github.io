@@ -1,18 +1,54 @@
-# 主页大图 Banner
+# ========== 主页大图 ==========
 banner: "/images/back.png"
 
-# 站点信息
+# ========== 自定义 CSS 注入 (主题不读 customCSS，必须用 injector 钩子) ==========
+injector:
+  head_end: |
+    <link rel="stylesheet" href="/css/custom.css?v=cyber2026b">
+    <script>
+      // 在第一帧前确定主题，消除 FOUC
+      (function() {
+        try {
+          if (localStorage.getItem('lyc_theme_v') !== 'cyber2026') {
+            localStorage.setItem('dark_mode', 'true');
+            localStorage.setItem('lyc_theme_v', 'cyber2026');
+          }
+          var mode = localStorage.getItem('dark_mode') || 'true';
+          var isDark = mode === 'true' ||
+                       (mode === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
+# ========== 站点信息 ==========
 author: ACM-Lycoris
 email: abcd1844314159@163.com
 description: "振桴彼岸，绽蕊忘川"
 
-# 主标题下方的副标题（打字机效果关闭时显示的文字）
+# ========== 副标题 (打字机循环) ==========
 subtitle:
   typing:
-    enable: false
+    enable: true
+    strings:
+      - "振桴彼岸，绽蕊忘川"
+      - "于无声处听惊雷"
+      - "代码与诗，皆可入梦"
+      - "Hack the planet · 落英缤纷"
+    typeSpeed: 90
+    backSpeed: 40
+    backDelay: 2000
+    startDelay: 300
+    loop: true
+    shuffle: false
+    showCursor: true
+    cursorChar: "_"
+    smartBackspace: false
   text: "振桴彼岸，绽蕊忘川"
 
-# 加载动画文字（就是进入网站前那个“少女祈祷中...”）
+# ========== 加载动画 ==========
 preloader:
   enable: true
   text:
@@ -20,12 +56,104 @@ preloader:
     en: "Loading..."
   rotate: true
 
-# 社交链接
+# ========== 默认深色模式 (赛博朋克) ==========
+dark_mode:
+  enable: true
+
+# ========== 社交链接 ==========
 social:
   github: https://github.com/ACM-Lycoris
   bilibili: https://space.bilibili.com/3493117112093634
 
-# 看板娘
+# ========== 看板娘 ==========
 live2d:
   enable: true
   position: left
+
+# ========== 自定义字体 (霞鹜文楷 + JetBrains Mono) ==========
+custom_font:
+  enable: true
+  article:
+    - css: https://fontsapi.zeoseven.com/292/main/result.css
+      name: "LXGW WenKai Screen"
+  code:
+    - css: https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap
+      name: "JetBrains Mono"
+
+font:
+  enable: true
+  article:
+    - Mulish
+    - Noto Serif SC
+  code:
+    - JetBrains Mono
+
+local_font:
+  article:
+    - "-apple-system"
+    - "PingFang SC"
+    - "Microsoft YaHei"
+    - "sans-serif"
+  code:
+    - "JetBrains Mono"
+    - "Menlo"
+    - "Monaco"
+    - "Consolas"
+    - "monospace"
+
+# ========== 配色方案：Cyber-Reimu (赛博灵梦) ==========
+# 主色：弗洛洛/灵梦的鲜艳红 + 纯黑科技底 + 霓虹青装饰
+internal_theme:
+  light:
+    --red-0: '#ff0033'         # 主强调：灵梦红
+    --red-1: '#ff1744'         # 链接红
+    --red-2: '#ff4569'         # 中调
+    --red-3: '#ff8a9a'         # 边框
+    --red-4: '#ffc1cc'         # 浅强调
+    --red-5: '#ffe5ea'         # 背景柔
+    --red-5-5: '#fff0f3'       # 极浅
+    --red-6: '#fff8fa'         # 最浅
+    --color-red-6-shadow: 'rgba(255, 0, 51, 0.45)'
+    --color-red-3-shadow: 'rgba(255, 23, 68, 0.30)'
+
+    --highlight-nav: "#fafafa"
+    --highlight-scrollbar: "#d6d6d6"
+    --highlight-background: "#fafbfc"
+    --highlight-selection: "#ffe5ea99"
+    --highlight-foreground: "#1a202c"
+    --highlight-comment: "#718096"
+    --highlight-red: "#e53e3e"
+    --highlight-orange: "#dd6b20"
+    --highlight-yellow: "#d69e2e"
+    --highlight-green: "#38a169"
+    --highlight-aqua: "#0bc5ea"
+    --highlight-blue: "#3182ce"
+    --highlight-purple: "#805ad5"
+    --highlight-deletion: "#c53030"
+    --highlight-deletion-bg: "#fff5f5"
+    --highlight-addition: "#2f855a"
+    --highlight-addition-bg: "#f0fff4"
+
+  dark:
+    --red-4: 'rgba(255, 23, 68, 0.65)'
+    --red-5: 'rgba(255, 0, 51, 0.18)'
+    --red-5-5: 'rgba(255, 0, 51, 0.08)'
+    --red-6: 'rgba(255, 0, 51, 0.22)'
+
+    --highlight-nav: "#0d0d14"
+    --highlight-scrollbar: "#ff003c"
+    --highlight-background: "#0d0d14"
+    --highlight-selection: "#ff003c33"
+    --highlight-foreground: "#e6e6f0"
+    --highlight-comment: "#6b7280"
+    --highlight-red: "#ff5577"
+    --highlight-orange: "#ffb86c"
+    --highlight-yellow: "#fcee0a"
+    --highlight-green: "#a6e22e"
+    --highlight-aqua: "#00e5ff"
+    --highlight-blue: "#66d9ef"
+    --highlight-purple: "#bd93f9"
+    --highlight-deletion: "#ff5577"
+    --highlight-deletion-bg: "#2a0a14"
+    --highlight-addition: "#a6e22e"
+    --highlight-addition-bg: "#0f2a0f"

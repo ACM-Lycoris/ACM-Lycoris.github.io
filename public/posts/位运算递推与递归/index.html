@@ -1,0 +1,1480 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="true"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  位运算、递推与递归：算法竞赛进阶指南·基本算法 | ACM-Lycoris
+</title>
+<meta name="description" content="位运算加速、状压DP递推、DFS递归回溯，从快速幂到Hamilton路径，每行代码逐句拆解"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_ex15nbittbh\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fontsapi.zeoseven.com/292/main/result.css"
+    onload="this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fonts.googleapis.com/css2?family=JetBrains&#43;Mono:wght@400;500;700&amp;display=swap"
+    onload="this.rel='stylesheet'"
+  /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_ex15nbittbh.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" /><meta property="og:type" content="website" />
+  <meta property="og:title" content="位运算、递推与递归：算法竞赛进阶指南·基本算法 | ACM-Lycoris" />
+  <meta
+    property="og:description"
+    content="位运算加速、状压DP递推、DFS递归回溯，从快速幂到Hamilton路径，每行代码逐句拆解"
+  />
+  <meta property="og:url" content="http://localhost:1313/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/" />
+  <meta
+    property="og:site_name"
+    content="ACM-Lycoris&#39;s Blog"
+  />
+  <meta property="og:image" content="http://localhost:1313/images/back.png" />
+  <meta property="article:author" content="ACM-Lycoris" />
+  <meta property="article:published_time" content="2026-05-20T18:00:00&#43;08:00" />
+  <meta property="article:modified_time" content="2026-05-20T18:00:00&#43;08:00" /><meta property="article:tag" content="算法竞赛进阶指南, 基本算法, 位运算, 递推, 递归, 状压DP, c&#43;&#43;" /><meta name="twitter:card" content="summary" /><meta name="twitter:image" content="http://localhost:1313/images/back.png" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"
+    onload="this.onload=null;this.rel='stylesheet'"
+  /><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    
+    
+    
+    
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/><link rel="stylesheet" href="/css/custom.css?v=cyber2026b">
+<script>
+  // 在第一帧前确定主题，消除 FOUC
+  (function() {
+    try {
+      if (localStorage.getItem('lyc_theme_v') !== 'cyber2026') {
+        localStorage.setItem('dark_mode', 'true');
+        localStorage.setItem('lyc_theme_v', 'cyber2026');
+      }
+      var mode = localStorage.getItem('dark_mode') || 'true';
+      var isDark = mode === 'true' ||
+                   (mode === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch(e) {}
+  })();
+</script>
+</head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend"><div class='main-nav-icon icon rotate'>&#xe62b;</div><span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"></nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/back.png" alt="位运算、递推与递归：算法竞赛进阶指南·基本算法"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">位运算、递推与递归：算法竞赛进阶指南·基本算法</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          
+          class="sidebar-right"  ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#位运算基础速查表">位运算基础速查表</a></li>
+    <li><a href="#第一部分位运算">第一部分：位运算</a>
+      <ul>
+        <li><a href="#11-快速幂洛谷-p1226--acwing-89">1.1 快速幂（洛谷 P1226 / AcWing 89）</a></li>
+        <li><a href="#12-64-位整数乘法洛谷-p10446--acwing-90">1.2 64 位整数乘法（洛谷 P10446 / AcWing 90）</a></li>
+        <li><a href="#13-起床困难综合症洛谷-p2114--acwing-998">1.3 起床困难综合症（洛谷 P2114 / AcWing 998）</a></li>
+        <li><a href="#14-快速幂应用raising-modulo-numbersuva--acwing-92">1.4 快速幂应用：Raising Modulo Numbers（UVA / AcWing 92）</a></li>
+      </ul>
+    </li>
+    <li><a href="#第二部分递推">第二部分：递推</a>
+      <ul>
+        <li><a href="#21-最短-hamilton-路径洛谷-p10447--acwing-91">2.1 最短 Hamilton 路径（洛谷 P10447 / AcWing 91）</a></li>
+        <li><a href="#22-取数游戏洛谷-p1123--类状压dp">2.2 取数游戏（洛谷 P1123 / 类状压DP）</a></li>
+      </ul>
+    </li>
+    <li><a href="#第三部分递归">第三部分：递归</a>
+      <ul>
+        <li><a href="#31-组合枚举选-r-个数洛谷-p1157--p10448">3.1 组合枚举——选 r 个数（洛谷 P1157 / P10448）</a></li>
+        <li><a href="#32-子集枚举洛谷-b3622--递归写法">3.2 子集枚举（洛谷 B3622 / 递归写法）</a></li>
+        <li><a href="#33-全排列洛谷-p1706">3.3 全排列（洛谷 P1706）</a></li>
+        <li><a href="#34-枚举元组洛谷-b3621--递归的另一种形态">3.4 枚举元组（洛谷 B3621 / 递归的另一种形态）</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结三个板块的联系">总结：三个板块的联系</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="ACM-Lycoris"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">ACM-Lycoris</div>
+  <div class="sidebar-description">振桴彼岸，绽蕊忘川</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">7</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      7
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">21</div>
+  </a>
+</div>
+<div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
+        <a
+          href="https://space.bilibili.com/3493117112093634"
+          itemprop="url"
+          target="_blank"
+          aria-label="bilibili"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div><div class="icon-github sidebar-social-icon">
+        <a
+          href="https://github.com/ACM-Lycoris"
+          itemprop="url"
+          target="_blank"
+          aria-label="github"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">友链</div>
+    </div></div></div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2026-05-20 18:00:00 &#43;0800 CST" itemprop="datePublished"
+      >2026-05-20</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2026-05-20</time
+    >
+  </span></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>位运算加速、递推建模、递归枚举——算法竞赛里三种最基础的思维方式，覆盖了从快速幂到状压DP的大量题目。这篇文章把每行代码的时空间代价掰开讲清楚。</p>
+</blockquote>
+<hr>
+<h2 id="背景">
+<a class="header-anchor" href="#%e8%83%8c%e6%99%af"></a>
+背景
+</h2><p>如果你正在刷《算法竞赛进阶指南》，本章&quot;位运算、递推与递归&quot;是基本算法的第一块硬骨头。它的难点不在于理解&quot;位运算很快&quot;，而是：</p>
+<ul>
+<li>为什么<strong>快速幂</strong>用 <code>b&gt;&gt;=1</code> 就能从 O(N) 变成 O(log N)？</li>
+<li>为什么<strong>起床困难综合症</strong>要从高位到低位&quot;逐位贪心&quot;？</li>
+<li>为什么<strong>最短 Hamilton 路径</strong>能用 <code>dp[mask][i]</code> 递推，而不是 O(N!) 暴力？</li>
+<li>递归枚举组合时，<strong>为什么传 <code>start</code> 参数就能避免重复</strong>？</li>
+</ul>
+<p>这篇文章会用 10 道例题，把位运算、递推、递归的三个递进层次逐一拆穿。</p>
+<p><strong>前置知识</strong>：C++ 基本语法、数组、for 循环。不需要任何高级数据结构。</p>
+<hr>
+<h2 id="位运算基础速查表">
+<a class="header-anchor" href="#%e4%bd%8d%e8%bf%90%e7%ae%97%e5%9f%ba%e7%a1%80%e9%80%9f%e6%9f%a5%e8%a1%a8"></a>
+位运算基础速查表
+</h2><p>在进入例题前，先把赛场上最常用的 6 个位运算操作过一遍。</p>
+<table>
+  <thead>
+      <tr>
+          <th>操作</th>
+          <th>写法</th>
+          <th>含义</th>
+          <th>典型用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>取第 k 位</td>
+          <td><code>(x &gt;&gt; k) &amp; 1</code></td>
+          <td>x 的二进制第 k 位是 0 还是 1</td>
+          <td>检查某个 bit 是否设置</td>
+      </tr>
+      <tr>
+          <td>置第 k 位为 1</td>
+          <td><code>x |= (1 &lt;&lt; k)</code></td>
+          <td>把第 k 位设成 1</td>
+          <td>状态压缩：加入一个元素</td>
+      </tr>
+      <tr>
+          <td>判断奇偶</td>
+          <td><code>x &amp; 1</code></td>
+          <td>奇数为 1，偶数为 0</td>
+          <td>替代 <code>x % 2</code></td>
+      </tr>
+      <tr>
+          <td>除以 2</td>
+          <td><code>x &gt;&gt;= 1</code></td>
+          <td>右移一位 = 除以 2</td>
+          <td>快速幂/快速乘的循环</td>
+      </tr>
+      <tr>
+          <td>lowbit</td>
+          <td><code>x &amp; -x</code></td>
+          <td>取出最低位的 1</td>
+          <td>树状数组核心操作</td>
+      </tr>
+      <tr>
+          <td>去掉最低位的 1</td>
+          <td><code>x &amp; (x - 1)</code></td>
+          <td>消掉最右边的一个 1</td>
+          <td>统计二进制中 1 的个数</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>时空间提醒</strong>：位运算的每一步都是 CPU 单周期指令，O(1) 时间，没有额外空间开销。赛场上能用位运算就别用 <code>%2</code> 和 <code>/2</code>——不是说后者会 TLE，而是前者能让你对二进制表示形成肌肉记忆，状压 DP 时才不会晕。</p>
+<hr>
+<h2 id="第一部分位运算">
+<a class="header-anchor" href="#%e7%ac%ac%e4%b8%80%e9%83%a8%e5%88%86%e4%bd%8d%e8%bf%90%e7%ae%97"></a>
+第一部分：位运算
+</h2><p>位运算的核心思想只有一句话：<strong>对二进制的每一位独立操作</strong>。下面的四道题分别代表了四个递进的思考层次：</p>
+<ul>
+<li>快速幂：用二进制拆分指数，把 O(N) 降到 O(log N)</li>
+<li>64 位乘法：与快速幂同构——乘法变加法，&ldquo;取模&quot;的思想完全一致</li>
+<li>起床困难综合症：利用<strong>位与位之间独立</strong>，逐位贪心</li>
+<li>Raising Modulo Numbers：把快速幂封装成板子，在多组数据下反复调用</li>
+</ul>
+<hr>
+<h3 id="11-快速幂洛谷-p1226--acwing-89">
+<a class="header-anchor" href="#11-%e5%bf%ab%e9%80%9f%e5%b9%82%e6%b4%9b%e8%b0%b7-p1226--acwing-89"></a>
+1.1 快速幂（洛谷 P1226 / AcWing 89）
+</h3><p><strong>题意</strong>：给定 <code>a, b, p</code>，求 <code>a^b mod p</code>。范围：<code>a, b &lt; 2^31</code>，<code>p ≤ 10^9</code>。</p>
+<h4 id="暴力为什么不行">
+<a class="header-anchor" href="#%e6%9a%b4%e5%8a%9b%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%a1%8c"></a>
+暴力为什么不行
+</h4><p>如果直接写 <code>for (int i = 1; i &lt;= b; i++) ans = ans * a % p;</code>，循环 b 次，b 最大可以到 2^31 ≈ 2×10^9，妥妥 TLE。而且 <code>ans * a</code> 会溢出 <code>long long</code>（两个 <code>10^9</code> 级别的数相乘 ≈ <code>10^18</code>，刚好卡在 <code>long long</code> 的边界，略超就溢出）。</p>
+<h4 id="核心思想二进制拆分指数">
+<a class="header-anchor" href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%8b%86%e5%88%86%e6%8c%87%e6%95%b0"></a>
+核心思想：二进制拆分指数
+</h4><p>任何一个整数 <code>b</code> 都可以写成二进制。例如 <code>b = 13 = 8 + 4 + 1 = 2^3 + 2^2 + 2^0 = (1101)_2</code>。</p>
+<p>那么 <code>a^13 = a^8 × a^4 × a^1</code>。</p>
+<p>我们不需要算 13 次乘法，只需要：算出 <code>a^1, a^2, a^4, a^8</code>（每次平方即可），然后把对应二进制位为 1 的那些乘起来。</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" style="width:100%; max-width:720px; display:block; margin:16px auto;">
+  <text x="360" y="24" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">快速幂示意图：a^13 = a^(1101₂)</text>
+  <!-- b的二进制分解 -->
+  <rect x="60" y="55" width="60" height="36" rx="6" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="90" y="78" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">b &amp; 1</text>
+  <rect x="135" y="55" width="60" height="36" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/>
+  <text x="165" y="78" text-anchor="middle" font-size="15" fill="#333">b>>1</text>
+  <rect x="210" y="55" width="60" height="36" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/>
+  <text x="240" y="78" text-anchor="middle" font-size="15" fill="#333">b>>1</text>
+  <rect x="285" y="55" width="60" height="36" rx="6" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="315" y="78" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">b &amp; 1</text>
+  <rect x="360" y="55" width="60" height="36" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"/>
+  <text x="390" y="78" text-anchor="middle" font-size="15" fill="#333">b>>1</text>
+  <!-- 二进制位标注 -->
+  <text x="90" y="110" text-anchor="middle" font-size="12" fill="#27ae60">b₀=1 ✓</text>
+  <text x="165" y="110" text-anchor="middle" font-size="12" fill="#999">b₁=0 ✗</text>
+  <text x="240" y="110" text-anchor="middle" font-size="12" fill="#999">b₂=1 ✓</text>
+  <text x="315" y="110" text-anchor="middle" font-size="12" fill="#27ae60">b₃=1 ✓</text>
+  <text x="390" y="110" text-anchor="middle" font-size="12" fill="#999">b=0 结束</text>
+  <!-- a的变化 -->
+  <text x="45" y="155" font-size="14" fill="#2c3e50" font-weight="bold">a:</text>
+  <text x="90" y="155" text-anchor="middle" font-size="13" fill="#e74c3c">a¹</text>
+  <text x="165" y="155" text-anchor="middle" font-size="13" fill="#999">a²</text>
+  <text x="240" y="155" text-anchor="middle" font-size="13" fill="#999">a⁴</text>
+  <text x="315" y="155" text-anchor="middle" font-size="13" fill="#e74c3c">a⁸</text>
+  <text x="390" y="155" text-anchor="middle" font-size="13" fill="#999">a¹⁶</text>
+  <!-- res的变化 -->
+  <text x="45" y="185" font-size="14" fill="#2c3e50" font-weight="bold">res:</text>
+  <text x="90" y="185" text-anchor="middle" font-size="13" fill="#e74c3c">a¹</text>
+  <text x="240" y="185" text-anchor="middle" font-size="13" fill="#e74c3c">a¹×a⁴</text>
+  <text x="315" y="185" text-anchor="middle" font-size="13" fill="#e74c3c">a¹×a⁴×a⁸</text>
+  <!-- 结论 -->
+  <text x="360" y="225" text-anchor="middle" font-size="13" fill="#27ae60" font-weight="bold">最终 res = a^13 = a¹×a⁴×a⁸</text>
+  <text x="360" y="250" text-anchor="middle" font-size="11" fill="#888">每轮 a = a² mod p（O(1)）；b 右移一位 → 共 log₂(b) 轮</text>
+</svg>
+<h4 id="代码逐行拆解">
+<a class="header-anchor" href="#%e4%bb%a3%e7%a0%81%e9%80%90%e8%a1%8c%e6%8b%86%e8%a7%a3"></a>
+代码逐行拆解
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="nf">quickPow</span><span class="p">(</span><span class="n">ll</span> <span class="n">a</span><span class="p">,</span> <span class="n">ll</span> <span class="n">b</span><span class="p">,</span> <span class="n">ll</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>       <span class="c1">// 行1: 初始化
+</span></span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span>               <span class="c1">// 行2: 先取模防溢出
+</span></span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>           <span class="c1">// 行3: 循环直到b的二进制位全部处理完
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>        <span class="c1">// 行4: 检查b的最低位
+</span></span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">__int128</span><span class="p">)</span><span class="n">res</span> <span class="o">*</span> <span class="n">a</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>  <span class="c1">// 行5: 乘入答案
+</span></span></span><span class="line"><span class="cl">        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">__int128</span><span class="p">)</span><span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>          <span class="c1">// 行6: 平方a
+</span></span></span><span class="line"><span class="cl">        <span class="n">b</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>          <span class="c1">// 行7: 右移b
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>行1: <code>ll res = 1 % p;</code></strong> —— 初始化答案为 1（乘法的单位元）。写 <code>1 % p</code> 而不是 <code>1</code>，是为了处理 <code>p = 1</code> 的边界情况：任何数 mod 1 = 0，如果 <code>res</code> 初始化成 1 而不是 <code>1%p=0</code>，答案会错。<strong>时空代价</strong>：O(1) 时间，O(1) 空间。</p>
+<p><strong>行2: <code>a %= p;</code></strong> —— 先把 a 对 p 取模。为什么不直接算？因为 <code>a * a</code> 可能溢出 <code>long long</code>，先取模缩小范围。这一步保证后续 <code>a * a</code> 时两个数都在 <code>[0, p-1]</code> 范围内。<strong>时空代价</strong>：O(1)，没有额外数组。</p>
+<p><strong>行3: <code>while (b)</code></strong> —— 当 b &gt; 0 时继续循环。循环次数 = b 的二进制位数 = <code>⌊log₂(b)⌋ + 1 ≈ 31</code>（最大）。复杂度 O(log b)。</p>
+<p><strong>行4: <code>if (b &amp; 1)</code></strong> —— 检查 b 的最低位是否为 1。等价于 <code>b % 2 == 1</code>，但位运算比取模快一个常数级。如果最低位是 1，说明当前位对应的一幂需要乘入答案。</p>
+<p><strong>行5: <code>res = (__int128)res * a % p;</code></strong> —— 将当前 <code>a</code> 的贡献乘入答案。<code>__int128</code> 是 GCC/Clang 的 128 位整数扩展，保证 <code>res * a</code>（两个最大 10^9 的数相乘）不会溢出。取模后再存回 <code>res</code>（<code>long long</code> 范围）。<strong>为什么必须用 <code>__int128</code>？</strong> <code>long long</code> 最大约 9×10^18，而 <code>10^9 × 10^9 = 10^18</code>，再乘以更大的数就溢出了。128 位能表示到约 10^38，足够安全。</p>
+<p><strong>行6: <code>a = (__int128)a * a % p;</code></strong> —— 平方 <code>a</code>。<code>a</code> 在循环中的含义是 <code>a^(2^k)</code>：第 1 轮是 <code>a^1</code>，第 2 轮是 <code>a^2</code>，第 3 轮是 <code>a^4</code>……每次循环平方一次，对应的恰好是 b 二进制下一位的权重。取模保证不溢出。</p>
+<p><strong>行7: <code>b &gt;&gt;= 1;</code></strong> —— b 右移一位，下一轮检查下一个二进制位。</p>
+<p><strong>总复杂度</strong>：时间 O(log b)，空间 O(1)。对于 b = 2^31，只需约 31 次循环，比暴力快 6 个数量级。</p>
+<div class="fw-desc">
+<strong>坑点</strong>：如果不用 <code>__int128</code>，在 <code>res * a % p</code> 这一步两个 <code>long long</code> 相乘可能溢出。替代方案是用下一节讲的 64 位乘法（龟速乘），但不推荐——<code>__int128</code> 在 Codeforces/洛谷/NOI Linux 2.0 上都可用，写起来简洁且常数小。
+</div>
+<hr>
+<h3 id="12-64-位整数乘法洛谷-p10446--acwing-90">
+<a class="header-anchor" href="#12-64-%e4%bd%8d%e6%95%b4%e6%95%b0%e4%b9%98%e6%b3%95%e6%b4%9b%e8%b0%b7-p10446--acwing-90"></a>
+1.2 64 位整数乘法（洛谷 P10446 / AcWing 90）
+</h3><p><strong>题意</strong>：给定 <code>a, b, p</code>（均在 <code>long long</code> 范围内），求 <code>a × b mod p</code>。</p>
+<h4 id="为什么不能直接乘">
+<a class="header-anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%83%bd%e7%9b%b4%e6%8e%a5%e4%b9%98"></a>
+为什么不能直接乘
+</h4><p><code>a * b</code> 可能高达 <code>(10^9) × (10^9) = 10^18</code>，两个 <code>10^18</code> 级别的数相乘，<code>long long</code> 直接溢出。但题目要求的是<strong>取模后的结果</strong>，所以我们需要一个中间不会溢出的乘法。</p>
+<h4 id="方法一龟速乘与快速幂完全同构">
+<a class="header-anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%80%e9%be%9f%e9%80%9f%e4%b9%98%e4%b8%8e%e5%bf%ab%e9%80%9f%e5%b9%82%e5%ae%8c%e5%85%a8%e5%90%8c%e6%9e%84"></a>
+方法一：龟速乘（与快速幂完全同构）
+</h4><p>把 &ldquo;乘法&rdquo; 变成 &ldquo;加法&rdquo;，与快速幂的代码结构一一对应：</p>
+<table>
+  <thead>
+      <tr>
+          <th>快速幂</th>
+          <th>龟速乘</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>a^b mod p</code></td>
+          <td><code>a × b mod p</code></td>
+      </tr>
+      <tr>
+          <td><code>res = 1</code></td>
+          <td><code>res = 0</code></td>
+      </tr>
+      <tr>
+          <td><code>a = a * a % p</code></td>
+          <td><code>a = (a + a) % p</code></td>
+      </tr>
+      <tr>
+          <td><code>res = res * a % p</code></td>
+          <td><code>res = (res + a) % p</code></td>
+      </tr>
+      <tr>
+          <td>指数拆成二进制</td>
+          <td>乘数 b 拆成二进制</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="nf">mulMod</span><span class="p">(</span><span class="n">ll</span> <span class="n">a</span><span class="p">,</span> <span class="n">ll</span> <span class="n">b</span><span class="p">,</span> <span class="n">ll</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// 加法的单位元是 0
+</span></span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span> <span class="n">b</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>  <span class="c1">// 加法，不会溢出（两个 &lt; p 的数相加 &lt; 2p &lt; 2×10^9）
+</span></span></span><span class="line"><span class="cl">        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>          <span class="c1">// 同上
+</span></span></span><span class="line"><span class="cl">        <span class="n">b</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>为什么 <code>res + a</code> 不溢出？</strong> 因为 <code>res &lt; p, a &lt; p</code>，所以 <code>res + a &lt; 2p ≤ 2×10^9</code>，<code>long long</code> 轻松装下。</p>
+<p><strong>时间复杂度</strong>：O(log b) ≈ 63 次循环。</p>
+<h4 id="方法二o1-技巧法long-double-乘除法">
+<a class="header-anchor" href="#%e6%96%b9%e6%b3%95%e4%ba%8co1-%e6%8a%80%e5%b7%a7%e6%b3%95long-double-%e4%b9%98%e9%99%a4%e6%b3%95"></a>
+方法二：O(1) 技巧法（long double 乘除法）
+</h4><p>利用 <code>long double</code> 的 64 位精度（约 19 位十进制有效数字）做除法取商：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ull</span> <span class="nf">mulModFast</span><span class="p">(</span><span class="n">ull</span> <span class="n">a</span><span class="p">,</span> <span class="n">ull</span> <span class="n">b</span><span class="p">,</span> <span class="n">ull</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span> <span class="n">b</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ull</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">double</span><span class="p">)</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="n">p</span><span class="p">;</span>  <span class="c1">// c ≈ ⌊a×b / p⌋
+</span></span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="p">(</span><span class="n">ll</span><span class="p">)</span><span class="n">c</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ans</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>这为什么对？</strong> <code>a×b - c×p</code> 恰好是 <code>a×b mod p</code> 的余数。<code>long double</code> 计算 <code>a×b/p</code> 的误差最多 ±1，所以 <code>c</code> 与真实商 <code>⌊a×b/p⌋</code> 最多差 1，导致 <code>ans</code> 可能在 <code>[-p, p-1]</code> 之间，一个 <code>if</code> 就修正回来了。</p>
+<p><strong>时空比较</strong>：</p>
+<ul>
+<li>龟速乘：O(log b) 时间，O(1) 空间，<strong>100% 正确，无精度风险</strong></li>
+<li>技巧法：O(1) 时间，O(1) 空间，<strong>绝大多数情况正确，long double 精度足够 10^18 以内的运算</strong></li>
+</ul>
+<div class="fw-desc">
+<strong>赛场上怎么选？</strong> 一般用龟速乘，因为 O(log b) ≈ 63 次循环在现代 CPU 上几乎不耗时。如果题目卡常（如 N=10^6 次乘法查询），再用技巧法。切记 <strong>不要用浮点法做 (a*b)%p 后再转换</strong>——不是不行，是容易写出隐藏的精度 bug。
+</div>
+<hr>
+<h3 id="13-起床困难综合症洛谷-p2114--acwing-998">
+<a class="header-anchor" href="#13-%e8%b5%b7%e5%ba%8a%e5%9b%b0%e9%9a%be%e7%bb%bc%e5%90%88%e7%97%87%e6%b4%9b%e8%b0%b7-p2114--acwing-998"></a>
+1.3 起床困难综合症（洛谷 P2114 / AcWing 998）
+</h3><p><strong>题意</strong>：给定 N 个门，每个门是 <code>AND x</code> 或 <code>OR x</code> 或 <code>XOR x</code> 之一。你有一个初始攻击力 <code>t ∈ [0, m]</code>，让它依次经过 N 个门，求最终攻击力最大是多少。</p>
+<p><strong>范围</strong>：N ≤ 10^5，m ≤ 10^9，x ≤ 10^9。</p>
+<h4 id="为什么不能枚举所有-t">
+<a class="header-anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%83%bd%e6%9e%9a%e4%b8%be%e6%89%80%e6%9c%89-t"></a>
+为什么不能枚举所有 t
+</h4><p>m 最大 10^9，枚举所有 t 直接 TLE。而且对每个 t 还要模拟 N 个门，复杂度 O(N×M)，天方夜谭。</p>
+<h4 id="核心思想位与位之间相互独立">
+<a class="header-anchor" href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3%e4%bd%8d%e4%b8%8e%e4%bd%8d%e4%b9%8b%e9%97%b4%e7%9b%b8%e4%ba%92%e7%8b%ac%e7%ab%8b"></a>
+核心思想：位与位之间相互独立
+</h4><p><strong>关键观察</strong>：<code>AND</code>、<code>OR</code>、<code>XOR</code> 都是<strong>按位操作</strong>。第 k 位的运算结果只取决于第 k 位的输入，与其他位无关。</p>
+<p>这意味着什么？<strong>我们不需要枚举 <code>t</code> 的值，只需要对每一位分别决定该位是 0 还是 1。</strong></p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" style="width:100%; max-width:640px; display:block; margin:16px auto;">
+  <text x="320" y="24" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">位运算独立性示意图</text>
+  <g style="cursor:pointer" onclick="var s=this.closest('svg');var t=this.querySelector('text');if(s.animationsPaused()){s.unpauseAnimations();t.textContent='⏸ 暂停'}else{s.pauseAnimations();t.textContent='▶ 播放'}">
+    <rect x="570" y="2" width="62" height="22" rx="5" fill="#fafafa" stroke="#ccc"/>
+    <text x="601" y="18" text-anchor="middle" font-size="12" fill="#666">⏸ 暂停</text>
+  </g>
+  <text x="120" y="55" text-anchor="middle" font-size="13" fill="#2c3e50" font-weight="bold">输入 —— 每位独立填 0/1</text>
+  <text x="320" y="55" text-anchor="middle" font-size="13" fill="#2c3e50" font-weight="bold">N 个门依次运算</text>
+  <text x="520" y="55" text-anchor="middle" font-size="13" fill="#2c3e50" font-weight="bold">输出 —— 每位独立得到 0/1</text>
+  <line x1="215" y1="65" x2="215" y2="260" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="425" y1="65" x2="425" y2="260" stroke="#ddd" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="15" y="96" font-size="11" fill="#555" font-weight="bold">bit0</text>
+  <rect x="55" y="80" width="48" height="28" rx="5" fill="#ecf0f1" stroke="#bbb" stroke-width="1.2"/>
+  <text x="79" y="99" text-anchor="middle" font-size="14" fill="#e67e22" font-family="monospace" font-weight="bold">0</text>
+  <circle r="3.5" fill="#e67e22" opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="108;280;430" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="94;94;94" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <rect x="230" y="78" width="180" height="32" rx="4" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="320" y="99" text-anchor="middle" font-size="10" fill="#777">AND x₀ → OR x₁ → XOR x₂ → ...</text>
+  <rect x="235" y="82" width="32" height="24" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.8">
+    <animate attributeName="opacity" values="1;1;0.3;0.3;0.3;0.3;1;1" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="251" y="99" text-anchor="middle" font-size="8" fill="#e67e22">
+    <animate attributeName="opacity" values="1;1;0.3;0.3;0.3;0.3;1;1" dur="2s" repeatCount="indefinite"/>
+    AND
+  </text>
+  <rect x="273" y="82" width="26" height="24" rx="3" fill="#ebf5fb" stroke="#3498db" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3;0.3;0.3" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="286" y="99" text-anchor="middle" font-size="8" fill="#3498db">
+    <animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3;0.3;0.3" dur="2s" repeatCount="indefinite"/>
+    OR
+  </text>
+  <rect x="305" y="82" width="26" height="24" rx="3" fill="#e8f8f5" stroke="#27ae60" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.3;0.3;0.3;0.3;1;1;0.3;0.3" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="318" y="99" text-anchor="middle" font-size="8" fill="#27ae60">
+    <animate attributeName="opacity" values="0.3;0.3;0.3;0.3;1;1;0.3;0.3" dur="2s" repeatCount="indefinite"/>
+    XOR
+  </text>
+  <text x="370" y="99" text-anchor="start" font-size="9" fill="#999">...</text>
+  <rect x="445" y="80" width="48" height="28" rx="5" fill="#d5f5e3" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="469" y="99" text-anchor="middle" font-size="14" fill="#27ae60" font-family="monospace" font-weight="bold">1</text>
+  <text x="525" y="99" font-size="10" fill="#888">← 输入0却得到了1，白嫖！</text>
+  <text x="15" y="145" font-size="11" fill="#555" font-weight="bold">bit1</text>
+  <rect x="55" y="129" width="48" height="28" rx="5" fill="#ecf0f1" stroke="#bbb" stroke-width="1.2"/>
+  <text x="79" y="148" text-anchor="middle" font-size="14" fill="#3498db" font-family="monospace" font-weight="bold">1</text>
+  <circle r="3.5" fill="#3498db" opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0;0" dur="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="108;280;430" dur="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="143;143;143" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  <rect x="230" y="127" width="180" height="32" rx="4" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="320" y="148" text-anchor="middle" font-size="10" fill="#777">AND x₀ → OR x₁ → XOR x₂ → ...</text>
+  <rect x="235" y="131" width="32" height="24" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.8">
+    <animate attributeName="opacity" values="1;1;0.3;0.3;0.3;0.3;1;1" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="251" y="148" text-anchor="middle" font-size="8" fill="#e67e22">
+    <animate attributeName="opacity" values="1;1;0.3;0.3;0.3;0.3;1;1" dur="2.2s" repeatCount="indefinite"/>
+    AND
+  </text>
+  <rect x="273" y="131" width="26" height="24" rx="3" fill="#ebf5fb" stroke="#3498db" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3;0.3;0.3" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="286" y="148" text-anchor="middle" font-size="8" fill="#3498db">
+    <animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3;0.3;0.3" dur="2.2s" repeatCount="indefinite"/>
+    OR
+  </text>
+  <rect x="305" y="131" width="26" height="24" rx="3" fill="#e8f8f5" stroke="#27ae60" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.3;0.3;0.3;0.3;1;1;0.3;0.3" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="318" y="148" text-anchor="middle" font-size="8" fill="#27ae60">
+    <animate attributeName="opacity" values="0.3;0.3;0.3;0.3;1;1;0.3;0.3" dur="2.2s" repeatCount="indefinite"/>
+    XOR
+  </text>
+  <text x="370" y="148" text-anchor="start" font-size="9" fill="#999">...</text>
+  <rect x="445" y="129" width="48" height="28" rx="5" fill="#ecf0f1" stroke="#bbb" stroke-width="1.5"/>
+  <text x="469" y="148" text-anchor="middle" font-size="14" fill="#e74c3c" font-family="monospace" font-weight="bold">0</text>
+  <text x="525" y="148" font-size="10" fill="#888">← 填1也没捞到1，亏了</text>
+  <text x="79" y="188" text-anchor="middle" font-size="16" fill="#aaa">⋮</text>
+  <text x="469" y="188" text-anchor="middle" font-size="16" fill="#aaa">⋮</text>
+  <text x="10" y="220" font-size="11" fill="#555" font-weight="bold">bit29</text>
+  <rect x="55" y="204" width="48" height="28" rx="5" fill="#ecf0f1" stroke="#bbb" stroke-width="1.2"/>
+  <text x="79" y="223" text-anchor="middle" font-size="14" fill="#27ae60" font-family="monospace" font-weight="bold">0</text>
+  <circle r="3.5" fill="#27ae60" opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0;0" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="108;280;430" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="218;218;218" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <rect x="230" y="202" width="180" height="32" rx="4" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="320" y="223" text-anchor="middle" font-size="10" fill="#777">AND x₀ → OR x₁ → XOR x₂ → ...</text>
+  <rect x="235" y="206" width="32" height="24" rx="3" fill="#fdebd0" stroke="#e67e22" stroke-width="0.8">
+    <animate attributeName="opacity" values="1;1;0.3;0.3;0.3;0.3;1;1" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="251" y="223" text-anchor="middle" font-size="8" fill="#e67e22">
+    <animate attributeName="opacity" values="1;1;0.3;0.3;0.3;0.3;1;1" dur="2.5s" repeatCount="indefinite"/>
+    AND
+  </text>
+  <rect x="273" y="206" width="26" height="24" rx="3" fill="#ebf5fb" stroke="#3498db" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3;0.3;0.3" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="286" y="223" text-anchor="middle" font-size="8" fill="#3498db">
+    <animate attributeName="opacity" values="0.3;0.3;1;1;0.3;0.3;0.3;0.3" dur="2.5s" repeatCount="indefinite"/>
+    OR
+  </text>
+  <rect x="305" y="206" width="26" height="24" rx="3" fill="#e8f8f5" stroke="#27ae60" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.3;0.3;0.3;0.3;1;1;0.3;0.3" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="318" y="223" text-anchor="middle" font-size="8" fill="#27ae60">
+    <animate attributeName="opacity" values="0.3;0.3;0.3;0.3;1;1;0.3;0.3" dur="2.5s" repeatCount="indefinite"/>
+    XOR
+  </text>
+  <text x="370" y="223" text-anchor="start" font-size="9" fill="#999">...</text>
+  <rect x="445" y="204" width="48" height="28" rx="5" fill="#fdebd0" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="469" y="223" text-anchor="middle" font-size="14" fill="#e67e22" font-family="monospace" font-weight="bold">0</text>
+  <text x="525" y="223" font-size="10" fill="#888">← 选0结果也是0，没救了</text>
+  <line x1="30" y1="250" x2="610" y2="250" stroke="#ddd" stroke-width="1"/>
+  <text x="320" y="272" text-anchor="middle" font-size="13" fill="#2c3e50" font-weight="bold">关键结论：bit0/bit1/bit29 三行之间没有任何数据交互</text>
+  <text x="320" y="292" text-anchor="middle" font-size="11" fill="#e74c3c">→ 每一行的输出只取决于本行输入 + 相同的一串门操作 → 可以逐位独立决策！</text>
+</svg>
+<h4 id="解法预处理--逐位贪心">
+<a class="header-anchor" href="#%e8%a7%a3%e6%b3%95%e9%a2%84%e5%a4%84%e7%90%86--%e9%80%90%e4%bd%8d%e8%b4%aa%e5%bf%83"></a>
+解法：预处理 + 逐位贪心
+</h4><p><strong>第一步</strong>：分别模拟&quot;该位为 0&quot;和&quot;该位为 1&quot;经过所有门后的结果。</p>
+<p>我们不需要真的枚举 32 位各跑一次 N=10^5 的模拟。只需跑<strong>两次</strong> N 个门：一次初始值全是 0 (<code>val0</code>)，一次初始值全是 1 (<code>val1</code>)。因为门操作是纯位运算，<code>val0</code> 的第 k 位就是&quot;输入0经过所有门后第 k 位的输出&rdquo;。</p>
+<p><strong>初始值选择</strong>：<code>val0 = 0</code>（所有位为 0），<code>val1 = (1&lt;&lt;30)-1</code>（低 30 位全为 1，因为 m ≤ 10^9 &lt; 2^30）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="n">val0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ll</span> <span class="n">val1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// 低30位全是1
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>      <span class="n">val0</span> <span class="o">&amp;=</span> <span class="n">cur</span><span class="p">,</span> <span class="n">val1</span> <span class="o">&amp;=</span> <span class="n">cur</span><span class="p">;</span>  <span class="c1">// AND
+</span></span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">val0</span> <span class="o">|=</span> <span class="n">cur</span><span class="p">,</span> <span class="n">val1</span> <span class="o">|=</span> <span class="n">cur</span><span class="p">;</span>  <span class="c1">// OR
+</span></span></span><span class="line"><span class="cl">    <span class="k">else</span>                        <span class="n">val0</span> <span class="o">^=</span> <span class="n">cur</span><span class="p">,</span> <span class="n">val1</span> <span class="o">^=</span> <span class="n">cur</span><span class="p">;</span>  <span class="c1">// XOR
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>第二步</strong>：从高位到低位（bit 29 → bit 0）逐位贪心。</p>
+<p>对于每一位，我们有四个信息：</p>
+<ul>
+<li>选 0 的输出 → <code>(val0 &gt;&gt; k) &amp; 1</code></li>
+<li>选 1 的输出 → <code>(val1 &gt;&gt; k) &amp; 1</code></li>
+</ul>
+<p>贪心策略：</p>
+<ol>
+<li>如果<strong>选 0 的输出就是 1</strong>：那这一位必然选 0（不消耗 m 的限额，且得到 1 的结果），答案的这一位取 1。</li>
+<li>如果选 0 输出是 0，但<strong>选 1 输出是 1</strong>：考虑&quot;选 1&quot;的代价——是否会让 <code>cur | (1&lt;&lt;k) &gt; m</code>（超出限额）。若不超出，选 1，答案取 1，<code>cur</code> 更新。</li>
+<li>如果两种情况输出都是 0：选 0（不浪费限额），答案这一位为 0。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">val0</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>           <span class="c1">// 选0就拿到1，白嫖
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">((</span><span class="n">val1</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">((</span><span class="n">cur</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 选1的代价在限额内
+</span></span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// else: 两种情况都是0，这一位默认0，什么都不做
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>为什么从高位到低位？</strong> 高位对数值的贡献大（2^29 &raquo; 2^0），优先保证高位拿到 1。如果从低位开始，可能会出现&quot;低位把 m 的预算花光了，高位有大收益却没钱选&quot;的情况。</p>
+<div class="fw-desc">
+<strong>时空分析</strong>：预处理 O(N)，逐位贪心 O(log m) ≈ 30，总时间 O(N)，空间 O(N)（存门的数组）。<strong>复杂度瓶颈在输入</strong>，10^5 的开销完全可以接受。<code>val1</code> 初始化 <code>(1&lt;&lt;30)-1</code> 是因为 m ≤ 10^9 &lt; 2^30，我们只需关心低 30 位。
+</div>
+<hr>
+<h3 id="14-快速幂应用raising-modulo-numbersuva--acwing-92">
+<a class="header-anchor" href="#14-%e5%bf%ab%e9%80%9f%e5%b9%82%e5%ba%94%e7%94%a8raising-modulo-numbersuva--acwing-92"></a>
+1.4 快速幂应用：Raising Modulo Numbers（UVA / AcWing 92）
+</h3><p><strong>题意</strong>：给定 Z 组询问，每组给出模数 M 和 H 对 (A, B)，求 <code>(A₁^B₁ + A₂^B₂ + ... + A_H^B_H) mod M</code>。</p>
+<p>这题本身没有新算法，但它展示了<strong>快速幂在实际题目中的正确使用姿势</strong>——多组询问时，每组调用快速幂即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="nf">quickPower</span><span class="p">(</span><span class="n">ll</span> <span class="n">a</span><span class="p">,</span> <span class="n">ll</span> <span class="n">b</span><span class="p">,</span> <span class="n">ll</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 和 1.1 完全一样的板子
+</span></span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">*</span> <span class="n">a</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Z</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">Z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="n">Z</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">MOD</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">MOD</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">H</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">H</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">H</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ll</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">quickPower</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">MOD</span><span class="p">))</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">;</span>  <span class="c1">// 每个 A^B 单独算，累加到 sum
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>**每个 <code>quickPower</code> 是 O(log B)`，总时间 O(Z × H × log B)。这题没有复杂的边界情况，但有两个细节值得注意：</p>
+<ul>
+<li><strong><code>sum = (sum + ...) % MOD</code></strong>：加法后立刻取模，防止 <code>sum</code> 累积过大溢出 <code>long long</code>。这和快速幂内部每步乘法后取模是同一个思路。</li>
+<li><strong><code>a %= p</code></strong> 放在 <code>quickPower</code> 内部：调用者不需要预处理，函数自己保证输入在合法范围。</li>
+</ul>
+<div class="fw-desc">
+<strong>举一反三</strong>：把多组数据下的快速幂写熟，今后遇到需要大量求幂的场景（如组合数取模、Hash 值计算），你的板子就不再是"背下来的"，而是"理解了的"。
+</div>
+<hr>
+<h2 id="第二部分递推">
+<a class="header-anchor" href="#%e7%ac%ac%e4%ba%8c%e9%83%a8%e5%88%86%e9%80%92%e6%8e%a8"></a>
+第二部分：递推
+</h2><p><strong>递推</strong>（recurrence）的本质是：<strong>大问题的解可以由小问题的解推导出来</strong>。它与递归的区别是——递推用 <code>for</code> 循环自底向上填表，递归用函数调用自顶向下分解。</p>
+<p>在赛场上，递推的最经典形态是<strong>状态压缩 DP</strong>：把&quot;哪些元素已选/哪些位置已走&quot;压成一个二进制数，然后用 <code>dp[mask]</code> 从小的 <code>mask</code> 推到大的 <code>mask</code>。</p>
+<hr>
+<h3 id="21-最短-hamilton-路径洛谷-p10447--acwing-91">
+<a class="header-anchor" href="#21-%e6%9c%80%e7%9f%ad-hamilton-%e8%b7%af%e5%be%84%e6%b4%9b%e8%b0%b7-p10447--acwing-91"></a>
+2.1 最短 Hamilton 路径（洛谷 P10447 / AcWing 91）
+</h3><p><strong>题意</strong>：给定 N 个点的带权完全图（0~N-1），求从点 0 出发，恰好访问每个点一次，最后停在点 N-1 的最短路径长度。N ≤ 20。</p>
+<h4 id="为什么不能全排列暴搜">
+<a class="header-anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%83%bd%e5%85%a8%e6%8e%92%e5%88%97%e6%9a%b4%e6%90%9c"></a>
+为什么不能全排列暴搜
+</h4><p>N=20 时，全排列有 18! 种（去掉首尾固定），约 6.4×10^15，不可能跑完。</p>
+<h4 id="核心思想用二进制-mask-表示已访问过的点集">
+<a class="header-anchor" href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3%e7%94%a8%e4%ba%8c%e8%bf%9b%e5%88%b6-mask-%e8%a1%a8%e7%a4%ba%e5%b7%b2%e8%ae%bf%e9%97%ae%e8%bf%87%e7%9a%84%e7%82%b9%e9%9b%86"></a>
+核心思想：用二进制 mask 表示&quot;已访问过的点集&quot;
+</h4><p>定义一个二进制数 <code>mask</code>，其第 j 位为 1 表示&quot;点 j 已经访问过&quot;。</p>
+<p>例如：N=4，<code>mask = (1011)_2 = 11</code> 表示已经访问了 {0, 1, 3}。</p>
+<p>定义 <code>dp[mask][i]</code>：从起点 0 出发，已经访问过的点集为 <code>mask</code>，<strong>当前位于点 i</strong>，所走的最短路径长度。</p>
+<h4 id="递推公式">
+<a class="header-anchor" href="#%e9%80%92%e6%8e%a8%e5%85%ac%e5%bc%8f"></a>
+递推公式
+</h4><p>对于每个状态 <code>(mask, i)</code>，我们枚举下一个要去的点 <code>j</code>（j 不在 mask 中）：</p>
+<p><code>dp[mask | (1&lt;&lt;j)][j] = min(dp[mask | (1&lt;&lt;j)][j], dp[mask][i] + dist[i][j])</code></p>
+<p>翻译成人话：从 &ldquo;在 i 点，走过的集合是 mask&rdquo; 转移到 &ldquo;在 j 点，走过的集合是 mask 加上 j&rdquo;，代价是 <code>dist[i][j]</code>。</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" style="width:100%; max-width:600px; display:block; margin:16px auto;">
+  <text x="300" y="24" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">状压DP递推示意图：mask → nextMask</text>
+  <!-- 当前状态 -->
+  <rect x="40" y="60" width="220" height="70" rx="8" fill="#fdebd0" stroke="#e67e22" stroke-width="2"/>
+  <text x="150" y="85" text-anchor="middle" font-size="13" fill="#e67e22" font-weight="bold">当前状态 dp[mask][i]</text>
+  <text x="150" y="105" text-anchor="middle" font-size="12" fill="#555">mask = 1011₂ (已访问 {0,1,3})</text>
+  <text x="150" y="122" text-anchor="middle" font-size="12" fill="#555">当前在点 i = 3</text>
+  <!-- 箭头 -->
+  <text x="300" y="98" text-anchor="middle" font-size="20" fill="#3498db">→</text>
+  <text x="300" y="118" text-anchor="middle" font-size="11" fill="#3498db">+dist[3][2]</text>
+  <!-- 下一状态 -->
+  <rect x="340" y="60" width="230" height="70" rx="8" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="455" y="85" text-anchor="middle" font-size="13" fill="#27ae60" font-weight="bold">下一状态 dp[nextMask][j]</text>
+  <text x="455" y="105" text-anchor="middle" font-size="12" fill="#555">mask' = 1111₂ (已访问 {0,1,2,3})</text>
+  <text x="455" y="122" text-anchor="middle" font-size="12" fill="#555">当前在点 j = 2</text>
+  <!-- 复杂度提示 -->
+  <text x="300" y="170" text-anchor="middle" font-size="12" fill="#888">状态数 2^N × N，转移 O(N)，总 O(N²·2^N)</text>
+  <text x="300" y="190" text-anchor="middle" font-size="12" fill="#e74c3c">N=20: 2^20 ≈ 10^6 × 400 ≈ 4×10^8，卡着过</text>
+</svg>
+<h4 id="代码逐行拆解-1">
+<a class="header-anchor" href="#%e4%bb%a3%e7%a0%81%e9%80%90%e8%a1%8c%e6%8b%86%e8%a7%a3-1"></a>
+代码逐行拆解
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div><p><strong>读取邻接矩阵</strong>：<code>dist[i][j]</code> = 点 i 到 j 的直接距离。图是完全图，所以每个 (i,j) 对都有值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">;</span>  <span class="c1">// 2^n: 所有可能的访问集合
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">dp</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// 只访问了起点 0，位于点 0，代价为 0
+</span></span></span></code></pre></div><p><strong><code>dp</code> 的维度</strong>：第一维大小 <code>2^n</code>（mask 有 2^n 种），第二维大小 N。初始化全为 <code>INT_MAX</code>（不可达），只有起点状态 <code>dp[1][0] = 0</code>。</p>
+<p><strong>为什么是 <code>1 &lt;&lt; 0</code> 而不是 <code>1</code>？</strong> 一样，但写 <code>1 &lt;&lt; 0</code> 更清晰地表达&quot;第 0 位为 1&quot;。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">mask</span> <span class="o">&lt;</span> <span class="n">total</span><span class="p">;</span> <span class="n">mask</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>  <span class="c1">// 行1: 必须包含起点
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">((</span><span class="n">mask</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>    <span class="c1">// 行2: i必须在mask中
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span> <span class="c1">// 行3: 状态必须可达
+</span></span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">((</span><span class="n">mask</span> <span class="o">&gt;&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>   <span class="c1">// 行4: j不能在mask中
+</span></span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">nextMask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>  <span class="c1">// 行5: 把j加入集合
+</span></span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">nextMask</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">nextMask</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>行1: <code>if (!(mask &amp; 1)) continue;</code></strong> —— mask 的最低位（点 0）必须是 1。因为路径从点 0 出发，任何有效状态必须包含点 0。这一行剪枝掉了一半的无效状态，对 N=20 能省约 5×10^5 次循环。</p>
+<p><strong>行2: <code>if (!((mask &gt;&gt; i) &amp; 1)) continue;</code></strong> —— 当前所在的点 i 必须在 mask 中（你已经到了这个点，当然访问过）。逻辑上 <code>(mask &gt;&gt; i) &amp; 1</code> 检查 mask 的第 i 位。</p>
+<p><strong>行3: <code>if (dp[mask][i] == INT_MAX) continue;</code></strong> —— 这个状态没有被任何前驱状态更新过，意味着从起点不可达（虽然理论上都可达，但某些 mask 的组合可能跳过）。</p>
+<p><strong>行4: <code>if ((mask &gt;&gt; j) &amp; 1) continue;</code></strong> —— 下一个点 j 不能在 mask 中（还没访问过）。这保证了每条路径中各点<strong>不重不漏</strong>。</p>
+<p><strong>行5: <code>int nextMask = mask | (1 &lt;&lt; j);</code></strong> —— 位运算更新 mask，将 j 点对应的位设为 1。</p>
+<p><strong>行6: <code>dp[nextMask][j] = min(...)</code></strong> —— 递推核心：从 <code>(mask, i)</code> 转移到 <code>(nextMask, j)</code>，代价增加 <code>dist[i][j]</code>。<code>min</code> 保证了如果有多条不同路径到达同一个 <code>(nextMask, j)</code>，取最短的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">full</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// 所有位全是1: {0,1,2,...,n-1} 都访问过了
+</span></span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">full</span><span class="p">][</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span></code></pre></div><p>最终答案：所有点都访问过（<code>full = 2^n - 1</code>），且当前停在点 N-1。</p>
+<p><strong>状态空间分析</strong>：</p>
+<ul>
+<li>mask 枚举：2^N = 2^20 ≈ 10^6</li>
+<li>对每个 mask，枚举 i：最多 N = 20</li>
+<li>对每个 (mask, i)，枚举 j：最多 N = 20</li>
+<li>总复杂度：O(N² × 2^N) ≈ 400 × 10^6 = 4×10^8</li>
+</ul>
+<p>4×10^8 在 1s 时限下<strong>卡着过</strong>（CF/洛谷的评测机大约 3~5×10^8 次简单操作/秒）。实际跑不满，因为剪枝和 skip 大幅减少了常数。</p>
+<div class="fw-desc">
+<strong>空间优化</strong>：dp 数组大小 = 2^N × N ≈ 10^6 × 20 × 4 bytes = 80MB，在 256MB 限制内。如果 N=25，2^25 × 25 × 4B ≈ 3.3GB 就爆了——所以这题 N 才限制了 ≤ 20。状压 DP 的 N 上限通常就是 20~22。
+</div>
+<hr>
+<h3 id="22-取数游戏洛谷-p1123--类状压dp">
+<a class="header-anchor" href="#22-%e5%8f%96%e6%95%b0%e6%b8%b8%e6%88%8f%e6%b4%9b%e8%b0%b7-p1123--%e7%b1%bb%e7%8a%b6%e5%8e%8bdp"></a>
+2.2 取数游戏（洛谷 P1123 / 类状压DP）
+</h3><p><strong>题意</strong>：给 N×M 的矩阵，选出若干个数。若选了 <code>(i, j)</code>，其周围 8 个相邻格都不能选。求所选数之和的最大值。N ≤ 6, M ≤ 100。</p>
+<h4 id="分析">
+<a class="header-anchor" href="#%e5%88%86%e6%9e%90"></a>
+分析
+</h4><p>N 很小（≤ 6），M 可以很大（≤ 100）。这暗示了<strong>按行状压</strong>：每行的选择方案用一个二进制数 <code>state</code> 表示（第 j 位为 1 表示选了该行的第 j 列）。</p>
+<h4 id="行内冲突判断一行内相邻不能同时选">
+<a class="header-anchor" href="#%e8%a1%8c%e5%86%85%e5%86%b2%e7%aa%81%e5%88%a4%e6%96%ad%e4%b8%80%e8%a1%8c%e5%86%85%e7%9b%b8%e9%82%bb%e4%b8%8d%e8%83%bd%e5%90%8c%e6%97%b6%e9%80%89"></a>
+行内冲突判断（一行内相邻不能同时选）
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">checkState</span><span class="p">(</span><span class="kt">int</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">state</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">));</span>  <span class="c1">// 相邻的1冲突
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>state &amp; (state &lt;&lt; 1)</code>：如果 <code>state</code> 中有相邻的 1，这个与运算的结果一定非零。例如 <code>state = 011₂ = 3</code>，<code>state &lt;&lt; 1 = 110₂ = 6</code>，<code>011 &amp; 110 = 010 ≠ 0</code>，冲突。</p>
+<h4 id="行间冲突判断上下行和对角线不能同时选">
+<a class="header-anchor" href="#%e8%a1%8c%e9%97%b4%e5%86%b2%e7%aa%81%e5%88%a4%e6%96%ad%e4%b8%8a%e4%b8%8b%e8%a1%8c%e5%92%8c%e5%af%b9%e8%a7%92%e7%ba%bf%e4%b8%8d%e8%83%bd%e5%90%8c%e6%97%b6%e9%80%89"></a>
+行间冲突判断（上下行和对角线不能同时选）
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">noConflict</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prev</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">!</span><span class="p">((</span><span class="n">cur</span> <span class="o">&amp;</span> <span class="n">prev</span><span class="p">)</span> <span class="o">||</span>           <span class="c1">// 正上方
+</span></span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="n">cur</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prev</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">))</span> <span class="o">||</span>    <span class="c1">// 右上
+</span></span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="n">cur</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prev</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)));</span>     <span class="c1">// 左上
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>三句逐个拆开：</p>
+<ul>
+<li><code>cur &amp; prev</code>：正上方的格同时被选——冲突</li>
+<li><code>cur &amp; (prev &gt;&gt; 1)</code>：当前行的第 j 位与上一行的第 j+1 位（prev 右移后对齐）——右上对角线冲突</li>
+<li><code>cur &amp; (prev &lt;&lt; 1)</code>：当前行的第 j 位与上一行的第 j-1 位——左上对角线冲突</li>
+</ul>
+<h4 id="递推流程">
+<a class="header-anchor" href="#%e9%80%92%e6%8e%a8%e6%b5%81%e7%a8%8b"></a>
+递推流程
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 预处理所有&#34;行内不冲突&#34;的状态（合法状态）
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">validStates</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">);</span> <span class="n">s</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">checkState</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">validStates</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// dp[i][j]: 前 i 行，第 i 行采用 validStates[j] 时的最大得分
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>           <span class="c1">// 枚举行
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">total</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// 枚举当前行状态
+</span></span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">curState</span> <span class="o">=</span> <span class="n">validStates</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">best</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">prev</span> <span class="o">&lt;</span> <span class="n">total</span><span class="p">;</span> <span class="n">prev</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 枚举上一行状态
+</span></span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">prevState</span> <span class="o">=</span> <span class="n">validStates</span><span class="p">[</span><span class="n">prev</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">noConflict</span><span class="p">(</span><span class="n">curState</span><span class="p">,</span> <span class="n">prevState</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">best</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">prev</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">best</span> <span class="o">+</span> <span class="n">rowScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>复杂度</strong>：每行最多 2^M 个状态，但由于&quot;相邻不选&quot;的限制，实际合法状态远少于 2^M。M=6 时最多约 21 个合法状态（Fibonacci(M+2)），M=100 时仍只有约 34 个。总复杂度约 O(N × K²) ≈ 6 × 34² ≈ 7000，完全没问题。</p>
+<hr>
+<h2 id="第三部分递归">
+<a class="header-anchor" href="#%e7%ac%ac%e4%b8%89%e9%83%a8%e5%88%86%e9%80%92%e5%bd%92"></a>
+第三部分：递归
+</h2><p><strong>递归</strong>是做&quot;枚举所有方案&quot;类问题的最强武器。赛场上写递归枚举有两个关键点：</p>
+<ol>
+<li><strong>正确设定递归边界</strong>（什么时候停）</li>
+<li><strong>正确传递状态参数</strong>（保证不重不漏）</li>
+</ol>
+<p>下面通过四道例题分别讲组合枚举、子集枚举、全排列、枚举元组。</p>
+<hr>
+<h3 id="31-组合枚举选-r-个数洛谷-p1157--p10448">
+<a class="header-anchor" href="#31-%e7%bb%84%e5%90%88%e6%9e%9a%e4%b8%be%e9%80%89-r-%e4%b8%aa%e6%95%b0%e6%b4%9b%e8%b0%b7-p1157--p10448"></a>
+3.1 组合枚举——选 r 个数（洛谷 P1157 / P10448）
+</h3><p><strong>题意</strong>：从 1~n 个数中选出 r 个（n ≤ 20），按字典序输出所有组合。</p>
+<h4 id="核心难题如何避免重复">
+<a class="header-anchor" href="#%e6%a0%b8%e5%bf%83%e9%9a%be%e9%a2%98%e5%a6%82%e4%bd%95%e9%81%bf%e5%85%8d%e9%87%8d%e5%a4%8d"></a>
+核心难题：如何避免重复
+</h4><p>例如 n=4, r=2，组合 <code>{1,2}</code> 和 <code>{2,1}</code> 是同一组——但我们如果写成&quot;枚举每个位置的每个可能数字&quot;，就会把&quot;位置1=2, 位置2=1&quot;和&quot;位置1=1, 位置2=2&quot;都输出，产生重复。</p>
+<p><strong>解决方案</strong>：<strong>强制定序</strong>——要求选出的数严格递增。只要规定了&quot;后一位的数必须 &gt; 前一位&quot;，<code>{2,1}</code> 这个情况就不可能出现了。</p>
+<p>这就是 <code>start</code> 参数的作用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="mi">25</span><span class="p">];</span>  <span class="c1">// r 最大 20，开 25 安全
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>                    <span class="c1">// 已经填好了 r 个数
+</span></span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 从 start 开始枚举，保证递增
+</span></span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DFS</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>            <span class="c1">// 下一位从 i+1 开始
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>调用</strong>：<code>DFS(1, 1)</code> —— 从第 1 个位置开始，候选数从 1 开始。</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 280" style="width:100%; max-width:680px; display:block; margin:16px auto;">
+  <text x="340" y="24" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">组合枚举递归树：n=4, r=2</text>
+  <!-- 根 -->
+  <circle cx="340" cy="55" r="16" fill="#3498db" stroke="#fff" stroke-width="1.5"/>
+  <text x="340" y="61" text-anchor="middle" font-size="11" fill="#fff">根</text>
+  <!-- pos=1 -->
+  <line x1="335" y1="70" x2="150" y2="105" stroke="#999" stroke-width="1"/>
+  <line x1="340" y1="70" x2="280" y2="105" stroke="#999" stroke-width="1"/>
+  <line x1="345" y1="70" x2="410" y2="105" stroke="#999" stroke-width="1"/>
+  <line x1="345" y1="70" x2="525" y2="105" stroke="#999" stroke-width="1"/>
+  <circle cx="150" cy="118" r="14" fill="#fdebd0" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="150" y="123" text-anchor="middle" font-size="10" fill="#333">1</text>
+  <circle cx="280" cy="118" r="14" fill="#fdebd0" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="280" y="123" text-anchor="middle" font-size="10" fill="#333">2</text>
+  <circle cx="410" cy="118" r="14" fill="#fdebd0" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="410" y="123" text-anchor="middle" font-size="10" fill="#333">3</text>
+  <circle cx="525" cy="118" r="14" fill="#eee" stroke="#ccc" stroke-width="1.5"/>
+  <text x="525" y="123" text-anchor="middle" font-size="10" fill="#999">4</text>
+  <!-- 剪枝标注 → 移到4号节点右侧 -->
+  <line x1="539" y1="118" x2="570" y2="118" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="575" y="115" font-size="9" fill="#e74c3c">只剩0个</text>
+  <text x="575" y="128" font-size="9" fill="#e74c3c">空位→剪枝</text>
+  <!-- pos=2 -->
+  <line x1="145" y1="132" x2="95" y2="165" stroke="#999" stroke-width="0.8"/>
+  <line x1="150" y1="132" x2="160" y2="165" stroke="#999" stroke-width="0.8"/>
+  <line x1="150" y1="132" x2="210" y2="165" stroke="#999" stroke-width="0.8"/>
+  <line x1="275" y1="132" x2="280" y2="165" stroke="#999" stroke-width="0.8"/>
+  <line x1="280" y1="132" x2="325" y2="165" stroke="#999" stroke-width="0.8"/>
+  <line x1="405" y1="132" x2="415" y2="165" stroke="#999" stroke-width="0.8"/>
+  <circle cx="95" cy="178" r="13" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="95" y="183" text-anchor="middle" font-size="9" fill="#333">{1,2}</text>
+  <circle cx="160" cy="178" r="13" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="160" y="183" text-anchor="middle" font-size="9" fill="#333">{1,3}</text>
+  <circle cx="210" cy="178" r="13" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="210" y="183" text-anchor="middle" font-size="9" fill="#333">{1,4}</text>
+  <circle cx="280" cy="178" r="13" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="280" y="183" text-anchor="middle" font-size="9" fill="#333">{2,3}</text>
+  <circle cx="325" cy="178" r="13" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="325" y="183" text-anchor="middle" font-size="9" fill="#333">{2,4}</text>
+  <circle cx="415" cy="178" r="13" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="415" y="183" text-anchor="middle" font-size="9" fill="#333">{3,4}</text>
+  <!-- 叶子 -->
+  <text x="340" y="220" text-anchor="middle" font-size="12" fill="#888">绿色叶子 = C(4,2) = 6 种组合</text>
+  <text x="340" y="242" text-anchor="middle" font-size="11" fill="#999">start 参数保证严格递增 → 不重不漏</text>
+  <text x="340" y="262" text-anchor="middle" font-size="11" fill="#999">时间复杂度：O(C(n,r) × r)，输出 size 是主要开销</text>
+</svg>
+<p><strong>时空复杂度</strong>：递归深度 r ≤ 20，每个答案输出 r 个数。总输出量 = C(n,r) × r，这就是时间下界。空间 O(r)（递归栈深度）。</p>
+<p><strong>注意</strong>：这题也可以用 <code>next_permutation</code> + <code>prev_permutation</code> 做组合枚举（选 r 个元素的另一个经典技巧），但 DFS 递归写法更灵活——比如可以轻松加入剪枝条件。</p>
+<hr>
+<h3 id="32-子集枚举洛谷-b3622--递归写法">
+<a class="header-anchor" href="#32-%e5%ad%90%e9%9b%86%e6%9e%9a%e4%b8%be%e6%b4%9b%e8%b0%b7-b3622--%e9%80%92%e5%bd%92%e5%86%99%e6%b3%95"></a>
+3.2 子集枚举（洛谷 B3622 / 递归写法）
+</h3><p><strong>题意</strong>：输入 n，按字典序（先 N 后 Y）输出 1~n 的所有子集。例如 n=2，输出：<code>NN, NY, YN, YY</code>（分别表示 ∅, {2}, {1}, {1,2}）。</p>
+<p>这题天然适合递归——每个元素有两种选择（选/不选），构造出 2^n 个叶子。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="n">n</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">DFS</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">self</span><span class="p">,</span> <span class="n">ll</span> <span class="n">pos</span><span class="p">,</span> <span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">==</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>          <span class="c1">// n个元素的决策都已做完
+</span></span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&#34;N&#34;</span><span class="p">);</span>  <span class="c1">// 不选第 pos 个元素
+</span></span></span><span class="line"><span class="cl">    <span class="n">self</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&#34;Y&#34;</span><span class="p">);</span>  <span class="c1">// 选第 pos 个元素
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">DFS</span><span class="p">(</span><span class="n">DFS</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p><strong>为什么用 <code>auto&amp;&amp; self</code> 的 lambda？</strong> C++ 中 lambda 的递归需要显式传递自身，<code>auto&amp;&amp; self</code> 使 lambda 可以调用自身。这种写法省去了定义外部函数的麻烦，参数直接捕获在闭包里，<strong>但不推荐在 N &gt; 20 的递归中使用</strong>——lambda 递归的额外开销比普通函数递归稍大。</p>
+<p><strong>为什么先 N 后 Y？</strong> 题目要求字典序，<code>N &lt; Y</code>，所以先递归&quot;不选&quot;，再递归&quot;选&quot;。</p>
+<p><strong>时空复杂度</strong>：递归深度 n，叶子 2^n 个，每个叶子输出长度为 n 的字符串。总时间 O(n × 2^n)。对于 n=20，输出量 = 20 × 10^6 ≈ 200MB，已经接近输出瓶颈。空间 O(n)（递归栈）。</p>
+<hr>
+<h3 id="33-全排列洛谷-p1706">
+<a class="header-anchor" href="#33-%e5%85%a8%e6%8e%92%e5%88%97%e6%b4%9b%e8%b0%b7-p1706"></a>
+3.3 全排列（洛谷 P1706）
+</h3><p><strong>题意</strong>：输入 n（n ≤ 9），输出 1~n 的所有全排列，每个数字占 5 个字符宽度。</p>
+<p>这题可以直接调 <code>std::next_permutation</code>——但我更建议你在赛场上<strong>手写 DFS</strong>，因为面对&quot;带限制条件的排列&quot;时（如相邻两数之和为质数的排列），标准库做不到。</p>
+<h4 id="方法一stl-一行流无限制时最快">
+<a class="header-anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%80stl-%e4%b8%80%e8%a1%8c%e6%b5%81%e6%97%a0%e9%99%90%e5%88%b6%e6%97%b6%e6%9c%80%e5%bf%ab"></a>
+方法一：STL 一行流（无限制时最快）
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">iota</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">1</span><span class="p">);</span>   <span class="c1">// 填入 1, 2, ..., n
+</span></span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">next_permutation</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+</span></span></code></pre></div><p><code>next_permutation</code> 返回 <code>false</code> 时说明已经是字典序最大的排列（降序），循环结束。</p>
+<p><strong>时间复杂度</strong>：O(N! × N)，N=9 时 9! = 362880，完全没问题。</p>
+<h4 id="方法二dfs--vis-数组通用模板">
+<a class="header-anchor" href="#%e6%96%b9%e6%b3%95%e4%ba%8cdfs--vis-%e6%95%b0%e7%bb%84%e9%80%9a%e7%94%a8%e6%a8%a1%e6%9d%bf"></a>
+方法二：DFS + vis 数组（通用模板）
+</h4><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">perm</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>       <span class="c1">// 已经用过这个数了
+</span></span></span><span class="line"><span class="cl">        <span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">perm</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>             <span class="c1">// 回溯：还给后续搜索
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong><code>vis[i] = false</code> 为什么是必须的？</strong> 回溯时，如果不恢复 <code>vis[i]</code>，那么 <code>{1,2,3}</code> 输出后，状态还是&quot;123 都被用了&quot;，递归回退后无法生成 <code>{1,3,2}</code>。<code>vis[i] = false</code> 就是&quot;把用过的数还给池子&quot;。</p>
+<p><strong>时空复杂度</strong>：O(N! × N) 时间，O(N) 额外空间。vis 数组和递归栈各 O(N)。</p>
+<hr>
+<h3 id="34-枚举元组洛谷-b3621--递归的另一种形态">
+<a class="header-anchor" href="#34-%e6%9e%9a%e4%b8%be%e5%85%83%e7%bb%84%e6%b4%9b%e8%b0%b7-b3621--%e9%80%92%e5%bd%92%e7%9a%84%e5%8f%a6%e4%b8%80%e7%a7%8d%e5%bd%a2%e6%80%81"></a>
+3.4 枚举元组（洛谷 B3621 / 递归的另一种形态）
+</h3><p><strong>题意</strong>：输入 n 和 k，输出所有长度为 n、每位从 1~k 中取值的 n 元组（共 k^n 个），按字典序排列。例如 n=2, k=3，输出 <code>1 1, 1 2, 1 3, 2 1, 2 2, 2 3, 3 1, 3 2, 3 3</code>。</p>
+<h4 id="与组合枚举的区别">
+<a class="header-anchor" href="#%e4%b8%8e%e7%bb%84%e5%90%88%e6%9e%9a%e4%b8%be%e7%9a%84%e5%8c%ba%e5%88%ab"></a>
+与组合枚举的区别
+</h4><p>组合枚举（3.1）要求<strong>严格递增</strong>（<code>start</code> 参数），每个数只能选一次；元组枚举<strong>每一位独立</strong>，可以重复选同一个数。</p>
+<p>这就意味着：递归的 for 循环<strong>不需要 <code>start</code> 参数</strong>，每一位都从 1 枚举到 k。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>                   <span class="c1">// 填满了 n 位
+</span></span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">v</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>    <span class="c1">// 每一位独立从 1~k 枚举
+</span></span></span><span class="line"><span class="cl">        <span class="n">nums</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DFS</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>           <span class="c1">// 注意：没有 start 参数
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 调用：nums.resize(n); DFS(n, k, 0);
+</span></span></span></code></pre></div><p><strong>为什么不需要 <code>start</code>？</strong> 因为 <code>{1,1}</code>、<code>{2,1}</code> 都是合法且不同的元组。每一位可以取 1~k 中的任何值，不受前一位的限制。</p>
+<h4 id="与子集枚举32的关系">
+<a class="header-anchor" href="#%e4%b8%8e%e5%ad%90%e9%9b%86%e6%9e%9a%e4%b8%be32%e7%9a%84%e5%85%b3%e7%b3%bb"></a>
+与子集枚举（3.2）的关系
+</h4><p>子集枚举是元组枚举的特例：当 k=2（只有 N/Y 两个选项）时，就是子集枚举。所以元组枚举实际上比子集枚举更通用——它是真正的&quot;每个位置独立决策&quot;模板。</p>
+<p><strong>时空复杂度</strong>：叶子数 k^n 个，每个叶子输出 n 个数。总时间 O(n × k^n)。空间 O(n)（递归栈深度）。</p>
+<div class="fw-desc">
+<strong>对比总结</strong>：递归枚举的三种递进——<strong>组合</strong>（有 start 约束，C(n,r) 个解）、<strong>子集</strong>（每位二选一，2^n 个解）、<strong>元组</strong>（每位 k 选一，k^n 个解）。复杂度依次递增，代码骨架完全一致，区别只在于 for 循环的范围和约束条件。
+</div>
+<hr>
+<h2 id="总结三个板块的联系">
+<a class="header-anchor" href="#%e6%80%bb%e7%bb%93%e4%b8%89%e4%b8%aa%e6%9d%bf%e5%9d%97%e7%9a%84%e8%81%94%e7%b3%bb"></a>
+总结：三个板块的联系
+</h2><p>用一张图来总结整篇文章十道题之间的脉络：</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" style="width:100%; max-width:640px; display:block; margin:16px auto;">
+  <text x="320" y="24" text-anchor="middle" font-size="16" fill="#2c3e50" font-weight="bold">位运算 · 递推 · 递归 —— 知识图谱</text>
+  <!-- 位运算 -->
+  <rect x="30" y="50" width="180" height="60" rx="10" fill="#fdebd0" stroke="#e67e22" stroke-width="2"/>
+  <text x="120" y="75" text-anchor="middle" font-size="14" fill="#e67e22" font-weight="bold">位运算</text>
+  <text x="120" y="96" text-anchor="middle" font-size="9" fill="#666">快速幂 / 64位乘法 / 起床困难 / 取模累加</text>
+  <!-- 递推 -->
+  <rect x="230" y="50" width="180" height="60" rx="10" fill="#d5f5e3" stroke="#27ae60" stroke-width="2"/>
+  <text x="320" y="75" text-anchor="middle" font-size="14" fill="#27ae60" font-weight="bold">递推（状压DP）</text>
+  <text x="320" y="96" text-anchor="middle" font-size="10" fill="#666">Hamilton路径 / 取数游戏</text>
+  <!-- 递归 -->
+  <rect x="430" y="50" width="180" height="60" rx="10" fill="#d4e6f1" stroke="#3498db" stroke-width="2"/>
+  <text x="520" y="75" text-anchor="middle" font-size="14" fill="#3498db" font-weight="bold">递归（DFS枚举）</text>
+  <text x="520" y="96" text-anchor="middle" font-size="9" fill="#666">组合 / 子集 / 全排列 / 枚举元组</text>
+  <!-- 连接箭头 -->
+  <line x1="210" y1="80" x2="230" y2="80" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="410" y1="80" x2="430" y2="80" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#999"/></marker></defs>
+  <!-- 联系说明 -->
+  <text x="320" y="140" text-anchor="middle" font-size="11" fill="#999">位运算 →（状压DP的"mask"）→ 递推 →（枚举状态的"搜索"）→ 递归</text>
+  <!-- 技巧总结 -->
+  <text x="30" y="175" font-size="12" fill="#e67e22" font-weight="bold">核心技巧：</text>
+  <text x="30" y="195" font-size="11" fill="#555">• b &amp; 1 检查二进制最低位</text>
+  <text x="30" y="212" font-size="11" fill="#555">• 位与位独立 → 逐位贪心</text>
+  <text x="30" y="229" font-size="11" fill="#555">• __int128 防溢出，否则用龟速乘</text>
+  <text x="240" y="175" font-size="12" fill="#27ae60" font-weight="bold">核心技巧：</text>
+  <text x="240" y="195" font-size="11" fill="#555">• mask 用二进制表示集合</text>
+  <text x="240" y="212" font-size="11" fill="#555">• dp[mask][i] 从子集推全集</text>
+  <text x="240" y="229" font-size="11" fill="#555">• 2^N 上限定 N≤20~22</text>
+  <text x="440" y="175" font-size="12" fill="#3498db" font-weight="bold">核心技巧：</text>
+  <text x="440" y="195" font-size="11" fill="#555">• start 参数保证不重不漏</text>
+  <text x="440" y="212" font-size="11" fill="#555">• vis 回溯时必须恢复</text>
+  <text x="440" y="229" font-size="11" fill="#555">• 输出量 = 时间复杂度下界</text>
+</svg>
+<style>
+.fw-desc {
+    margin: 1rem 0 1.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 4px solid var(--neon-red, #ff003c);
+    background: rgba(255, 0, 60, 0.04);
+    border-radius: 0 10px 10px 0;
+    line-height: 1.85;
+    border-top: 1px solid rgba(255, 0, 60, 0.12);
+    border-right: 1px solid rgba(255, 0, 60, 0.12);
+    border-bottom: 1px solid rgba(255, 0, 60, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(255, 0, 60, 0.05), 0 2px 12px rgba(255, 0, 60, 0.06);
+    color: var(--ink-soft, #4a5568);
+}
+.fw-desc strong { color: var(--neon-red, #ff003c); font-weight: 700; }
+.fw-desc code {
+    background: rgba(255, 0, 60, 0.07) !important;
+    color: #cc0030 !important;
+    padding: 0.12em 0.45em !important;
+    border-radius: 4px !important;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace !important;
+    font-size: 0.93em !important;
+    border: 1px solid rgba(255, 0, 60, 0.2) !important;
+}
+[data-theme="dark"] .fw-desc {
+    background: rgba(15, 15, 26, 0.65);
+    border-left-color: #ff003c;
+    border-top-color: rgba(255, 0, 60, 0.25);
+    border-right-color: rgba(255, 0, 60, 0.25);
+    border-bottom-color: rgba(255, 0, 60, 0.25);
+    box-shadow: inset 0 0 0 1px rgba(255, 0, 60, 0.1), 0 0 24px rgba(255, 0, 60, 0.1);
+    backdrop-filter: blur(8px);
+    color: #c0c0d0;
+}
+[data-theme="dark"] .fw-desc strong { color: #ff5577; text-shadow: 0 0 8px rgba(255, 0, 60, 0.45); }
+[data-theme="dark"] .fw-desc code {
+    background: rgba(255, 0, 60, 0.12) !important;
+    color: #ff5577 !important;
+    border-color: rgba(255, 0, 60, 0.35) !important;
+    box-shadow: 0 0 8px rgba(255, 0, 60, 0.08);
+}
+@media (max-width: 768px) {
+    .fw-desc { margin: 0.65rem 0 0.9rem; padding: 0.8rem; border-left-width: 3px; line-height: 1.75; }
+}
+</style>
+</div>
+    <footer class="article-footer"><ul class="article-category-list"><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/%e7%ae%97%e6%b3%95"
+      data-aos="zoom-in"
+      >算法</a
+    >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/%e7%ae%97%e6%b3%95%e7%ab%9e%e8%b5%9b%e8%bf%9b%e9%98%b6%e6%8c%87%e5%8d%97"
+      data-aos="zoom-in"
+      >算法竞赛进阶指南</a
+    >
+    </li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e7%ae%97%e6%b3%95%e7%ab%9e%e8%b5%9b%e8%bf%9b%e9%98%b6%e6%8c%87%e5%8d%97"
+        rel="tag"
+        >算法竞赛进阶指南</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e5%9f%ba%e6%9c%ac%e7%ae%97%e6%b3%95"
+        rel="tag"
+        >基本算法</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e4%bd%8d%e8%bf%90%e7%ae%97"
+        rel="tag"
+        >位运算</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e9%80%92%e6%8e%a8"
+        rel="tag"
+        >递推</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e9%80%92%e5%bd%92"
+        rel="tag"
+        >递归</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/%e7%8a%b6%e5%8e%8bdp"
+        rel="tag"
+        >状压DP</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/c&#43;&#43;"
+        rel="tag"
+        >c&#43;&#43;</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="/images/covers/OIP-C-1.jpg"
+              data-sizes="auto"
+              alt="滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）"
+              class="lazyload"
+            /><a
+          href="/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/"
+          aria-label="前一篇:滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）"
+          title="前一篇:滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）</h3>
+      </div></nav></article></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2020-2026<span class="footer-info-sep rotate"></span>ACM-Lycoris
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp;Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;10.0k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;00:50</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#位运算基础速查表">位运算基础速查表</a></li>
+    <li><a href="#第一部分位运算">第一部分：位运算</a>
+      <ul>
+        <li><a href="#11-快速幂洛谷-p1226--acwing-89">1.1 快速幂（洛谷 P1226 / AcWing 89）</a></li>
+        <li><a href="#12-64-位整数乘法洛谷-p10446--acwing-90">1.2 64 位整数乘法（洛谷 P10446 / AcWing 90）</a></li>
+        <li><a href="#13-起床困难综合症洛谷-p2114--acwing-998">1.3 起床困难综合症（洛谷 P2114 / AcWing 998）</a></li>
+        <li><a href="#14-快速幂应用raising-modulo-numbersuva--acwing-92">1.4 快速幂应用：Raising Modulo Numbers（UVA / AcWing 92）</a></li>
+      </ul>
+    </li>
+    <li><a href="#第二部分递推">第二部分：递推</a>
+      <ul>
+        <li><a href="#21-最短-hamilton-路径洛谷-p10447--acwing-91">2.1 最短 Hamilton 路径（洛谷 P10447 / AcWing 91）</a></li>
+        <li><a href="#22-取数游戏洛谷-p1123--类状压dp">2.2 取数游戏（洛谷 P1123 / 类状压DP）</a></li>
+      </ul>
+    </li>
+    <li><a href="#第三部分递归">第三部分：递归</a>
+      <ul>
+        <li><a href="#31-组合枚举选-r-个数洛谷-p1157--p10448">3.1 组合枚举——选 r 个数（洛谷 P1157 / P10448）</a></li>
+        <li><a href="#32-子集枚举洛谷-b3622--递归写法">3.2 子集枚举（洛谷 B3622 / 递归写法）</a></li>
+        <li><a href="#33-全排列洛谷-p1706">3.3 全排列（洛谷 P1706）</a></li>
+        <li><a href="#34-枚举元组洛谷-b3621--递归的另一种形态">3.4 枚举元组（洛谷 B3621 / 递归的另一种形态）</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结三个板块的联系">总结：三个板块的联系</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.jpg"
+    data-sizes="auto"
+    alt="ACM-Lycoris"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">ACM-Lycoris</div>
+  <div class="sidebar-description">振桴彼岸，绽蕊忘川</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">7</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      7
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">21</div>
+  </a>
+</div>
+<div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
+        <a
+          href="https://space.bilibili.com/3493117112093634"
+          itemprop="url"
+          target="_blank"
+          aria-label="bilibili"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div><div class="icon-github sidebar-social-icon">
+        <a
+          href="https://github.com/ACM-Lycoris"
+          itemprop="url"
+          target="_blank"
+          aria-label="github"
+          rel="noopener nofollow noreferrer"
+        ></a>
+      </div></div><div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a><div class='sidebar-menu-icon icon rotate'>&#xe62b;</div><div class="sidebar-menu-link">友链</div>
+    </div></div></div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    
+    
+    
+    
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    
+    
+    
+    
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js"  ></script><script src="/js/aos.js"  ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax ></script><script>
+  var setupFirework = () => {
+    if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+      if (window.firework) {
+        const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+        options.excludeElements = options.excludeelements;
+        delete options.excludeelements;
+        window.firework(options);
+      }
+    }
+  }
+</script><script
+    src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js"
+    defer
+    
+    
+    onload="setupFirework()"
+    integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8&#43;pUoWX8n1rgq282T" crossorigin="anonymous"></script><script>
+  var setupLive2d = () => {
+    live2d.init('https:\/\/fastly.jsdelivr.net\/gh\/D-Sketon\/plugin-live2d\/', {themeTipsPath: ""});
+  }
+</script><script
+    src="http://localhost:1313/"
+    
+    async
+    
+    onload="setupLive2d()"
+    ></script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "ACM-Lycoris",
+          title: "位运算、递推与递归：算法竞赛进阶指南·基本算法",
+          url: "http:\/\/localhost:1313\/posts\/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92\/",
+          description: "位运算加速、状压DP递推、DFS递归回溯，从快速幂到Hamilton路径，每行代码逐句拆解",
+          cover: "http:\/\/localhost:1313\/images\/back.png",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax ></script><script src="/js/tabs.js" data-pjax defer></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+        }
+        pswp()
+      </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    
+    async
+    
+    
+    integrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

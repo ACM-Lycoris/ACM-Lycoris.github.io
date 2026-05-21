@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>单调队列 on ACM-Lycoris&#39;s Blog</title>
-    <link>http://localhost:49677/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</link>
+    <link>https://acm-lycoris.cn/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
@@ -12,23 +12,110 @@
     
     <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
     
-    <lastBuildDate>Mon, 18 May 2026 15:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 10:00:00 +0800</lastBuildDate>
     
     
-    <atom:link href="http://localhost:49677/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="https://acm-lycoris.cn/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
     
 
     <item>
-      <title>滑动窗口算法——从暴力到最优，一套模板通刷所有OJ</title>
-      <link>http://localhost:49677/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</link>
+      <title>滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）</title>
+      <link>https://acm-lycoris.cn/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/</link>
+      <pubDate>Tue, 19 May 2026 10:00:00 &#43;0800</pubDate>
+      <author>abcd1844314159@163.com (ACM-Lycoris)</author>
+      <guid>https://acm-lycoris.cn/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/</guid>
+      <description>
+        <![CDATA[<h1>滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        
+          <style>
+.fw-desc {
+    margin: 1rem 0 1.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 4px solid var(--neon-red, #ff003c);
+    background: rgba(255, 0, 60, 0.04);
+    border-radius: 0 10px 10px 0;
+    line-height: 1.85;
+    border-top: 1px solid rgba(255, 0, 60, 0.12);
+    border-right: 1px solid rgba(255, 0, 60, 0.12);
+    border-bottom: 1px solid rgba(255, 0, 60, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(255, 0, 60, 0.05), 0 2px 12px rgba(255, 0, 60, 0.06);
+    color: var(--ink-soft, #4a5568);
+}
+
+.fw-desc strong {
+    color: var(--neon-red, #ff003c);
+    font-weight: 700;
+}
+
+.fw-desc code {
+    background: rgba(255, 0, 60, 0.07) !important;
+    color: #cc0030 !important;
+    padding: 0.12em 0.45em !important;
+    border-radius: 4px !important;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace !important;
+    font-size: 0.93em !important;
+    border: 1px solid rgba(255, 0, 60, 0.2) !important;
+}
+
+[data-theme="dark"] .fw-desc {
+    background: rgba(15, 15, 26, 0.65);
+    border-left-color: #ff003c;
+    border-top-color: rgba(255, 0, 60, 0.25);
+    border-right-color: rgba(255, 0, 60, 0.25);
+    border-bottom-color: rgba(255, 0, 60, 0.25);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 0, 60, 0.1),
+        0 0 24px rgba(255, 0, 60, 0.1);
+    backdrop-filter: blur(8px);
+    color: #c0c0d0;
+}
+
+[data-theme="dark"] .fw-desc strong {
+    color: #ff5577;
+    text-shadow: 0 0 8px rgba(255, 0, 60, 0.45);
+}
+
+[data-theme="dark"] .fw-desc code {
+    background: rgba(255, 0, 60, 0.12) !important;
+    color: #ff5577 !important;
+    border-color: rgba(255, 0, 60, 0.35) !important;
+    box-shadow: 0 0 8px rgba(255, 0, 60, 0.08);
+}
+
+@media (max-width: 768px) {
+    .fw-desc {
+        margin: 0.65rem 0 0.9rem;
+        padding: 0.8rem;
+        border-left-width: 3px;
+        line-height: 1.75;
+    }
+}
+</style>
+<h2 id="-前言">
+<a class="header-anchor" href="#-%e5%89%8d%e8%a8%80"></a>
+📝 前言
+</h2><p>这是 <a href="https://acm-lycoris.cn/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/">《滑动窗口算法——从暴力到最优，一套模板通刷所有OJ》</a> 的配套实战篇。</p>
+        
+        <hr><p>本文2026-05-19首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-19</p>]]>
+      </description>
+      
+        <category>算法</category><category>题解</category><category>算法竞赛进阶指南</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>滑动窗口算法：从暴力到最优，一套模板通刷所有OJ</title>
+      <link>https://acm-lycoris.cn/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</link>
       <pubDate>Mon, 18 May 2026 15:30:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:49677/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</guid>
+      <guid>https://acm-lycoris.cn/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</guid>
       <description>
-        <![CDATA[<h1>滑动窗口算法——从暴力到最优，一套模板通刷所有OJ</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>滑动窗口算法：从暴力到最优，一套模板通刷所有OJ</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>滑动窗口是处理子数组/子串问题的一个常用技巧。写这篇的主要目的是整理自己的思路，如果对你有帮助那再好不过了。</p>
@@ -104,10 +191,10 @@
 </svg>
 <p>上图窗口 <code>[L, R)</code>（左闭右开）包含了 <code>[5, 3, 7]</code> 三个元素。接下来：</p>
         
-        <hr><p>本文2026-05-18首发于<a href='http://localhost:49677/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-18</p>]]>
+        <hr><p>本文2026-05-18首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-18</p>]]>
       </description>
       
-        <category>算法</category>
+        <category>算法</category><category>算法竞赛进阶指南</category>
       
     </item>
     

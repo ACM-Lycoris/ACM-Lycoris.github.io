@@ -1,0 +1,54 @@
+baseURL = 'https://acm-lycoris.cn/'
+timeZone = 'Asia/Shanghai'
+locale = 'zh-cn'
+title = "ACM-Lycoris's Blog"
+theme = 'hugo-theme-reimu'
+
+[params]
+  uglyURLs = true
+  customCSS = ["css/custom.css"]
+  mainSections = ["posts"]
+  author = "ACM-Lycoris"
+  description = "振桴彼岸，绽蕊忘川"
+  avatar = "avatar.jpg"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  mouseeffect = false
+  highlightjslib = "highlight.js"
+
+[[menu.main]]
+  name = '首页'
+  url = '/'
+  weight = 10
+
+[[menu.main]]
+  name = '归档'
+  url = '/archives/'
+  weight = 20
+
+[[menu.main]]
+  name = '标签'
+  url = '/tags/'
+  weight = 30
+
+[[menu.main]]
+  name = '友链'
+  url = '/friend/'
+  weight = 40
+
+[[menu.main]]
+  name = '关于'
+  url = '/about/'
+  weight = 50
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[minify]
+  disableHTML = true

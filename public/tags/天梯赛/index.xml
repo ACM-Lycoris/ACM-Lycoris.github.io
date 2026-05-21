@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>天梯赛 on ACM-Lycoris&#39;s Blog</title>
-    <link>http://localhost:49677/tags/%E5%A4%A9%E6%A2%AF%E8%B5%9B/</link>
+    <link>https://acm-lycoris.cn/tags/%E5%A4%A9%E6%A2%AF%E8%B5%9B/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
@@ -15,7 +15,7 @@
     <lastBuildDate>Sat, 25 Apr 2026 22:14:41 +0800</lastBuildDate>
     
     
-    <atom:link href="http://localhost:49677/tags/%E5%A4%A9%E6%A2%AF%E8%B5%9B/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="https://acm-lycoris.cn/tags/%E5%A4%A9%E6%A2%AF%E8%B5%9B/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
@@ -23,10 +23,10 @@
 
     <item>
       <title>图论Hopcroft-Karp算法与2026天梯赛L3-2</title>
-      <link>http://localhost:49677/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</link>
+      <link>https://acm-lycoris.cn/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</link>
       <pubDate>Sat, 25 Apr 2026 22:14:41 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:49677/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</guid>
+      <guid>https://acm-lycoris.cn/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</guid>
       <description>
         <![CDATA[<h1>图论Hopcroft-Karp算法与2026天梯赛L3-2</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
@@ -81,10 +81,10 @@
 <blockquote>
 <p>定理：当且仅当不存在增广路时，当前匹配是最大匹配。</p>
         
-        <hr><p>本文2026-04-25首发于<a href='http://localhost:49677/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-25</p>]]>
+        <hr><p>本文2026-04-25首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-25</p>]]>
       </description>
       
-        <category>图论</category>
+        <category>图论</category><category>算法竞赛进阶指南</category>
       
     </item>
     
@@ -92,10 +92,10 @@
 
     <item>
       <title>GPLT团体程序设计天梯赛2026题解</title>
-      <link>http://localhost:49677/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</link>
+      <link>https://acm-lycoris.cn/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</link>
       <pubDate>Wed, 22 Apr 2026 20:38:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:49677/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</guid>
+      <guid>https://acm-lycoris.cn/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</guid>
       <description>
         <![CDATA[<h1>GPLT团体程序设计天梯赛2026题解</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
@@ -144,7 +144,7 @@ L1-1 一行代码
 输入格式
 </h3><p>本题没有输入。</p>
         
-        <hr><p>本文2026-04-22首发于<a href='http://localhost:49677/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-22</p>]]>
+        <hr><p>本文2026-04-22首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-22</p>]]>
       </description>
       
         <category>GPLT天梯赛</category><category>2026</category>

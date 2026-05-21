@@ -1,9 +1,9 @@
 <!doctype html>
 <html
   lang="zh-cn" 
-  data-theme-mode="auto"
+  data-theme-mode="true"
   >
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49677&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -11,18 +11,30 @@
   图论Hopcroft-Karp算法与2026天梯赛L3-2 | ACM-Lycoris
 </title>
 <meta name="description" content="图论中的二分图匹配算法"/><script>
-  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:49677/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_ex15nbittbh\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"icon_font\":\"4552607_ex15nbittbh\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
   
 </script>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fontsapi.zeoseven.com/292/main/result.css"
+    onload="this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    crossorigin
+    href="https://fonts.googleapis.com/css2?family=JetBrains&#43;Mono:wght@400;500;700&amp;display=swap"
+    onload="this.rel='stylesheet'"
+  /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   rel="preload"
   as="style"
-  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
 />
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7cJetBrains%20Mono:400,400italic,700,700italic&amp;display=swap"
   media="print"
   onload="this.media='all'"
 />
@@ -38,15 +50,15 @@
     property="og:description"
     content="图论中的二分图匹配算法"
   />
-  <meta property="og:url" content="http://localhost:49677/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/" />
+  <meta property="og:url" content="http://localhost:1313/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/" />
   <meta
     property="og:site_name"
     content="ACM-Lycoris&#39;s Blog"
   />
-  <meta property="og:image" content="http://localhost:49677/images/back.png" />
+  <meta property="og:image" content="http://localhost:1313/images/back.png" />
   <meta property="article:author" content="ACM-Lycoris" />
   <meta property="article:published_time" content="2026-04-25T22:14:41&#43;08:00" />
-  <meta property="article:modified_time" content="2026-04-25T22:14:41&#43;08:00" /><meta property="article:tag" content="算法, 图论, 二分图, Hopcroft-Karp, 天梯赛" /><meta name="twitter:card" content="summary" /><meta name="twitter:image" content="http://localhost:49677/images/back.png" />
+  <meta property="article:modified_time" content="2026-04-25T22:14:41&#43;08:00" /><meta property="article:tag" content="算法, 图论, 二分图, Hopcroft-Karp, 天梯赛" /><meta name="twitter:card" content="summary" /><meta name="twitter:image" content="http://localhost:1313/images/back.png" />
 <link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" /><link
     rel="preload"
     as="style"
@@ -68,7 +80,25 @@
     integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
     rel="stylesheet"
     href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
-    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/><link rel="stylesheet" href="/css/custom.css?v=cyber2026b">
+<script>
+  // 在第一帧前确定主题，消除 FOUC
+  (function() {
+    try {
+      if (localStorage.getItem('lyc_theme_v') !== 'cyber2026') {
+        localStorage.setItem('dark_mode', 'true');
+        localStorage.setItem('lyc_theme_v', 'cyber2026');
+      }
+      var mode = localStorage.getItem('dark_mode') || 'true';
+      var isDark = mode === 'true' ||
+                   (mode === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch(e) {}
+  })();
+</script>
+</head>
   <body><div id='loader'>
     <div class="loading-left-bg loading-bg"></div>
     <div class="loading-right-bg loading-bg"></div>
@@ -179,17 +209,17 @@
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>文章</div><div class="sidebar-state-number">5</div>
+    <div>文章</div><div class="sidebar-state-number">7</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>分类</div>
     <div class="sidebar-state-number">
-      5
+      7
     </div>
   </a>
   <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
     <div>标签</div>
-    <div class="sidebar-state-number">15</div>
+    <div class="sidebar-state-number">21</div>
   </a>
 </div>
 <div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
@@ -664,6 +694,13 @@
       data-aos="zoom-in"
       >图论</a
     >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/%e7%ae%97%e6%b3%95%e7%ab%9e%e8%b5%9b%e8%bf%9b%e9%98%b6%e6%8c%87%e5%8d%97"
+      data-aos="zoom-in"
+      >算法竞赛进阶指南</a
+    >
     </li></ul>
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
       <a
@@ -707,7 +744,7 @@
     aria-label="Article navigation"
     data-aos="fade-up"
   ><div class="article-nav-link-wrap left"><img
-              data-src="/images/covers/15946456018111872.jpg"
+              data-src="/images/covers/OIP-C-2.jpg"
               data-sizes="auto"
               alt="GPLT团体程序设计天梯赛2026题解"
               class="lazyload"
@@ -719,17 +756,17 @@
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">GPLT团体程序设计天梯赛2026题解</h3>
       </div><div class="article-nav-link-wrap right"><img
-              data-src="/images/covers/cover12.jpg"
+              data-src="/images/covers/OIP-C-3.jpg"
               data-sizes="auto"
-              alt="图论Dijkstra算法——从入门到赛场上直接默写"
+              alt="图论Dijkstra算法：从入门到赛场上直接默写"
               class="lazyload"
             /><a
           href="/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/"
-          aria-label="后一篇:图论Dijkstra算法——从入门到赛场上直接默写"
-          title="后一篇:图论Dijkstra算法——从入门到赛场上直接默写"
+          aria-label="后一篇:图论Dijkstra算法：从入门到赛场上直接默写"
+          title="后一篇:图论Dijkstra算法：从入门到赛场上直接默写"
         ></a>
         <div class="article-nav-caption">后一篇</div>
-        <h3 class="article-nav-title">图论Dijkstra算法——从入门到赛场上直接默写</h3>
+        <h3 class="article-nav-title">图论Dijkstra算法：从入门到赛场上直接默写</h3>
       </div></nav></article></section>
         </div><footer id="footer" aria-label="Site footer">
   <div style="width: 100%; overflow: hidden">
@@ -751,10 +788,10 @@
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;6.0k</span
+          >&nbsp;10.0k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:31</span>
+        <span class="icon-coffee">&nbsp;00:50</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -822,17 +859,17 @@
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>文章</div><div class="sidebar-state-number">5</div>
+    <div>文章</div><div class="sidebar-state-number">7</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>分类</div>
     <div class="sidebar-state-number">
-      5
+      7
     </div>
   </a>
   <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
     <div>标签</div>
-    <div class="sidebar-state-number">15</div>
+    <div class="sidebar-state-number">21</div>
   </a>
 </div>
 <div class="sidebar-social" ><div class="icon-bilibili sidebar-social-icon">
@@ -927,7 +964,7 @@
     live2d.init('https:\/\/fastly.jsdelivr.net\/gh\/D-Sketon\/plugin-live2d\/', {themeTipsPath: ""});
   }
 </script><script
-    src="http://localhost:49677/"
+    src="http://localhost:1313/"
     
     async
     
@@ -939,9 +976,9 @@
         window.REIMU_POST = {
           author: "ACM-Lycoris",
           title: "图论Hopcroft-Karp算法与2026天梯赛L3-2",
-          url: "http:\/\/localhost:49677\/posts\/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2\/",
+          url: "http:\/\/localhost:1313\/posts\/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2\/",
           description: "图论中的二分图匹配算法",
-          cover: "http:\/\/localhost:49677\/images\/back.png",
+          cover: "http:\/\/localhost:1313\/images\/back.png",
         };
       </script><script src="/js/insert_highlight.js" data-pjax ></script><script src="/js/tabs.js" data-pjax defer></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
           if (_$$(`${gallery} ${children}`).length > 0) {
