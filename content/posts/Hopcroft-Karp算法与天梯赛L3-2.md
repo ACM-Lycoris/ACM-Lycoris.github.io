@@ -1,5 +1,5 @@
 ---
-title: "图论Hopcroft-Karp算法与2026天梯赛L3-2"
+title: "Hopcroft-Karp算法与天梯赛L3-2"
 date: 2026-04-25T22:14:41+08:00
 draft: false
 categories: ["图论", "算法竞赛进阶指南"]

@@ -22,11 +22,17 @@ injector:
         } catch(e) {}
       })();
     </script>
+  body_end: |
+    <script src="/js/category-accordion.js" defer></script>
 
 # ========== 站点信息 ==========
 author: ACM-Lycoris
 email: abcd1844314159@163.com
 description: "振桴彼岸，绽蕊忘川"
+
+# ========== 博客简介 (首页显示) ==========
+blogIntroTitle: "关于本站"
+blogIntro: "ACM / 算法竞赛笔记与题解。记录从基本算法到高级数据结构的进阶之路，兼有建站教程与开发札记。代码与诗，皆可入梦。"
 
 # ========== 副标题 (打字机循环) ==========
 subtitle:
@@ -51,6 +57,10 @@ subtitle:
     cursorChar: "_"
     smartBackspace: false
   text: "振桴彼岸，绽蕊忘川"
+
+# ========== 侧边栏小部件 ==========
+category_limits: 10
+tag_limits: 8
 
 # ========== 加载动画 ==========
 preloader:

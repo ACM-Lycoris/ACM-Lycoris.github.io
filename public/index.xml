@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ACM-Lycoris&#39;s Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:50835/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
@@ -15,20 +15,20 @@
     <lastBuildDate>Wed, 20 May 2026 18:00:00 +0800</lastBuildDate>
     
     
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="http://localhost:50835/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
     
 
     <item>
-      <title>位运算、递推与递归：算法竞赛进阶指南·基本算法</title>
-      <link>http://localhost:1313/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</link>
+      <title>位运算、递推与递归</title>
+      <link>http://localhost:50835/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</link>
       <pubDate>Wed, 20 May 2026 18:00:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</guid>
+      <guid>http://localhost:50835/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</guid>
       <description>
-        <![CDATA[<h1>位运算、递推与递归：算法竞赛进阶指南·基本算法</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>位运算、递推与递归</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>位运算加速、递推建模、递归枚举——算法竞赛里三种最基础的思维方式，覆盖了从快速幂到状压DP的大量题目。这篇文章把每行代码的时空间代价掰开讲清楚。</p>
@@ -101,7 +101,7 @@
 </table>
 <p><strong>时空间提醒</strong>：位运算的每一步都是 CPU 单周期指令，O(1) 时间，没有额外空间开销。赛场上能用位运算就别用 <code>%2</code> 和 <code>/2</code>——不是说后者会 TLE，而是前者能让你对二进制表示形成肌肉记忆，状压 DP 时才不会晕。</p>
         
-        <hr><p>本文2026-05-20首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-20</p>]]>
+        <hr><p>本文2026-05-20首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-20</p>]]>
       </description>
       
         <category>算法</category><category>算法竞赛进阶指南</category>
@@ -111,13 +111,13 @@
     
 
     <item>
-      <title>滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）</title>
-      <link>http://localhost:1313/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/</link>
+      <title>滑动窗口专题题解</title>
+      <link>http://localhost:50835/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/</link>
       <pubDate>Tue, 19 May 2026 10:00:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/</guid>
+      <guid>http://localhost:50835/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E9%A2%98%E8%A7%A3/</guid>
       <description>
-        <![CDATA[<h1>滑动窗口专题题解（AcWing 154 / P1886 / P1638 / P1102）</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>滑动窗口专题题解</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <style>
 .fw-desc {
@@ -188,7 +188,7 @@
 📝 前言
 </h2><p>这是 <a href="https://acm-lycoris.cn/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/">《滑动窗口算法——从暴力到最优，一套模板通刷所有OJ》</a> 的配套实战篇。</p>
         
-        <hr><p>本文2026-05-19首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-19</p>]]>
+        <hr><p>本文2026-05-19首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-19</p>]]>
       </description>
       
         <category>算法</category><category>题解</category><category>算法竞赛进阶指南</category>
@@ -198,13 +198,13 @@
     
 
     <item>
-      <title>滑动窗口算法：从暴力到最优，一套模板通刷所有OJ</title>
-      <link>http://localhost:1313/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</link>
+      <title>滑动窗口算法</title>
+      <link>http://localhost:50835/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</link>
       <pubDate>Mon, 18 May 2026 15:30:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</guid>
+      <guid>http://localhost:50835/posts/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95/</guid>
       <description>
-        <![CDATA[<h1>滑动窗口算法：从暴力到最优，一套模板通刷所有OJ</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>滑动窗口算法</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>滑动窗口是处理子数组/子串问题的一个常用技巧。写这篇的主要目的是整理自己的思路，如果对你有帮助那再好不过了。</p>
@@ -280,7 +280,7 @@
 </svg>
 <p>上图窗口 <code>[L, R)</code>（左闭右开）包含了 <code>[5, 3, 7]</code> 三个元素。接下来：</p>
         
-        <hr><p>本文2026-05-18首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-18</p>]]>
+        <hr><p>本文2026-05-18首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-18</p>]]>
       </description>
       
         <category>算法</category><category>算法竞赛进阶指南</category>
@@ -290,13 +290,13 @@
     
 
     <item>
-      <title>博客搭建日记：Hugo &#43; GitHub Pages &#43; Cloudflare 全流程</title>
-      <link>http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</link>
+      <title>博客搭建日记</title>
+      <link>http://localhost:50835/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</link>
       <pubDate>Sun, 17 May 2026 12:00:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</guid>
+      <guid>http://localhost:50835/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</guid>
       <description>
-        <![CDATA[<h1>博客搭建日记：Hugo + GitHub Pages + Cloudflare 全流程</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>博客搭建日记</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>总成本一年几十块，其他全部免费。这篇文章记录我从零搭建这个博客的完整过程，以及博主在搭建过程中踩过的坑</p>
@@ -372,7 +372,7 @@
 三、安装 Hugo
 </h2><p>Hugo 是用 Go 写的，Windows 上下载一个 zip 解压就能用。</p>
         
-        <hr><p>本文2026-05-17首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-17</p>]]>
+        <hr><p>本文2026-05-17首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-17</p>]]>
       </description>
       
         <category>建站</category>
@@ -382,13 +382,13 @@
     
 
     <item>
-      <title>图论Dijkstra算法：从入门到赛场上直接默写</title>
-      <link>http://localhost:1313/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/</link>
+      <title>Dijkstra最短路算法</title>
+      <link>http://localhost:50835/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sat, 09 May 2026 12:17:06 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/</guid>
+      <guid>http://localhost:50835/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/</guid>
       <description>
-        <![CDATA[<h1>图论Dijkstra算法：从入门到赛场上直接默写</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>Dijkstra最短路算法</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>最短路问题在ACM区域赛、天梯赛里几乎是必考题，Dijkstra是你必须能闭眼默写的板子之一。</p>
@@ -432,7 +432,7 @@
 </ul>
 <p><strong>第二轮</strong>：未确定点中 dist 最小的是 2（dist=2），确定。用 2 更新：</p>
         
-        <hr><p>本文2026-05-09首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-09</p>]]>
+        <hr><p>本文2026-05-09首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-09</p>]]>
       </description>
       
         <category>图论</category><category>算法竞赛进阶指南</category>
@@ -442,13 +442,13 @@
     
 
     <item>
-      <title>图论Hopcroft-Karp算法与2026天梯赛L3-2</title>
-      <link>http://localhost:1313/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</link>
+      <title>Hopcroft-Karp算法与天梯赛L3-2</title>
+      <link>http://localhost:50835/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</link>
       <pubDate>Sat, 25 Apr 2026 22:14:41 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</guid>
+      <guid>http://localhost:50835/posts/hopcroft-karp%E7%AE%97%E6%B3%95%E4%B8%8E%E5%A4%A9%E6%A2%AF%E8%B5%9Bl3-2/</guid>
       <description>
-        <![CDATA[<h1>图论Hopcroft-Karp算法与2026天梯赛L3-2</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>Hopcroft-Karp算法与天梯赛L3-2</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>从零入门二分图最大匹配，附天梯赛 2026 L3-2 的建模思路。</p>
@@ -501,7 +501,7 @@
 <blockquote>
 <p>定理：当且仅当不存在增广路时，当前匹配是最大匹配。</p>
         
-        <hr><p>本文2026-04-25首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-25</p>]]>
+        <hr><p>本文2026-04-25首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-25</p>]]>
       </description>
       
         <category>图论</category><category>算法竞赛进阶指南</category>
@@ -511,30 +511,75 @@
     
 
     <item>
-      <title>GPLT团体程序设计天梯赛2026题解</title>
-      <link>http://localhost:1313/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</link>
+      <title>GPLT天梯赛2026题解</title>
+      <link>http://localhost:50835/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</link>
       <pubDate>Wed, 22 Apr 2026 20:38:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>http://localhost:1313/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</guid>
+      <guid>http://localhost:50835/posts/gplt%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B2026%E9%A2%98%E8%A7%A3/</guid>
       <description>
-        <![CDATA[<h1>GPLT团体程序设计天梯赛2026题解</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>GPLT天梯赛2026题解</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <style>
 .gplt-desc {
-    margin: 0.8rem 0 1rem;
-    padding: 0.9rem 1rem;
-    border-left: 4px solid #6a3b9a;
-    background: linear-gradient(180deg, #faf7fc 0%, #f5eff9 100%);
-    border-radius: 8px;
-    line-height: 1.75;
+    margin: 1rem 0 1.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 4px solid var(--neon-red, #ff003c);
+    background: rgba(255, 0, 60, 0.04);
+    border-radius: 0 10px 10px 0;
+    line-height: 1.85;
+    border-top: 1px solid rgba(255, 0, 60, 0.12);
+    border-right: 1px solid rgba(255, 0, 60, 0.12);
+    border-bottom: 1px solid rgba(255, 0, 60, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(255, 0, 60, 0.05), 0 2px 12px rgba(255, 0, 60, 0.06);
+    color: var(--ink-soft, #4a5568);
+}
+
+.gplt-desc strong {
+    color: var(--neon-red, #ff003c);
+    font-weight: 700;
+}
+
+.gplt-desc code {
+    background: rgba(255, 0, 60, 0.07) !important;
+    color: #cc0030 !important;
+    padding: 0.12em 0.45em !important;
+    border-radius: 4px !important;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace !important;
+    font-size: 0.93em !important;
+    border: 1px solid rgba(255, 0, 60, 0.2) !important;
+}
+
+[data-theme="dark"] .gplt-desc {
+    background: rgba(15, 15, 26, 0.65);
+    border-left-color: #ff003c;
+    border-top-color: rgba(255, 0, 60, 0.25);
+    border-right-color: rgba(255, 0, 60, 0.25);
+    border-bottom-color: rgba(255, 0, 60, 0.25);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 0, 60, 0.1),
+        0 0 24px rgba(255, 0, 60, 0.1);
+    backdrop-filter: blur(8px);
+    color: #c0c0d0;
+}
+
+[data-theme="dark"] .gplt-desc strong {
+    color: #ff5577;
+    text-shadow: 0 0 8px rgba(255, 0, 60, 0.45);
+}
+
+[data-theme="dark"] .gplt-desc code {
+    background: rgba(255, 0, 60, 0.12) !important;
+    color: #ff5577 !important;
+    border-color: rgba(255, 0, 60, 0.35) !important;
+    box-shadow: 0 0 8px rgba(255, 0, 60, 0.08);
 }
 
 @media (max-width: 768px) {
     .gplt-desc {
         margin: 0.65rem 0 0.9rem;
-        padding: 0.75rem 0.8rem;
+        padding: 0.8rem;
         border-left-width: 3px;
-        line-height: 1.7;
+        line-height: 1.75;
     }
 }
 </style>
@@ -545,26 +590,8 @@
 <a class="header-anchor" href="#gplt-%e5%9b%a2%e4%bd%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1%e5%a4%a9%e6%a2%af%e8%b5%9b-2026-%e5%85%a8%e5%9b%bd%e6%80%bb%e5%86%b3%e8%b5%9b"></a>
 GPLT 团体程序设计天梯赛 2026 全国总决赛
 </h2><p>来自2026.4.18日天梯赛2026总决赛，往年真题链接 <a href="https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7">https://pintia.cn/problem-sets/994805046380707840/exam/problems/type/7</a>  比赛补题链接 <a href="https://pintia.cn/problem-sets/2045817898201726976/exam/overview">https://pintia.cn/problem-sets/2045817898201726976/exam/overview</a> （补题链接于2026.4.30关闭）</p>
-<p>每道题的讲解结构：<strong>题目 → 思路 → 代码</strong>。</p>
-<hr>
-<h2 id="l1-1-一行代码">
-<a class="header-anchor" href="#l1-1-%e4%b8%80%e8%a1%8c%e4%bb%a3%e7%a0%81"></a>
-L1-1 一行代码
-</h2><p><strong>分数</strong>：5</p>
-<h3 id="题目描述">
-<a class="header-anchor" href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0"></a>
-题目描述
-</h3><div class="gplt-desc">
-每次一行代码，建起我们的未来 —— 本题非常简单，就请你直接在屏幕上输出这句话：
-<br>
-<strong>“Building the Future, One Line of Code at a Time.”</strong>
-</div>
-<h3 id="输入格式">
-<a class="header-anchor" href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f"></a>
-输入格式
-</h3><p>本题没有输入。</p>
         
-        <hr><p>本文2026-04-22首发于<a href='http://localhost:1313/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-22</p>]]>
+        <hr><p>本文2026-04-22首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-04-22</p>]]>
       </description>
       
         <category>GPLT天梯赛</category><category>2026</category>

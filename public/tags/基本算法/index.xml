@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>基本算法 on ACM-Lycoris&#39;s Blog</title>
-    <link>https://acm-lycoris.cn/tags/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/</link>
+    <link>http://localhost:50835/tags/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/</link>
     <description>Recent content from ACM-Lycoris&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
@@ -15,20 +15,20 @@
     <lastBuildDate>Wed, 20 May 2026 18:00:00 +0800</lastBuildDate>
     
     
-    <atom:link href="https://acm-lycoris.cn/tags/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="http://localhost:50835/tags/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
     
 
     <item>
-      <title>位运算、递推与递归：算法竞赛进阶指南·基本算法</title>
-      <link>https://acm-lycoris.cn/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</link>
+      <title>位运算、递推与递归</title>
+      <link>http://localhost:50835/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</link>
       <pubDate>Wed, 20 May 2026 18:00:00 &#43;0800</pubDate>
       <author>abcd1844314159@163.com (ACM-Lycoris)</author>
-      <guid>https://acm-lycoris.cn/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</guid>
+      <guid>http://localhost:50835/posts/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92/</guid>
       <description>
-        <![CDATA[<h1>位运算、递推与递归：算法竞赛进阶指南·基本算法</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        <![CDATA[<h1>位运算、递推与递归</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
         
           <blockquote>
 <p>位运算加速、递推建模、递归枚举——算法竞赛里三种最基础的思维方式，覆盖了从快速幂到状压DP的大量题目。这篇文章把每行代码的时空间代价掰开讲清楚。</p>
@@ -101,7 +101,7 @@
 </table>
 <p><strong>时空间提醒</strong>：位运算的每一步都是 CPU 单周期指令，O(1) 时间，没有额外空间开销。赛场上能用位运算就别用 <code>%2</code> 和 <code>/2</code>——不是说后者会 TLE，而是前者能让你对二进制表示形成肌肉记忆，状压 DP 时才不会晕。</p>
         
-        <hr><p>本文2026-05-20首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-20</p>]]>
+        <hr><p>本文2026-05-20首发于<a href='http://localhost:50835/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-20</p>]]>
       </description>
       
         <category>算法</category><category>算法竞赛进阶指南</category>

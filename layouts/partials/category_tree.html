@@ -1,0 +1,97 @@
+{{- /* category_tree.html — flat category cards with image/text separated */ -}}
+{{- $allPages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections -}}
+{{- $covers := .Site.Data.covers | default slice -}}
+{{- $coverLen := len $covers -}}
+
+{{- if not $allPages -}}
+  <p class="cat-empty">暂无文章</p>
+{{- end -}}
+
+{{- /* Target categories in display order */ -}}
+{{- $targetCats := slice "GPLT天梯赛" "算法竞赛进阶指南" "图论" "建站" -}}
+
+{{- /* Build flat category → posts map */ -}}
+{{- $catMap := dict -}}
+{{- range $page := $allPages -}}
+  {{- $cats := $page.Params.categories -}}
+  {{- if not $cats -}}{{- continue -}}{{- end -}}
+  {{- if not (reflect.IsSlice $cats) -}}{{- $cats = slice $cats -}}{{- end -}}
+  {{- range $c := $cats -}}
+    {{- $catName := printf "%v" $c -}}
+    {{- $existing := index $catMap $catName | default slice -}}
+    {{- $catMap = merge $catMap (dict $catName ($existing | append $page)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Build final entries in display order, only for target categories */ -}}
+{{- $entries := slice -}}
+{{- $coverIdx := 0 -}}
+{{- range $catName := $targetCats -}}
+  {{- $posts := index $catMap $catName | default slice -}}
+  {{- if not $posts -}}{{- continue -}}{{- end -}}
+  {{- $total := len $posts -}}
+
+  {{- /* Find cover from first post that has one, else from covers data */ -}}
+  {{- $cover := "" -}}
+  {{- range $posts -}}
+    {{- $c := .Params.cover | default .Params.banner | default "" -}}
+    {{- if $c -}}{{- $cover = $c -}}{{- break -}}{{- end -}}
+  {{- end -}}
+  {{- if not $cover -}}
+    {{- if gt $coverLen 0 -}}
+      {{- $cover = printf "%v" (index $covers $coverIdx) -}}
+      {{- $coverIdx = mod (add $coverIdx 1) $coverLen -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $entries = $entries | append (dict "name" $catName "posts" $posts "total" $total "cover" $cover) -}}
+{{- end -}}
+
+{{- /* Sort by total descending */ -}}
+{{- $sorted := slice -}}
+{{- $maxCount := 0 -}}
+{{- range $entries -}}{{- if gt .total $maxCount -}}{{- $maxCount = .total -}}{{- end -}}{{- end -}}
+{{- range $i := seq $maxCount -}}
+  {{- $target := sub (add $maxCount 1) $i -}}
+  {{- range $entries -}}
+    {{- if eq .total $target -}}{{- $sorted = $sorted | append . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Render */ -}}
+{{- if $sorted -}}
+<div class="cat-grid" role="region" aria-label="{{ i18n "category" }}">
+  {{- range $sorted -}}
+  <div class="cat-card">
+    <div class="cat-card-cover">
+      {{- if .cover -}}
+      <img class="lazyload" data-src="{{ .cover | relURL }}" data-sizes="auto" alt="{{ .name }}" />
+      {{- end -}}
+    </div>
+    <div class="cat-card-content">
+      <div class="cat-card-header" role="button" tabindex="0">
+        <div class="cat-card-header-top">
+          <span class="cat-card-name">{{ .name }}</span>
+          <span class="cat-card-count">{{ .total }}</span>
+        </div>
+        <span class="cat-card-arrow" aria-hidden="true"></span>
+      </div>
+      <div class="cat-card-body">
+        <div class="cat-card-body-inner">
+          <ul class="cat-post-list">
+            {{- range .posts -}}
+            <li class="cat-post-item">
+              <a href="{{ .Permalink | relURL }}" class="cat-post-link">
+                <span class="cat-post-title">{{ .Title }}</span>
+                <time class="cat-post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "06-01-02" }}</time>
+              </a>
+            </li>
+            {{- end -}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{- end -}}
+</div>
+{{- end -}}

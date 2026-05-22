@@ -1,0 +1,45 @@
+{{- /* Custom category widget — only show target categories */ -}}
+{{- $targetCats := slice "GPLT天梯赛" "算法竞赛进阶指南" "图论" "建站" -}}
+{{- $allPages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections -}}
+
+{{- /* Build map: category name → count */ -}}
+{{- $catCounts := dict -}}
+{{- range $page := $allPages -}}
+  {{- $cats := $page.Params.categories -}}
+  {{- if not $cats -}}{{- continue -}}{{- end -}}
+  {{- if not (reflect.IsSlice $cats) -}}{{- $cats = slice $cats -}}{{- end -}}
+  {{- range $c := $cats -}}
+    {{- $cn := printf "%v" $c -}}
+    {{- $prev := index $catCounts $cn | default 0 -}}
+    {{- $catCounts = merge $catCounts (dict $cn (add $prev 1)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Check if any target categories have posts */ -}}
+{{- $hasCats := false -}}
+{{- range $targetCats -}}
+  {{- if index $catCounts . -}}{{- $hasCats = true -}}{{- break -}}{{- end -}}
+{{- end -}}
+
+{{- if $hasCats -}}
+  <div class="widget-wrapper">
+    <div class="widget-wrap" data-aos="{{ .Site.Params.animation.options.home.widget }}">
+      <div style="display: flex; justify-content: space-between;">
+        <h3 class="widget-title">{{ i18n "categories" }}</h3>
+        <a class="widget-link" href="{{ "categories/" | relLangURL }}">{{ i18n "more" }}</a>
+      </div>
+      <div class="widget">
+        <ul class="category-list">
+          {{- range $targetCats -}}
+            {{- $count := index $catCounts . | default 0 -}}
+            {{- if gt $count 0 -}}
+              <li class="category-list-item">
+                <a class="category-list-link" href="{{ "categories/" | relLangURL }}{{ . | urlize }}/" title="{{ . }}">{{ . }} <sup>{{ $count }}</sup></a>
+              </li>
+            {{- end -}}
+          {{- end -}}
+        </ul>
+      </div>
+    </div>
+  </div>
+{{- end -}}

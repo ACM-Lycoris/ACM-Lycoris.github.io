@@ -1,0 +1,49 @@
+{{- define "main" -}}
+  {{- $ctx := . -}}
+
+  {{- /* ===== Blog Intro ===== */ -}}
+  {{- $introTitle := .Site.Params.blogIntroTitle | default "" -}}
+  {{- $introText  := .Site.Params.blogIntro | default "" -}}
+  {{- $avatar     := .Site.Params.avatar | default "" -}}
+  {{- $author     := .Site.Params.author | default .Site.Title -}}
+
+  {{- if or $introTitle $introText -}}
+  <section class="home-intro" data-aos="fade-up">
+    <div class="home-intro-card">
+      {{- if $avatar -}}
+      <div class="home-intro-avatar">
+        <img src="{{ printf "avatar/%s" $avatar | relURL }}" alt="{{ $author }}" width="72" height="72" loading="eager" />
+      </div>
+      {{- end -}}
+      <div class="home-intro-body">
+        {{- if $introTitle -}}
+        <h2 class="home-intro-title">{{ $introTitle }}</h2>
+        {{- end -}}
+        {{- if $introText -}}
+        <p class="home-intro-text">{{ $introText }}</p>
+        {{- end -}}
+        <div class="home-intro-meta">
+          <a href="{{ "archives/" | relURL }}" class="home-intro-meta-item">
+            <span class="home-intro-meta-num">{{ len (where .Site.RegularPages "Section" "in" .Site.Params.mainSections) }}</span>
+            <span class="home-intro-meta-label">篇文章</span>
+          </a>
+          <span class="home-intro-meta-divider" aria-hidden="true"></span>
+          <a href="{{ "tags/" | relURL }}" class="home-intro-meta-item">
+            <span class="home-intro-meta-num">{{ len .Site.Taxonomies.tags }}</span>
+            <span class="home-intro-meta-label">个标签</span>
+          </a>
+          <span class="home-intro-meta-divider" aria-hidden="true"></span>
+          <a href="{{ "categories/" | relURL }}" class="home-intro-meta-item">
+            <span class="home-intro-meta-num">{{ len .Site.Taxonomies.categories }}</span>
+            <span class="home-intro-meta-label">个分类</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{- end -}}
+
+  {{- /* ===== Category Grid with Accordion ===== */ -}}
+  {{- partial "category_tree.html" . -}}
+
+{{- end -}}

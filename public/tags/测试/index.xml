@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>测试 on ACM-Lycoris&#39;s Blog</title>
+    <link>https://acm-lycoris.cn/tags/%E6%B5%8B%E8%AF%95/</link>
+    <description>Recent content from ACM-Lycoris&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>abcd1844314159@163.com (ACM-Lycoris)</managingEditor>
+    <webMaster>abcd1844314159@163.com (ACM-Lycoris)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Fri, 22 May 2026 12:00:00 +0800</lastBuildDate>
+    
+    
+    <atom:link href="https://acm-lycoris.cn/tags/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Hugo 编辑测试</title>
+      <link>https://acm-lycoris.cn/posts/hugo%E7%BC%96%E8%BE%91%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Fri, 22 May 2026 12:00:00 &#43;0800</pubDate>
+      <author>abcd1844314159@163.com (ACM-Lycoris)</author>
+      <guid>https://acm-lycoris.cn/posts/hugo%E7%BC%96%E8%BE%91%E6%B5%8B%E8%AF%95/</guid>
+      <description>
+        <![CDATA[<h1>Hugo 编辑测试</h1><p>作者：ACM-Lycoris（abcd1844314159@163.com）</p>
+        
+          <blockquote>
+<p>如果你看到了这篇文章，说明 Hugo 博客的编辑功能一切正常！🎉</p>
+</blockquote>
+<hr>
+<h2 id="这是一篇测试博客">
+<a class="header-anchor" href="#%e8%bf%99%e6%98%af%e4%b8%80%e7%af%87%e6%b5%8b%e8%af%95%e5%8d%9a%e5%ae%a2"></a>
+这是一篇测试博客
+</h2><p>本文仅用于测试目的，验证以下功能是否正常工作：</p>
+<h3 id="markdown-渲染">
+<a class="header-anchor" href="#markdown-%e6%b8%b2%e6%9f%93"></a>
+Markdown 渲染
+</h3><ul>
+<li><strong>加粗文本</strong></li>
+<li><em>斜体文本</em></li>
+<li><del>删除线</del></li>
+<li><code>行内代码</code></li>
+</ul>
+<h3 id="代码块">
+<a class="header-anchor" href="#%e4%bb%a3%e7%a0%81%e5%9d%97"></a>
+代码块
+</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello, Hugo!&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="引用">
+<a class="header-anchor" href="#%e5%bc%95%e7%94%a8"></a>
+引用
+</h3><blockquote>
+<p>这是一段引用文字，测试引用块的渲染效果。</p>
+</blockquote>
+<h3 id="数学公式">
+<a class="header-anchor" href="#%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f"></a>
+数学公式
+</h3><p>行内公式：$E = mc^2$</p>
+<p>块级公式：</p>
+<p>$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$</p>
+<h3 id="表格">
+<a class="header-anchor" href="#%e8%a1%a8%e6%a0%bc"></a>
+表格
+</h3><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>状态</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Markdown 渲染</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>代码高亮</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>数学公式</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>表格显示</td>
+          <td>✅</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><strong>测试完成。</strong> 如果以上内容均能正常显示，说明 Hugo 博客编辑功能运行良好。</p>
+        
+        <hr><p>本文2026-05-22首发于<a href='https://acm-lycoris.cn/'>ACM-Lycoris's Blog</a>，最后修改于2026-05-22</p>]]>
+      </description>
+      
+        <category>测试</category>
+      
+    </item>
+    
+  </channel>
+</rss>
