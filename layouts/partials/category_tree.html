@@ -7,9 +7,6 @@
   <p class="cat-empty">暂无文章</p>
 {{- end -}}
 
-{{- /* Target categories in display order */ -}}
-{{- $targetCats := slice "GPLT天梯赛" "算法竞赛进阶指南" "图论" "建站" -}}
-
 {{- /* Build flat category → posts map */ -}}
 {{- $catMap := dict -}}
 {{- range $page := $allPages -}}
@@ -23,12 +20,10 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Build final entries in display order, only for target categories */ -}}
+{{- /* Build final entries from all categories, sorted by post count */ -}}
 {{- $entries := slice -}}
 {{- $coverIdx := 0 -}}
-{{- range $catName := $targetCats -}}
-  {{- $posts := index $catMap $catName | default slice -}}
-  {{- if not $posts -}}{{- continue -}}{{- end -}}
+{{- range $catName, $posts := $catMap -}}
   {{- $total := len $posts -}}
 
   {{- /* Find cover from first post that has one, else from covers data */ -}}
