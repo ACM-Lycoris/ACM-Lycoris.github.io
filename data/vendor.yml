@@ -1,0 +1,19 @@
+# Override CDN source — npm.webcache.cn redirects broken, use jsdelivr instead
+js:
+  waline:
+    src: fastly_jsdelivr_npm|@waline/client@2.15.8/dist/waline.mjs
+    integrity: sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5
+  katex:
+    src: fastly_jsdelivr_npm|katex@0.16.24/dist/katex.min.js
+    integrity: sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC+gqPB3IBNO35xjZK3Ejb6oONRpDbPg
+  katex_auto_render:
+    src: fastly_jsdelivr_npm|katex@0.16.24/dist/contrib/auto-render.min.js
+    integrity: sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh
+
+css:
+  waline:
+    src: fastly_jsdelivr_npm|@waline/client@2.15.8/dist/waline.css
+    integrity: sha384-vltfZtesCdl6NYVcFVcjEaIi5RpNvZe9t7fXvq8twVtcoy+Ub9QgnxUYJmwOhYCK
+  katex:
+    src: fastly_jsdelivr_npm|katex@0.16.24/dist/katex.min.css
+    integrity: sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz+YI

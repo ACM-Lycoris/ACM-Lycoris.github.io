@@ -32,7 +32,7 @@ description: "振桴彼岸，绽蕊忘川"
 
 # ========== 博客简介 (首页显示) ==========
 blogIntroTitle: "关于本站"
-blogIntro: "ACM / 算法竞赛笔记与题解。记录我的技术学习之路,梦想是开发彼岸美好的世界."
+blogIntro: "ACM / 算法竞赛笔记与题解。记录我的技术学习之路,梦想是开发彼岸美好的世界"
 
 # ========== 副标题 (打字机循环) ==========
 subtitle:
@@ -84,6 +84,34 @@ live2d:
   enable: true
   position: left
 
+# ========== Waline 评论和点赞 ==========
+waline:
+  enable: true
+  serverURL: "https://acm-lycoris-waline.vercel.app"
+  locale:
+    placeholder: "留下你的想法吧~"
+    nick: "昵称"
+    mail: "邮箱（不会公开）"
+    link: ""
+    admin: "博主"
+    sofa: "还没有评论，抢个沙发吧~"
+    submit: "提交"
+    reply: "回复"
+    cancel: "取消"
+    more: "加载更多..."
+  emoji: []
+  meta:
+    - nick
+    - mail
+  requiredMeta:
+    - nick
+  wordLimit: 500
+  pageSize: 10
+  pageview: true
+  reaction: false
+  reactionList: []
+  login: "disable"
+
 # ========== 自定义字体 (霞鹜文楷 + JetBrains Mono) ==========
 custom_font:
   enable: true
@@ -116,7 +144,6 @@ local_font:
     - "monospace"
 
 # ========== 配色方案：Cyber-Reimu (赛博灵梦) ==========
-# 主色：弗洛洛/灵梦的鲜艳红 + 纯黑科技底 + 霓虹青装饰
 internal_theme:
   light:
     --red-0: '#ff0033'         # 主强调：灵梦红
