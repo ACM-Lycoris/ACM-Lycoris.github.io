@@ -114,7 +114,11 @@
           reaction: JSON.parse({{ $params.waline.reaction | jsonify }}),
           reactionList: JSON.parse({{ $params.waline.reactionList | jsonify }}),
           login: '{{ $params.waline.login }}',
+          imageUploader: {{ $params.waline.imageUploader | default false }},
+          search: {{ $params.waline.search | default false }},
+          copyright: {{ $params.waline.copyright | default false }},
         });
+        window.WalineInitialAvatar?.refresh?.();
       }
     },
     {{- end -}}

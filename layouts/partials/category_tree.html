@@ -57,10 +57,36 @@
 {{- if $sorted -}}
 <div class="cat-grid" role="region" aria-label="{{ i18n "category" }}">
   {{- range $sorted -}}
+  {{- $entry := . -}}
   <div class="cat-card">
     <div class="cat-card-cover">
-      {{- if .cover -}}
-      <img class="lazyload" data-src="{{ .cover | relURL }}" data-sizes="auto" alt="{{ .name }}" />
+      {{- if $entry.cover -}}
+        {{- $coverPath := strings.TrimPrefix "/" $entry.cover -}}
+        {{- $coverResource := "" -}}
+        {{- if not (or (strings.HasPrefix $entry.cover "http://") (strings.HasPrefix $entry.cover "https://")) -}}
+          {{- $coverResource = resources.Get $coverPath -}}
+        {{- end -}}
+        {{- with $coverResource -}}
+          {{- $small := .Fill "320x220 Smart webp q72" -}}
+          {{- $large := .Fill "640x440 Smart webp q72" -}}
+          <img
+            src="{{ $small.RelPermalink }}"
+            srcset="{{ $small.RelPermalink }} 320w, {{ $large.RelPermalink }} 640w"
+            sizes="(max-width: 768px) 110px, 180px"
+            width="{{ $small.Width }}"
+            height="{{ $small.Height }}"
+            alt="{{ $entry.name }}"
+            loading="eager"
+            decoding="async" />
+        {{- else -}}
+          <img
+            src="{{ $entry.cover | relURL }}"
+            width="320"
+            height="220"
+            alt="{{ $entry.name }}"
+            loading="lazy"
+            decoding="async" />
+        {{- end -}}
       {{- end -}}
     </div>
     <div class="cat-card-content">

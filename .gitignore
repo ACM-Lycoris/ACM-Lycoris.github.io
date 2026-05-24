@@ -1,5 +1,13 @@
 public/
 .hugo_build.lock
+.hugo-server.*.log
 resources/
+!static/resources/
+!static/resources/iconfont/
+!static/resources/iconfont/*.woff2
 
 .vercel
+/node_modules/
+/package-lock.json
+/package.json
+/waline-vercel.tgz
