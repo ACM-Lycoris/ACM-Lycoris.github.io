@@ -1,0 +1,616 @@
+---
+title: "Hugo博客添加Waline评论系统踩坑记录"
+date: 2026-05-24T12:30:00+08:00
+draft: false
+categories: ["建站"]
+description: "记录一次给 Hugo 静态博客接入 Waline 评论系统的完整过程：从 Vercel 失败，到 CloudBase 控制台绕路，再到手动部署云函数。"
+tags: ["Hugo", "Waline", "CloudBase", "评论系统", "建站", "踩坑"]
+---
+
+> 这篇文章记录一个非常现实的问题：静态博客本身可以很快，但只要评论系统选错部署位置，访客照样会在评论区看到 `Failed to fetch`。这不是玄学，是网络链路和后端部署方式的问题。
+
+## 一、先说最终方案
+
+我的博客是 Hugo 静态博客，部署在 GitHub Pages 上，主题是 `hugo-theme-reimu`。
+
+最后评论系统采用：
+
+| 部分 | 技术 |
+| ---- | ---- |
+| 静态博客 | Hugo |
+| 博客托管 | GitHub Pages |
+| 评论前端 | Waline Client |
+| 评论后端 | 腾讯云 CloudBase 云函数 |
+| 评论数据 | CloudBase 数据库 |
+| 访问路径 | CloudBase HTTP 访问服务 |
+
+最终博客配置里只需要让 Waline 前端指向这个后端地址：
+
+```yml
+waline:
+  enable: true
+  serverURL: "https://你的-cloudbase-域名/waline"
+```
+
+我的实际地址类似：
+
+```text
+https://waline-blog-xxxx.ap-shanghai.app.tcloudbase.com/waline
+```
+
+这样浏览器打开文章页时，评论框会向国内 CloudBase 后端请求评论数据，而不是去访问 Vercel。
+
+## 二、为什么静态博客也会慢
+
+很多人会有一个直觉：
+
+> 静态网页不就是 HTML、CSS、JS、图片吗？为什么会慢？
+
+这个直觉对了一半。
+
+Hugo 生成出来的页面确实是静态资源。首页、文章页、归档页，这些东西只要资源本身可达，一般都很快。
+
+但评论系统不是纯静态的。
+
+评论系统至少要做这些事：
+
+1. 读取某篇文章下面已有的评论。
+2. 接收新评论。
+3. 保存评论。
+4. 管理评论。
+5. 处理跨域、安全域名、反垃圾、头像、管理员登录。
+
+这些都需要后端 API。
+
+所以一个“静态博客 + 评论系统”的结构其实是：
+
+```text
+访客浏览器
+  -> GitHub Pages 读取静态页面
+  -> Waline 后端读取/提交评论
+  -> 数据库存储评论
+```
+
+静态页面快，不代表评论 API 一定快。
+
+## 三、最开始的问题：Vercel 后端在国内不稳定
+
+我原来的 Waline 后端部署在 Vercel：
+
+```yml
+serverURL: "https://acm-lycoris-waline.vercel.app"
+```
+
+开代理时，评论可以正常加载。
+
+不开代理时，朋友打开博客就会遇到：
+
+```text
+Failed to fetch
+```
+
+这个现象非常有辨识度：
+
+- 开代理能用。
+- 不开代理不能用。
+- 静态页面能打开。
+- 评论区请求失败。
+
+这基本可以判断，问题不在 Hugo，也不在主题，而在浏览器访问 Waline 后端的网络路径。
+
+换句话说，`serverURL` 指向的 Vercel 地址对目标访客网络不稳定。
+
+## 四、第一轮优化：先把前端依赖清干净
+
+在动评论后端之前，我先处理了博客前端的外部依赖。
+
+因为博客里不止评论会拖慢体验，主题里的字体、图标、特效、统计、头像服务也可能偷偷访问外部网络。
+
+我做了这些事：
+
+1. 把分类封面图改成本地资源。
+2. 用 Hugo Image Processing 生成更小的 WebP 图片。
+3. 把 iconfont 本地化，修复太极图标不显示的问题。
+4. 关闭不必要的外部效果，比如 live2d、busuanzi、pace、烟花等。
+5. 关闭 Waline 的 pageview。
+6. 禁用评论图片上传。
+7. 禁用外部头像，改成昵称首字母或汉字头像。
+
+这些优化很重要，但它们解决的是“页面资源加载慢”的问题。
+
+它们不能解决：
+
+```text
+浏览器访问不了 Vercel 上的评论后端
+```
+
+所以最终还是必须迁移评论后端。
+
+## 五、选择后端部署位置
+
+Waline 后端可以部署到很多地方：
+
+- Vercel
+- CloudBase
+- 阿里云函数计算
+- VPS
+- Docker
+- LeanCloud
+- Railway
+- Render
+
+如果主要访客在国内，我个人不建议继续把评论后端放在 Vercel。
+
+理论上它好用，实际上国内访客经常碰运气。评论区这种东西，一旦慢或者失败，体验会非常差，因为用户已经写了文字，点提交却失败，那种挫败感比图片加载慢更明显。
+
+最后我选择腾讯 CloudBase，原因是：
+
+- 国内访问更合适。
+- 自带云函数。
+- 自带数据库。
+- 可以给 Waline 做后端。
+- 不需要自己维护传统服务器。
+
+注意，这里买的不是传统意义上的 CVM 云服务器，而是 CloudBase 云开发套餐。
+
+## 六、腾讯云 CloudBase 是否要续费
+
+要。
+
+这次买的是 CloudBase 个人版，不是一次性买断。
+
+我当前环境信息是：
+
+```text
+环境 ID：waline-blog-d6geofi0wca743759
+套餐版本：个人版
+创建时间：2026-05-24 10:29:04
+到期时间：2026-06-24 23:59:59
+环境状态：正常
+```
+
+也就是说，如果继续使用这套评论系统，需要在到期前续费。
+
+腾讯云官方价格文档中，CloudBase 新计费模式是“资源套餐 + 按量付费 + 能力项”，个人版属于套餐版本；官方产品说明里也写到个人版面向个人开发，新用户可体验，后续为月度费用。
+
+对个人博客来说，这个成本主要是为了换来：
+
+- 国内可访问的评论 API。
+- 数据库托管。
+- 云函数托管。
+- 不用自己维护服务器。
+
+如果到期不续费，评论后端可能会停服。静态博客页面仍然在 GitHub Pages 上，但评论区会再次不可用。
+
+建议：
+
+1. 在腾讯云控制台设置到期提醒。
+2. 如果确认长期使用，可以打开自动续费。
+3. 如果只是短期测试，就不要打开自动续费。
+4. 定期导出评论数据，避免云服务到期或误删导致数据丢失。
+
+## 七、按官方一键部署，事情并没有那么丝滑
+
+Waline 官方提供了 CloudBase 部署入口，看起来非常美好：
+
+```text
+部署到云开发
+```
+
+理论流程是：
+
+1. 选择地域。
+2. 创建 CloudBase 环境。
+3. 选择 Waline 模板。
+4. 一键部署。
+5. 拿到访问地址。
+6. 填入 Hugo 配置。
+
+现实流程是：
+
+```text
+This env type is not available
+ResourcesSoldOut.PostpayPackageNotAvailable
+```
+
+这个错误不是配置错了，而是当时选择的环境类型或地域不支持创建对应套餐。
+
+后来换成购买 CloudBase 个人版，环境创建成功。
+
+当时 CloudBase 环境名是：
+
+```text
+waline-blog
+```
+
+环境 ID 类似：
+
+```text
+waline-blog-d6geofi0wca743759
+```
+
+到这里只是“买好了云开发环境”，还没有真正部署 Waline 后端。
+
+## 八、最迷惑的坑：静态网站托管不是我们要的东西
+
+CloudBase 控制台新版入口里，会出现这些选项：
+
+```text
+网站部署
+静态网站托管
+模板部署
+应用部署
+本地项目部署
+Git仓库部署
+```
+
+这很容易让人以为应该选“静态网站托管”或“Git 仓库部署”。
+
+于是我把 Waline 模板仓库填进去：
+
+```text
+https://github.com/walinejs/tcb-starter.git
+```
+
+结果部署失败。
+
+日志里关键的一句是：
+
+```text
+tcb hosting deploy ./ /waline
+```
+
+这说明控制台把 Waline 当成静态文件上传了。
+
+但 Waline 后端不是静态网站。
+
+它是 Node API 服务。
+
+于是控制台开始上传整个项目，甚至上传 `node_modules`：
+
+```text
+/waline/node_modules/mathjax-full/ts/output/chtml/Wrapper.ts
+```
+
+最后报：
+
+```text
+ECONNRESET
+socket hang up
+```
+
+这一刻非常离谱：我只是想加个评论区，它却像要把整个宇宙上传到静态托管。
+
+结论：
+
+> 不要把 Waline 后端当成静态网站部署。
+
+## 九、官方 Framework 部署也踩坑
+
+Waline 的 CloudBase 模板说明里写了：
+
+```bash
+tcb framework deploy --verbose -e 环境ID
+```
+
+这条命令理论上是正确的。
+
+模板里的 `cloudbaserc.json` 大概是：
+
+```json
+{
+  "version": "2.0",
+  "framework": {
+    "name": "waline",
+    "plugins": {
+      "node": {
+        "use": "@cloudbase/framework-plugin-node",
+        "inputs": {
+          "entry": "app.js",
+          "name": "waline",
+          "path": "/waline"
+        }
+      }
+    }
+  }
+}
+```
+
+但实际在 Windows 上跑的时候，又遇到：
+
+```text
+Cannot find module 'C:\Users\Administrator\cloudbase-framework\registry\node_modules\@cloudbase\framework-plugin-node'
+```
+
+更离谱的是，这个目录其实存在。
+
+也就是说，不是包没装，而是 CloudBase CLI 的 standalone 打包方式和 Framework 插件动态加载之间有兼容问题。
+
+我试过：
+
+- 换 CLI 版本。
+- 本地安装 CLI。
+- 手动安装 `@cloudbase/framework-plugin-node`。
+- 修改 Node 运行时。
+- 设置 `CLOUDBASE_FX_ENV=dev`。
+
+结果仍然卡在插件加载。
+
+于是我决定不再和这个抽象层纠缠，直接拆开它真正要做的事。
+
+## 十、最终可行方案：手动部署云函数
+
+Waline 的 CloudBase 模板入口文件很短：
+
+```js
+const Waline = require('@waline/cloudbase');
+
+module.exports = Waline({
+  postSave() {
+
+  }
+});
+```
+
+`@waline/cloudbase` 会导出一个 `tcbGetApp()`，CloudBase Framework 本来就是把它包装成可 HTTP 访问的函数。
+
+既然 Framework 插件加载失败，那就手动做这件事。
+
+核心思路：
+
+1. 创建一个云函数目录 `waline`。
+2. 放入 `app.js`。
+3. 用 `serverless-http` 包装 Waline app。
+4. 用 `tcb fn deploy` 部署云函数。
+5. 用 `tcb service create` 创建 HTTP 访问服务。
+
+云函数入口 `tcbindex.js`：
+
+```js
+module.exports.main = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  const entry = require('./app');
+  const serverless = require('serverless-http');
+
+  let app = entry;
+
+  if (entry && typeof entry.tcbGetApp === 'function') {
+    app = await entry.tcbGetApp(event, context);
+  }
+
+  return serverless(app)(event, context);
+};
+```
+
+`package.json` 至少需要：
+
+```json
+{
+  "dependencies": {
+    "@waline/cloudbase": "latest",
+    "serverless-http": "^2.7.0"
+  }
+}
+```
+
+然后在 `cloudbaserc.json` 里配置函数：
+
+```json
+{
+  "envId": "你的环境ID",
+  "functionRoot": ".",
+  "functions": [
+    {
+      "name": "waline",
+      "runtime": "Nodejs20.19",
+      "handler": "tcbindex.main",
+      "timeout": 20,
+      "memorySize": 512,
+      "installDependency": true,
+      "envVariables": {
+        "SITE_NAME": "你的博客名",
+        "SITE_URL": "https://你的域名",
+        "SECURE_DOMAINS": "你的域名,www.你的域名,你的github-pages域名",
+        "JWT_TOKEN": "一串随机密钥",
+        "TCB_ENV": "你的环境ID",
+        "AKISMET_KEY": "false",
+        "AVATAR_PROXY": "false",
+        "DISABLE_REGION": "true",
+        "DISABLE_USERAGENT": "true"
+      }
+    }
+  ]
+}
+```
+
+部署云函数：
+
+```bash
+tcb fn deploy --all --force -e 你的环境ID
+```
+
+部署成功后创建 HTTP 访问服务：
+
+```bash
+tcb service create -p waline -f waline -e 你的环境ID
+```
+
+成功后会得到类似：
+
+```text
+https://你的-cloudbase-域名/waline
+```
+
+这个就是 Waline 前端要填的 `serverURL`。
+
+## 十一、为什么直接访问 API 可能是 403
+
+部署完成后，我直接访问：
+
+```text
+https://你的-cloudbase-域名/waline/api/comment?path=/
+```
+
+可能看到：
+
+```text
+403 Forbidden
+```
+
+一开始这很吓人。
+
+但后来发现，这是因为 Waline 配了安全域名：
+
+```text
+SECURE_DOMAINS
+```
+
+命令行或直接打开 API 时，没有带博客页面的 `Origin` 或 `Referer`，所以会被拦。
+
+如果请求来源是：
+
+```text
+https://acm-lycoris.cn
+```
+
+就能正常返回：
+
+```json
+{
+  "errno": 0,
+  "errmsg": "",
+  "data": {
+    "page": 1,
+    "totalPages": 0,
+    "pageSize": 10,
+    "count": 0,
+    "data": []
+  }
+}
+```
+
+所以判断是否成功，不要只看直接打开 API 的结果。要从博客页面实际发起请求测试。
+
+## 十二、Hugo 里需要改哪里
+
+以我的项目为例，配置文件在：
+
+```text
+config/_default/params.yml
+```
+
+找到 Waline：
+
+```yml
+waline:
+  enable: true
+  serverURL: "旧地址"
+```
+
+改成：
+
+```yml
+waline:
+  enable: true
+  serverURL: "https://你的-cloudbase-域名/waline"
+```
+
+然后构建：
+
+```bash
+hugo --minify --gc
+```
+
+提交并推送：
+
+```bash
+git add config/_default/params.yml
+git commit -m "Point Waline to CloudBase backend"
+git push
+```
+
+等 GitHub Pages 部署完成后，打开文章页测试评论。
+
+## 十三、头像和图片上传不要一开始就做太复杂
+
+评论系统里还有一个小细节：头像。
+
+Waline 默认可能会去拉外部头像服务，比如 Gravatar。国内访问这些头像服务经常很慢，甚至加载不出来。
+
+我的处理是：
+
+- 禁用外部头像依赖。
+- 默认头像渲染为昵称第一个字母或汉字。
+- 不开放用户上传图片头像。
+
+这样评论区更快，也更少引入安全问题。
+
+用户上传头像听起来很自由，但它会带来：
+
+- 存储成本。
+- 审核问题。
+- 图片压缩问题。
+- 不当内容风险。
+- 更多网络请求。
+
+个人博客没必要一上来就做这么重。
+
+## 十四、这次踩坑总结
+
+这次加评论系统，真正麻烦的不是 Hugo。
+
+Hugo 只需要改一行：
+
+```yml
+serverURL: "..."
+```
+
+真正折腾的是：
+
+1. 评论后端部署在哪里。
+2. 国内网络能不能访问。
+3. 控制台部署入口是不是选对了。
+4. CloudBase Framework 插件会不会抽风。
+5. HTTP 访问服务有没有创建。
+6. 安全域名会不会拦请求。
+7. 评论头像和外部资源会不会拖慢页面。
+
+一上午的结论是：
+
+> 给静态博客加评论，不难；给国内访客加一个稳定、流畅、少外部依赖的评论系统，才是真的难。
+
+如果只是自己看，Vercel 可能够用。
+
+如果希望朋友不开代理也能评论，建议一开始就把评论后端放在国内可访问的平台上。
+
+## 十五、最终检查清单
+
+给 Hugo 加 Waline 评论时，可以按这个清单检查：
+
+1. Hugo 主题是否已经支持 Waline。
+2. `waline.enable` 是否为 `true`。
+3. `serverURL` 是否指向国内可访问后端。
+4. 后端 `/waline` 根路径是否能打开。
+5. 从博客域名发起 `/api/comment` 请求是否返回 200。
+6. `SECURE_DOMAINS` 是否包含博客主域名。
+7. 是否禁用了不必要的外部头像和图片上传。
+8. GitHub Pages 是否已经完成最新部署。
+9. 浏览器是否强制刷新过缓存。
+10. 手机流量不开代理是否能评论。
+
+评论区最终不是“能加载”就算结束，而是要做到：
+
+- 普通访客不用代理。
+- 评论框出现快。
+- 提交不丢内容。
+- 页面没有一堆外部资源拖后腿。
+- 后端到期和数据备份心里有数。
+
+这才是一个个人博客评论系统真正可用的状态。
+
+## 参考
+
+- Waline 文档：`https://waline.js.org/`
+- 腾讯云 CloudBase 价格文档：`https://cloud.tencent.com/document/product/876/75213`
+- 腾讯云 CloudBase 包年包月套餐说明：`https://cloud.tencent.com/document/product/876/39093`
