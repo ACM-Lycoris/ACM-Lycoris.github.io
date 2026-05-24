@@ -100,7 +100,7 @@ live2d:
 # ========== Waline 评论和点赞 ==========
 waline:
   enable: true
-  serverURL: "https://acm-lycoris-waline.vercel.app"
+  serverURL: "https://waline-blog-d6geofi0wca743759-1424401485.ap-shanghai.app.tcloudbase.com/waline"
   locale:
     placeholder: "留下你的想法吧~"
     nick: "昵称"
