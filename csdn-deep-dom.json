@@ -1,0 +1,118 @@
+{
+  "contenteditables": [
+    {
+      "tag": "PRE",
+      "className": "editor__inner markdown-highlighting",
+      "textSample": "\n",
+      "rect": {
+        "x": 16,
+        "y": 172,
+        "width": 696,
+        "height": 739,
+        "top": 172,
+        "right": 712,
+        "bottom": 911,
+        "left": 16
+      }
+    }
+  ],
+  "allInputsInEditor": [
+    {
+      "tag": "INPUT",
+      "type": "file",
+      "placeholder": "",
+      "className": "hidden-file",
+      "contenteditable": "",
+      "visible": true
+    }
+  ],
+  "titleArea": [
+    {
+      "tag": "DIV",
+      "className": "layout__panel layout__panel--articletitle-bar",
+      "placeholder": "",
+      "textSample": "返回\n【无标题】\n5/100",
+      "rect": {
+        "top": 0,
+        "left": 0,
+        "width": 1920,
+        "height": 56
+      }
+    },
+    {
+      "tag": "DIV",
+      "className": "article-bar__title-display",
+      "placeholder": "",
+      "textSample": "【无标题】",
+      "rect": {
+        "top": 8,
+        "left": 225,
+        "width": 638,
+        "height": 40
+      }
+    },
+    {
+      "tag": "INPUT",
+      "className": "hidden-file",
+      "placeholder": "",
+      "textSample": "",
+      "rect": {
+        "top": -999,
+        "left": 827,
+        "width": 303,
+        "height": 32
+      }
+    },
+    {
+      "tag": "PRE",
+      "className": "editor__inner markdown-highlighting",
+      "placeholder": "",
+      "textSample": "\n",
+      "rect": {
+        "top": 172,
+        "left": 16,
+        "width": 696,
+        "height": 739
+      }
+    }
+  ],
+  "topLevelDivs": [
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "app app--light",
+      "childCount": 4
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "hidden-rendering-container",
+      "childCount": 0
+    }
+  ],
+  "categoryElements": [
+    {
+      "tag": "SPAN",
+      "className": "menu-bar__item-label",
+      "text": "AI"
+    },
+    {
+      "tag": "SPAN",
+      "className": "menu-bar__item-label",
+      "text": "目录"
+    },
+    {
+      "tag": "SPAN",
+      "className": "menu-bar__item-label",
+      "text": "语法"
+    }
+  ],
+  "preDetails": {
+    "contenteditable": "true",
+    "textLength": 1,
+    "textSample": "\n",
+    "childrenTags": "DIV,DIV",
+    "dataset": "{}"
+  },
+  "settingButtons": []
+}

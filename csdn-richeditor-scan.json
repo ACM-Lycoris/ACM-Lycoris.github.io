@@ -1,0 +1,498 @@
+{
+  "inputs": [
+    {
+      "tag": "INPUT",
+      "type": "password",
+      "placeholder": "",
+      "id": "",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "placeholder": "搜CSDN",
+      "id": "toolbar-search-input",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "TEXTAREA",
+      "type": "textarea",
+      "placeholder": "请输入文章标题（5～100个字）",
+      "id": "txtTitle",
+      "className": "el_mcm-textarea__inner",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "hidden",
+      "placeholder": "",
+      "id": "",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "TEXTAREA",
+      "type": "textarea",
+      "placeholder": "本内容会在各展现列表中展示，帮助读者快速了解内容。若不填，则默认提取正文前256个字。",
+      "id": "txtSammary",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "placeholder": "请输入文字搜索，Enter键入可添加自定义标签",
+      "id": "el_mcm-id-5605-56",
+      "className": "el_mcm-input__inner",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "hidden",
+      "placeholder": "",
+      "id": "",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "file",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-upload__input",
+      "visible": false
+    },
+    {
+      "tag": "TEXTAREA",
+      "type": "textarea",
+      "placeholder": "摘要：会在推荐、列表等场景外露，帮助读者快速了解内容，支持一键将正文前 256 字符键入摘要文本框",
+      "id": "el_mcm-id-5605-57",
+      "className": "el_mcm-textarea__inner",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "hidden",
+      "placeholder": "",
+      "id": "",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "hidden",
+      "placeholder": "",
+      "id": "",
+      "className": "",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "placeholder": "请填写原文链接",
+      "id": "el_mcm-id-5605-58",
+      "className": "el_mcm-input__inner",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-checkbox__original",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "placeholder": "",
+      "id": "el_mcm-id-5605-59",
+      "className": "el_mcm-select__input",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-checkbox__original",
+      "visible": false
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "radio",
+      "placeholder": "",
+      "id": "",
+      "className": "el_mcm-radio__original",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "placeholder": "",
+      "id": "el_mcm-id-5605-61",
+      "className": "el_mcm-select__input",
+      "visible": true
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "placeholder": "",
+      "id": "el_mcm-id-5605-62",
+      "className": "el_mcm-select__input",
+      "visible": true
+    }
+  ],
+  "contenteditables": [],
+  "buttons": [
+    {
+      "text": "添加文章标签",
+      "className": "tag__btn-tag active"
+    },
+    {
+      "text": "从本地上传",
+      "className": "upload-img-box"
+    },
+    {
+      "text": "新建分类专栏",
+      "className": "tag__btn-tag"
+    },
+    {
+      "text": "发文设置",
+      "className": "el_mcm-button el_mcm-button--default is-link btn-position"
+    },
+    {
+      "text": "保存草稿",
+      "className": "el_mcm-button el_mcm-button--primary is-round btn-outline-secondary el_mcm-toolt"
+    },
+    {
+      "text": "发布博客",
+      "className": "el_mcm-button el_mcm-button--primary is-round btn-outline-danger ml16"
+    }
+  ],
+  "keywordEls": [
+    {
+      "tag": "SPAN",
+      "className": "title",
+      "id": "",
+      "text": "发布文章"
+    },
+    {
+      "tag": "FORM",
+      "className": "el_mcm-form el_mcm-form--default el_mcm-form--label-left form-htmleditor has-download-new",
+      "id": "",
+      "text": " 还需输入5个字\n文章标签*\n添加文章标签\n添加封面 \n\n从本地上传\n\n暂无内容图片，请在正文中添加图片\n\n文章摘要 \n0 / 256\nAI提取摘要\n分类专栏 "
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left title-box",
+      "id": "",
+      "text": " 还需输入5个字"
+    },
+    {
+      "tag": "PRE",
+      "className": "input__title_pre",
+      "id": "",
+      "text": ""
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-textarea input__title",
+      "id": "",
+      "text": ""
+    },
+    {
+      "tag": "TEXTAREA",
+      "className": "el_mcm-textarea__inner",
+      "id": "txtTitle",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "className": "title-chk",
+      "id": "",
+      "text": " 还需输入5个字"
+    },
+    {
+      "tag": "SPAN",
+      "className": "btn-ai-title el_mcm-tooltip__trigger el_mcm-tooltip__trigger",
+      "id": "",
+      "text": ""
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px mt16px form-item-flex required",
+      "id": "",
+      "text": "文章标签*\n添加文章标签"
+    },
+    {
+      "tag": "LABEL",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-5",
+      "text": "文章标签*"
+    },
+    {
+      "tag": "DIV",
+      "className": "mark_selection_title_el_tag",
+      "id": "",
+      "text": "添加文章标签"
+    },
+    {
+      "tag": "SPAN",
+      "className": "tag-box",
+      "id": "",
+      "text": "添加文章标签"
+    },
+    {
+      "tag": "BUTTON",
+      "className": "tag__btn-tag active",
+      "id": "",
+      "text": "添加文章标签"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "添加封面 \n\n从本地上传\n\n暂无内容图片，请在正文中添加图片"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-9",
+      "text": "添加封面 "
+    },
+    {
+      "tag": "DIV",
+      "className": "container-coverimage-box",
+      "id": "",
+      "text": "从本地上传\n\n暂无内容图片，请在正文中添加图片"
+    },
+    {
+      "tag": "DIV",
+      "className": "cover-upload-box",
+      "id": "",
+      "text": "从本地上传"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "文章摘要 \n0 / 256\nAI提取摘要"
+    },
+    {
+      "tag": "LABEL",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-11",
+      "text": "文章摘要 "
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "分类专栏 \n新建分类专栏"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-13",
+      "text": "分类专栏 "
+    },
+    {
+      "tag": "DIV",
+      "className": "tag__box column-name-selection",
+      "id": "",
+      "text": "新建分类专栏"
+    },
+    {
+      "tag": "DIV",
+      "className": "tag__item-list",
+      "id": "tagList",
+      "text": "新建分类专栏"
+    },
+    {
+      "tag": "BUTTON",
+      "className": "tag__btn-tag",
+      "id": "",
+      "text": "新建分类专栏"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "文章类型 \n原创\n转载\n翻译"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-15",
+      "text": "文章类型 "
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "原创"
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "转载"
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "翻译"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "创作声明\n无声明"
+    },
+    {
+      "tag": "LABEL",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-22",
+      "text": "创作声明"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "文章备份\n同时备份到GitCode\n\n您已同意GitCode 用户协议 和 隐私政策，我们会为您自动创建账号并备份文章至我的项目。"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-29",
+      "text": "文章备份"
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-checkbox__label",
+      "id": "",
+      "text": "同时备份到GitCode"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "可见范围 \n全部可见\n仅我可见\n粉丝可见\nVIP可见"
+    },
+    {
+      "tag": "LABEL",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-30",
+      "text": "可见范围 "
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "全部可见"
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "仅我可见"
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "粉丝可见"
+    },
+    {
+      "tag": "SPAN",
+      "className": "el_mcm-radio__label",
+      "id": "",
+      "text": "VIP可见"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left p8px",
+      "id": "",
+      "text": "参与活动\n/话题\n\n活动\n请选择创作活动\n话题\n请选择创作话题"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item__label",
+      "id": "el_mcm-id-5605-37",
+      "text": "参与活动\n/话题"
+    },
+    {
+      "tag": "DIV",
+      "className": "el_mcm-form-item is-no-asterisk asterisk-left el_mcm-form-item--label-left publish-opt-box",
+      "id": "",
+      "text": "共 0 字\n发文设置\n保存草稿\n发布博客"
+    }
+  ],
+  "bodyText": "消息\n发布文章\n 还需输入5个字\n文章标签*\n添加文章标签\n添加封面 \n\n从本地上传\n\n暂无内容图片，请在正文中添加图片\n\n文章摘要 \n0 / 256\nAI提取摘要\n分类专栏 \n新建分类专栏\n文章类型 \n原创\n转载\n翻译\n创作声明\n无声明\n文章备份\n同时备份到GitCode\n\n您已同意GitCode 用户协议 和 隐私政策，我们会为您自动创建账号并备份文章至我的项目。\n\n可见范围 \n全部可见\n仅我可见\n粉丝可见\nVIP可见\n\n参与活动\n/话题\n\n活动\n请选择创作活动\n话题\n请选择创作话题\n共 0 字\n发文设置\n保存草稿\n发布博客",
+  "links": [
+    {
+      "text": "消息",
+      "href": "https://i.csdn.net/#/msg/index"
+    },
+    {
+      "text": "用户协议",
+      "href": "https://docs.gitcode.com/declaration/terms-of-service/"
+    },
+    {
+      "text": "隐私政策",
+      "href": "https://docs.gitcode.com/declaration/privacy-policy/"
+    }
+  ]
+}

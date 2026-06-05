@@ -1,0 +1,289 @@
+{
+  "allInputs": [
+    {
+      "tag": "INPUT",
+      "type": "file",
+      "placeholder": "",
+      "id": "import-markdown-file-input",
+      "name": "",
+      "className": "hidden-file"
+    }
+  ],
+  "contenteditables": [
+    {
+      "tag": "PRE",
+      "className": "editor__inner markdown-highlighting",
+      "textLen": 80
+    }
+  ],
+  "buttons": [
+    {
+      "text": "Markdown",
+      "className": "nav-tab-btn"
+    },
+    {
+      "text": "比对",
+      "className": "nav-tab-btn nav-tab-btn--active"
+    },
+    {
+      "text": "预览",
+      "className": "nav-tab-btn"
+    },
+    {
+      "text": "使用富文本编辑器",
+      "className": "nav-tab-btn nav-tab-btn--switch"
+    },
+    {
+      "text": "列表",
+      "className": "navigation-bar__button button navigation_bar_list_trigger"
+    },
+    {
+      "text": "代码块",
+      "className": "navigation-bar__button button navigation_bar_code_trigger"
+    },
+    {
+      "text": "更多格式",
+      "className": "navigation-bar__button button navigation_bar_more_trigger"
+    },
+    {
+      "text": "更多插入",
+      "className": "navigation-bar__button button navigation_bar_more_inserts_trigger"
+    },
+    {
+      "text": "历史版本",
+      "className": "navigation-bar__button button navigation_bar_history_trigger"
+    },
+    {
+      "text": "更多操作",
+      "className": "navigation-bar__button button navigation_bar_more_actions_trigger"
+    },
+    {
+      "text": "保存草稿",
+      "className": "btn btn-save el-popover__reference"
+    },
+    {
+      "text": "发布文章",
+      "className": "btn btn-publish"
+    },
+    {
+      "text": "AI",
+      "className": "menu-bar__item menu-bar__item--active"
+    },
+    {
+      "text": "目录",
+      "className": "menu-bar__item"
+    },
+    {
+      "text": "语法",
+      "className": "menu-bar__item"
+    }
+  ],
+  "keywordEls": [
+    {
+      "tag": "DIV",
+      "className": "layout__panel layout__panel--articletitle-bar",
+      "id": "",
+      "text": "返回\ncsdn-post-1780498110742\n23/100"
+    },
+    {
+      "tag": "DIV",
+      "className": "article-bar flex flex--row flex--align-center",
+      "id": "",
+      "text": "返回\ncsdn-post-1780498110742\n23/100"
+    },
+    {
+      "tag": "DIV",
+      "className": "article-bar__link-box",
+      "id": "",
+      "text": "返回"
+    },
+    {
+      "tag": "DIV",
+      "className": "article-bar__input-box",
+      "id": "",
+      "text": "csdn-post-1780498110742"
+    },
+    {
+      "tag": "DIV",
+      "className": "article-bar__title-display",
+      "id": "",
+      "text": "csdn-post-1780498110742"
+    },
+    {
+      "tag": "DIV",
+      "className": "article-bar__user-box flex flex--row",
+      "id": "",
+      "text": ""
+    },
+    {
+      "tag": "BUTTON",
+      "className": "navigation-bar__button button button-save hasChg",
+      "id": "",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "className": "token cl cl-title-separator",
+      "id": "",
+      "text": "| -------- | ------------ | ---------- | -------- |"
+    },
+    {
+      "tag": "BUTTON",
+      "className": "btn btn-save el-popover__reference",
+      "id": "",
+      "text": "保存草稿 "
+    },
+    {
+      "tag": "BUTTON",
+      "className": "btn btn-publish",
+      "id": "",
+      "text": "发布文章"
+    },
+    {
+      "tag": "SPAN",
+      "className": "menu-bar__item-label",
+      "id": "",
+      "text": "AI"
+    },
+    {
+      "tag": "SPAN",
+      "className": "menu-bar__item-label",
+      "id": "",
+      "text": "目录"
+    },
+    {
+      "tag": "SPAN",
+      "className": "menu-bar__item-label",
+      "id": "",
+      "text": "语法"
+    }
+  ],
+  "bodyChildren": [
+    {
+      "tag": "svg",
+      "id": "",
+      "className": "[object SVGAnimatedString]"
+    },
+    {
+      "tag": "SCRIPT",
+      "id": "",
+      "className": ""
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "app app--light"
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "className": "hidden-rendering-container"
+    }
+  ],
+  "links": [
+    {
+      "text": "",
+      "href": "https://www.csdn.net/?spm=1001.2100.3001.4476"
+    },
+    {
+      "text": "返回",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": "https://mp.csdn.net/mp_blog/manage/article?spm=1015.2103.3001.5298"
+    },
+    {
+      "text": "",
+      "href": "https://mp.csdn.net/mp_blog/manage/article?spm=1015.2103.3001.5298"
+    },
+    {
+      "text": "",
+      "href": "https://blog.csdn.net/yeling114"
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "",
+      "href": ""
+    },
+    {
+      "text": "ACM-Lycoris’s Blog",
+      "href": "https://acm-lycoris.cn/"
+    },
+    {
+      "text": "Dijkstra最短路算法",
+      "href": "https://acm-lycoris.cn/posts/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/"
+    },
+    {
+      "text": "https://acm-lycoris.cn/",
+      "href": "https://acm-lycoris.cn/"
+    }
+  ]
+}

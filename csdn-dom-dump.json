@@ -1,0 +1,120 @@
+{
+  "inputs": [
+    {
+      "tag": "INPUT",
+      "type": "file",
+      "placeholder": "",
+      "id": "import-markdown-file-input",
+      "className": "hidden-file",
+      "name": "",
+      "value": ""
+    }
+  ],
+  "buttons": [
+    {
+      "text": "Markdown",
+      "className": "nav-tab-btn",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "比对",
+      "className": "nav-tab-btn nav-tab-btn--active",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "预览",
+      "className": "nav-tab-btn",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "使用富文本编辑器",
+      "className": "nav-tab-btn nav-tab-btn--switch",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "列表",
+      "className": "navigation-bar__button button navigation_bar_list_trigger",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "代码块",
+      "className": "navigation-bar__button button navigation_bar_code_trigger",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "更多格式",
+      "className": "navigation-bar__button button navigation_bar_more_trigger",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "更多插入",
+      "className": "navigation-bar__button button navigation_bar_more_inserts_trigger",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "历史版本",
+      "className": "navigation-bar__button button navigation_bar_history_trigger",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "更多操作",
+      "className": "navigation-bar__button button navigation_bar_more_actions_trigger",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "保存草稿",
+      "className": "btn btn-save el-popover__reference",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "发布文章",
+      "className": "btn btn-publish",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "AI",
+      "className": "menu-bar__item menu-bar__item--active",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "目录",
+      "className": "menu-bar__item",
+      "tag": "BUTTON"
+    },
+    {
+      "text": "语法",
+      "className": "menu-bar__item",
+      "tag": "BUTTON"
+    }
+  ],
+  "codeMirror": [],
+  "editorDivs": [
+    {
+      "tag": "NAV",
+      "className": "navigation-bar navigation-bar--editor",
+      "id": ""
+    },
+    {
+      "tag": "DIV",
+      "className": "layout__panel layout__panel--editor",
+      "id": ""
+    },
+    {
+      "tag": "DIV",
+      "className": "editor",
+      "id": ""
+    },
+    {
+      "tag": "PRE",
+      "className": "editor__inner markdown-highlighting",
+      "id": ""
+    },
+    {
+      "tag": "DIV",
+      "className": "preview__inner-2 markdown_views prism-atom-one-dark",
+      "id": ""
+    }
+  ],
+  "placeholders": [],
+  "bodyClass": ""
+}
