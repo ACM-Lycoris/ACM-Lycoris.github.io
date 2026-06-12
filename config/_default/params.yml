@@ -5,6 +5,7 @@ banner: "/images/back.png"
 injector:
   head_end: |
     <link rel="stylesheet" href="/css/custom.css?v=cyber2026b">
+    <link rel="stylesheet" href="/css/scifi.css?v=fx1">
     <script>
       // 在第一帧前确定主题，消除 FOUC
       (function() {
@@ -25,6 +26,7 @@ injector:
   body_end: |
     <script src="/js/category-accordion.js" defer></script>
     <script src="/js/waline-initial-avatar.js" defer></script>
+    <script src="/js/scifi-effects.js?v=fx1" defer></script>
 
 # ========== 站点信息 ==========
 author: ACM-Lycoris

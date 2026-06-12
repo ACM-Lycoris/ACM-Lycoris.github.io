@@ -1,0 +1,362 @@
+/* =========================================================
+ * ACM-Lycoris Blog · Sci-Fi FX Layer
+ * 科幻特效层：粒子星网 / 极光 / 故障标题 / 全息卡片 / HUD
+ * 依赖 custom.css 中的颜色变量 (--neon-red / --neon-cyan ...)
+ * 本文件只做"增强"，移除后站点功能不受任何影响
+ * ========================================================= */
+
+/* ========== 0. 特效层级规划 ==========
+ * z-index 0      : #fx-bg 粒子画布 / body::after 极光（内容层为 z-index:1）
+ * z-index 10500  : #fx-fg 点击火花画布
+ * z-index 10800  : #fx-boot 开机扫描
+ * z-index 10900  : #fx-progress 阅读进度条
+ */
+
+/* ========== 1. 粒子星网画布 ========== */
+#fx-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ========== 2. 点击火花画布 ========== */
+#fx-fg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10500;
+    pointer-events: none;
+}
+
+/* ========== 3. 阅读进度条 (霓虹光带) ========== */
+#fx-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 10900;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+        var(--neon-red, #ff003c) 0%,
+        var(--neon-magenta, #ff00aa) 55%,
+        var(--neon-cyan, #00e5ff) 100%);
+    box-shadow:
+        0 0 8px rgba(255, 0, 60, 0.7),
+        0 0 18px rgba(255, 0, 170, 0.35);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    opacity: 0.9;
+}
+
+/* ========== 4. 极光氛围层 (仅暗色 · 纯 CSS 不依赖 JS) ========== */
+@media (min-width: 769px) {
+    [data-theme="dark"] body::after {
+        content: "";
+        position: fixed;
+        inset: -45%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(ellipse 42% 30% at 28% 30%,
+                rgba(255, 0, 60, 0.07) 0%, transparent 70%),
+            radial-gradient(ellipse 38% 28% at 72% 68%,
+                rgba(0, 229, 255, 0.055) 0%, transparent 70%),
+            radial-gradient(ellipse 30% 24% at 55% 22%,
+                rgba(255, 0, 170, 0.045) 0%, transparent 70%);
+        animation: fx-aurora-drift 90s linear infinite;
+        will-change: transform;
+    }
+
+    @keyframes fx-aurora-drift {
+        0%   { transform: rotate(0deg) scale(1); }
+        25%  { transform: rotate(90deg) scale(1.08); }
+        50%  { transform: rotate(180deg) scale(1); }
+        75%  { transform: rotate(270deg) scale(1.08); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+}
+
+/* ========== 5. Banner CRT 扫描线 + 底缘光 ========== */
+[data-theme="dark"] #header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255, 255, 255, 0.022) 0px,
+            rgba(255, 255, 255, 0.022) 1px,
+            transparent 1px,
+            transparent 3px),
+        linear-gradient(180deg,
+            transparent 82%,
+            rgba(255, 0, 60, 0.10) 97%,
+            rgba(255, 0, 60, 0.22) 100%);
+}
+
+/* ========== 6. 站点标题故障风 (Glitch) ========== */
+.fx-glitch {
+    position: relative;
+}
+
+.fx-glitch::before,
+.fx-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: none;
+    -webkit-text-fill-color: initial;
+}
+
+.fx-glitch::before {
+    color: var(--neon-cyan, #00e5ff);
+    z-index: -1;
+}
+
+.fx-glitch::after {
+    color: var(--neon-red, #ff003c);
+    z-index: -2;
+}
+
+.fx-glitch-go::before {
+    opacity: 0.85;
+    animation: fx-glitch-a 0.42s steps(3, end) both;
+}
+
+.fx-glitch-go::after {
+    opacity: 0.85;
+    animation: fx-glitch-b 0.42s steps(3, end) both;
+}
+
+@keyframes fx-glitch-a {
+    0%   { transform: translate(-3px, -2px); clip-path: inset(12% 0 58% 0); }
+    25%  { transform: translate(3px, 1px);   clip-path: inset(54% 0 12% 0); }
+    50%  { transform: translate(-2px, 2px);  clip-path: inset(30% 0 42% 0); }
+    75%  { transform: translate(2px, -1px);  clip-path: inset(70% 0 8% 0); }
+    100% { transform: translate(0, 0);       clip-path: inset(45% 0 38% 0); opacity: 0; }
+}
+
+@keyframes fx-glitch-b {
+    0%   { transform: translate(3px, 2px);   clip-path: inset(62% 0 10% 0); }
+    25%  { transform: translate(-3px, -1px); clip-path: inset(8% 0 64% 0); }
+    50%  { transform: translate(2px, -2px);  clip-path: inset(40% 0 30% 0); }
+    75%  { transform: translate(-2px, 1px);  clip-path: inset(20% 0 55% 0); }
+    100% { transform: translate(0, 0);       clip-path: inset(50% 0 32% 0); opacity: 0; }
+}
+
+/* ========== 7. 卡片 HUD 角标 (JS 注入 .fx-corners) ========== */
+.fx-has-fx {
+    position: relative;
+}
+
+.fx-corners {
+    position: absolute;
+    inset: 0;
+    z-index: 12;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.fx-corners i {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--neon-cyan, #00e5ff);
+    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.8));
+}
+
+.fx-corners i:nth-child(1) { top: 7px;    left: 7px;   border-right: none; border-bottom: none; border-top-left-radius: 4px; }
+.fx-corners i:nth-child(2) { top: 7px;    right: 7px;  border-left: none;  border-bottom: none; border-top-right-radius: 4px; }
+.fx-corners i:nth-child(3) { bottom: 7px; left: 7px;   border-right: none; border-top: none;    border-bottom-left-radius: 4px; }
+.fx-corners i:nth-child(4) { bottom: 7px; right: 7px;  border-left: none;  border-top: none;    border-bottom-right-radius: 4px; }
+
+.post-wrap:hover > .fx-corners,
+.cat-card:hover > .fx-corners,
+.home-intro-card:hover > .fx-corners {
+    opacity: 0.92;
+}
+
+/* ========== 8. 全息光斑 (JS 注入 .fx-glare) ========== */
+.fx-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: radial-gradient(380px circle at var(--fx-gx, 50%) var(--fx-gy, 50%),
+        rgba(0, 229, 255, 0.10) 0%,
+        rgba(255, 0, 60, 0.06) 35%,
+        transparent 65%);
+    mix-blend-mode: screen;
+}
+
+.post-wrap:hover > .fx-glare,
+.cat-card:hover > .fx-glare,
+.home-intro-card:hover > .fx-glare {
+    opacity: 1;
+}
+
+/* ========== 9. 3D 倾斜辅助 (JS 切换 .fx-tilting) ========== */
+.fx-tilting {
+    transition: transform 0.1s ease-out !important;
+    will-change: transform;
+}
+
+/* ========== 10. 滚动渐显 (JS 标记 .fx-reveal → .fx-in) ========== */
+.fx-reveal {
+    animation: none !important;
+    opacity: 0;
+    transform: translateY(26px);
+}
+
+.fx-reveal.fx-in {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media print {
+    .fx-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ========== 11. 开机扫描线 (一次性) ========== */
+#fx-boot {
+    position: fixed;
+    left: 0;
+    top: -6px;
+    width: 100%;
+    height: 4px;
+    z-index: 10800;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0, 229, 255, 0.85) 30%,
+        rgba(255, 0, 60, 0.9) 55%,
+        rgba(0, 229, 255, 0.85) 70%,
+        transparent 100%);
+    box-shadow:
+        0 0 14px rgba(0, 229, 255, 0.8),
+        0 0 36px rgba(255, 0, 60, 0.45);
+    animation: fx-boot-sweep 0.9s cubic-bezier(0.6, 0.04, 0.34, 1) forwards;
+}
+
+@keyframes fx-boot-sweep {
+    0%   { transform: translateY(0); opacity: 1; }
+    85%  { opacity: 0.9; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* ========== 12. 代码块霓虹增强 ========== */
+[data-theme="dark"] pre:hover,
+[data-theme="dark"] .highlight:hover {
+    border-color: rgba(0, 229, 255, 0.4) !important;
+    box-shadow:
+        0 6px 22px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 229, 255, 0.3),
+        0 0 26px rgba(0, 229, 255, 0.12) !important;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+pre, .highlight {
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.code-copy {
+    transition: color 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+}
+
+.code-copy:hover {
+    color: var(--neon-cyan, #00e5ff) !important;
+    filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.85));
+    transform: scale(1.12);
+}
+
+/* ========== 13. 标题红条呼吸 (悬停时) ========== */
+.article-entry h2:hover::before {
+    animation: fx-bar-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fx-bar-pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(255, 0, 60, 0.55); }
+    50%      { box-shadow: 0 0 22px rgba(255, 0, 60, 1), 0 0 34px rgba(255, 0, 170, 0.5); }
+}
+
+/* ========== 14. 导航图标 & 返回顶部霓虹 ========== */
+[data-theme="dark"] .main-nav-link-wrap:hover .main-nav-icon {
+    text-shadow:
+        0 0 8px rgba(255, 0, 60, 0.9),
+        0 0 18px rgba(255, 0, 60, 0.5);
+}
+
+.sidebar-top {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+
+.sidebar-top:hover {
+    transform: translateY(-4px) scale(1.08);
+}
+
+[data-theme="dark"] .sidebar-top:hover {
+    filter: drop-shadow(0 0 10px rgba(255, 0, 60, 0.65));
+}
+
+/* ========== 15. 评论按钮霓虹 ========== */
+[data-theme="dark"] .wl-btn:hover {
+    border-color: var(--neon-cyan, #00e5ff) !important;
+    color: var(--neon-cyan, #00e5ff) !important;
+    box-shadow: 0 0 14px rgba(0, 229, 255, 0.35);
+}
+
+/* ========== 16. 移动端降级 ========== */
+@media (max-width: 768px) {
+    .fx-corners,
+    .fx-glare {
+        display: none;
+    }
+}
+
+/* ========== 17. 无障碍：减少动态 ========== */
+@media (prefers-reduced-motion: reduce) {
+    #fx-bg,
+    #fx-fg,
+    #fx-boot {
+        display: none !important;
+    }
+
+    [data-theme="dark"] body::after {
+        animation: none !important;
+    }
+
+    .fx-glitch-go::before,
+    .fx-glitch-go::after {
+        animation: none !important;
+        opacity: 0 !important;
+    }
+
+    .fx-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .article-entry h2:hover::before {
+        animation: none !important;
+    }
+}
